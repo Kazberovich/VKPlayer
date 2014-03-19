@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF9B4699C49E41F5BA04927B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B169C91114549B49113595C /* libPods.a */; };
 		FB04FB9E18D97CA80066A18E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB04FB9D18D97CA80066A18E /* Foundation.framework */; };
 		FB04FBA018D97CA80066A18E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB04FB9F18D97CA80066A18E /* CoreGraphics.framework */; };
 		FB04FBA218D97CA80066A18E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB04FBA118D97CA80066A18E /* UIKit.framework */; };
@@ -18,9 +19,12 @@
 		FB04FBD418D98D8A0066A18E /* KSAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FB04FBD318D98D8A0066A18E /* KSAccessToken.m */; };
 		FB04FBDA18D99C100066A18E /* KSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB04FBD918D99C100066A18E /* KSViewController.m */; };
 		FB04FBDD18D99EAE0066A18E /* KSURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = FB04FBDC18D99EAE0066A18E /* KSURLBuilder.m */; };
+		FB04FBE018D9E4AE0066A18E /* KSPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB04FBDF18D9E4AE0066A18E /* KSPlayerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B169C91114549B49113595C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC1586450FFD48A1A696B282 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FB04FB9A18D97CA80066A18E /* KSVKPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSVKPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB04FB9D18D97CA80066A18E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FB04FB9F18D97CA80066A18E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -40,6 +44,8 @@
 		FB04FBD918D99C100066A18E /* KSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSViewController.m; path = LoginViewController/KSViewController.m; sourceTree = "<group>"; };
 		FB04FBDB18D99EAE0066A18E /* KSURLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSURLBuilder.h; path = Models/KSURLBuilder.h; sourceTree = "<group>"; };
 		FB04FBDC18D99EAE0066A18E /* KSURLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSURLBuilder.m; path = Models/KSURLBuilder.m; sourceTree = "<group>"; };
+		FB04FBDE18D9E4AE0066A18E /* KSPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPlayerViewController.h; path = PlayerViewController/KSPlayerViewController.h; sourceTree = "<group>"; };
+		FB04FBDF18D9E4AE0066A18E /* KSPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPlayerViewController.m; path = PlayerViewController/KSPlayerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +56,7 @@
 				FB04FBA018D97CA80066A18E /* CoreGraphics.framework in Frameworks */,
 				FB04FBA218D97CA80066A18E /* UIKit.framework in Frameworks */,
 				FB04FB9E18D97CA80066A18E /* Foundation.framework in Frameworks */,
+				DF9B4699C49E41F5BA04927B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +69,7 @@
 				FB04FBA318D97CA80066A18E /* KSVKPlayer */,
 				FB04FB9C18D97CA80066A18E /* Frameworks */,
 				FB04FB9B18D97CA80066A18E /* Products */,
+				BC1586450FFD48A1A696B282 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,6 +88,7 @@
 				FB04FB9F18D97CA80066A18E /* CoreGraphics.framework */,
 				FB04FBA118D97CA80066A18E /* UIKit.framework */,
 				FB04FBBC18D97CA80066A18E /* XCTest.framework */,
+				4B169C91114549B49113595C /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -87,12 +96,12 @@
 		FB04FBA318D97CA80066A18E /* KSVKPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				FB04FBE118D9E4B20066A18E /* PlayerViewController */,
 				FB04FBD718D99B8A0066A18E /* LoginViewController */,
 				FB04FBD518D98D970066A18E /* Models */,
 				FB04FBAC18D97CA80066A18E /* KSAppDelegate.h */,
 				FB04FBAD18D97CA80066A18E /* KSAppDelegate.m */,
 				FB04FBAF18D97CA80066A18E /* Main.storyboard */,
-				FB04FBB518D97CA80066A18E /* Images.xcassets */,
 				FB04FBA418D97CA80066A18E /* Supporting Files */,
 			);
 			path = KSVKPlayer;
@@ -101,6 +110,7 @@
 		FB04FBA418D97CA80066A18E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FB04FBB518D97CA80066A18E /* Images.xcassets */,
 				FB04FBA518D97CA80066A18E /* KSVKPlayer-Info.plist */,
 				FB04FBA618D97CA80066A18E /* InfoPlist.strings */,
 				FB04FBA918D97CA80066A18E /* main.m */,
@@ -129,6 +139,15 @@
 			name = LoginViewController;
 			sourceTree = "<group>";
 		};
+		FB04FBE118D9E4B20066A18E /* PlayerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FB04FBDE18D9E4AE0066A18E /* KSPlayerViewController.h */,
+				FB04FBDF18D9E4AE0066A18E /* KSPlayerViewController.m */,
+			);
+			name = PlayerViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -136,9 +155,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB04FBCC18D97CA80066A18E /* Build configuration list for PBXNativeTarget "KSVKPlayer" */;
 			buildPhases = (
+				893841C4B9664F6DA01335CF /* Check Pods Manifest.lock */,
 				FB04FB9618D97CA80066A18E /* Sources */,
 				FB04FB9718D97CA80066A18E /* Frameworks */,
 				FB04FB9818D97CA80066A18E /* Resources */,
+				E5EFCA0A2E094E8C980385EA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -190,6 +211,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		893841C4B9664F6DA01335CF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E5EFCA0A2E094E8C980385EA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FB04FB9618D97CA80066A18E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -198,6 +252,7 @@
 				FB04FBAE18D97CA80066A18E /* KSAppDelegate.m in Sources */,
 				FB04FBAA18D97CA80066A18E /* main.m in Sources */,
 				FB04FBDD18D99EAE0066A18E /* KSURLBuilder.m in Sources */,
+				FB04FBE018D9E4AE0066A18E /* KSPlayerViewController.m in Sources */,
 				FB04FBDA18D99C100066A18E /* KSViewController.m in Sources */,
 				FB04FBD418D98D8A0066A18E /* KSAccessToken.m in Sources */,
 			);
@@ -299,6 +354,7 @@
 		};
 		FB04FBCD18D97CA80066A18E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC1586450FFD48A1A696B282 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -313,6 +369,7 @@
 		};
 		FB04FBCE18D97CA80066A18E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC1586450FFD48A1A696B282 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
