@@ -10,4 +10,11 @@
 
 @implementation KSAccessToken
 
+-(NSString*) getUserID
+{
+    return self.userID;
+}
+
+
+
 @end

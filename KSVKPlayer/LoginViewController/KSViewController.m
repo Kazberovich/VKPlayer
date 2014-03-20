@@ -10,6 +10,7 @@
 #import "KSURLBuilder.h"
 #import <AFHTTPRequestOperation.h>
 #import "KSAccessToken.h"
+#import "KSPlayerViewController.h"
 
 @interface KSViewController ()
 
@@ -28,33 +29,33 @@
     [super dealloc];
 }
 
-
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
-    NSLog(@"%@", [KSURLBuilder getAuthorizeURL]);
-    
+    [super viewDidLoad];
+    NSLog(@"%@", @"viewDidLoad");
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
     // clear cookies
     NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray* tmdbCookies = [cookies cookiesForURL:
-                            [NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
+    NSArray* tmdbCookies = [cookies cookiesForURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
     
-    for (NSHTTPCookie* cookie in tmdbCookies) {
+    for (NSHTTPCookie* cookie in tmdbCookies)
+    {
         [cookies deleteCookie:cookie];
     }
-
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
     
     _webView.delegate = self;
     
     [self.webView loadRequest:request];
-    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UIWebViewDelegate
@@ -77,7 +78,6 @@
         {
             query = array.lastObject;
         }
-        
         KSAccessToken *token = [[KSAccessToken alloc] init];
         
         NSArray *pairs = [query componentsSeparatedByString:@"&"];
@@ -102,13 +102,17 @@
                     {
                         token.userID = [values lastObject];
                     }
-                   
                 }
             }
         }
         
         NSLog(@"%@  %@  %@", token.userID, token.token, token.expirationDate);
-        return YES;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        KSPlayerViewController *playerViewController = (KSPlayerViewController*)[storyboard instantiateViewControllerWithIdentifier:@"player"];
+        playerViewController.token = token;
+        [self.navigationController pushViewController:playerViewController animated:YES];
+        
+        return NO;
     }
 }
 

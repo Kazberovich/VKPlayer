@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KSPlayerViewController : UIViewController
+@class KSAccessToken;
+
+@interface KSPlayerViewController : UIViewController <UITableViewDataSource>
+
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) KSAccessToken *token;
 
 @end

@@ -14,4 +14,6 @@
 @property (nonatomic, retain) NSDate *expirationDate;
 @property (nonatomic, retain) NSString *userID;
 
+//-(NSString*) getUserID;
+
 @end

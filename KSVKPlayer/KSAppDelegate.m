@@ -7,11 +7,17 @@
 //
 
 #import "KSAppDelegate.h"
+#import "KSViewController.h"
 
 @implementation KSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+   /* UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    KSViewController *web = (KSViewController*)[storyboard instantiateViewControllerWithIdentifier:@"web"];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:web];
+    */
     // Override point for customization after application launch.
     return YES;
 }

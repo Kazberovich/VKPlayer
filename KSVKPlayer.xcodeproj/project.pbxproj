@@ -96,12 +96,12 @@
 		FB04FBA318D97CA80066A18E /* KSVKPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				FB04FBE118D9E4B20066A18E /* PlayerViewController */,
-				FB04FBD718D99B8A0066A18E /* LoginViewController */,
-				FB04FBD518D98D970066A18E /* Models */,
 				FB04FBAC18D97CA80066A18E /* KSAppDelegate.h */,
 				FB04FBAD18D97CA80066A18E /* KSAppDelegate.m */,
 				FB04FBAF18D97CA80066A18E /* Main.storyboard */,
+				FB04FBE118D9E4B20066A18E /* PlayerViewController */,
+				FB04FBD718D99B8A0066A18E /* LoginViewController */,
+				FB04FBD518D98D970066A18E /* Models */,
 				FB04FBA418D97CA80066A18E /* Supporting Files */,
 			);
 			path = KSVKPlayer;
