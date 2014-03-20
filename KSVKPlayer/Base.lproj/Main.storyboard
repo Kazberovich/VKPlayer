@@ -68,6 +68,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="0HV-0G-gmN" id="qAn-BQ-pvj"/>
+                                    <outlet property="delegate" destination="0HV-0G-gmN" id="wyy-5D-vC8"/>
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ldh-T4-MrF">

@@ -8,12 +8,19 @@
 
 #import "KSPlayerViewController.h"
 #import "KSAccessToken.h"
+#import "KSServerManager.h"
+#import "KSAudio.h"
 
 @interface KSPlayerViewController ()
 
+@property (nonatomic, retain) NSMutableArray *audioArray;
+
 @end
 
+
 @implementation KSPlayerViewController
+
+static NSInteger countToLoad = 20;
 
 @synthesize tableView = _tableView;
 @synthesize token = _token;
@@ -25,18 +32,12 @@
     [super dealloc];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
-    NSLog(@"%@", _token);
     [super viewDidLoad];
+    
+    self.audioArray = [NSMutableArray array];
+    [self getAudioFromServer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,25 +45,68 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - API
+
+- (void) getAudioFromServer
+{
+    [[KSServerManager sharedManager] getAudioWithOffset: [self.audioArray count]
+                                                  token: _token
+                                                  limit: countToLoad
+                                              onSuccess: ^(NSArray *audioList) {
+        
+                                                  [self.audioArray addObjectsFromArray:audioList];
+        [_tableView retain];
+        [_tableView reloadData];
+        
+    } onFailure:^(NSError *error, NSInteger statusCode) {
+        NSLog(@"error = %@, code = %d", [error localizedDescription], statusCode);
+    }];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return [self.audioArray count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuse"];
+    static NSString *identifier = @"Cell";
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Cell index = %d, %@", indexPath.row, _token.userID];
-        
+    UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier] autorelease];
+    
+    if (!cell)
+    {
+        cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:identifier] autorelease];
+    }
+    
+    if (indexPath.row == [self.audioArray count])
+    {
+        cell.textLabel.text = @"LOAD MORE";
+        cell.detailTextLabel.text = nil;
+    }
+    else
+    {
+        KSAudio *audio = [self.audioArray objectAtIndex:indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", audio.title];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", audio.artist];
+    }
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == [self.audioArray count])
+    {
+        [self getAudioFromServer];
+    }
 }
 
 @end

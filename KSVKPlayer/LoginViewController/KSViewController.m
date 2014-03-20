@@ -38,14 +38,14 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     // clear cookies
-    NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    /*NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray* tmdbCookies = [cookies cookiesForURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
     
     for (NSHTTPCookie* cookie in tmdbCookies)
     {
         [cookies deleteCookie:cookie];
     }
-    
+    */
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
     
     _webView.delegate = self;
@@ -112,6 +112,7 @@
         playerViewController.token = token;
         [self.navigationController pushViewController:playerViewController animated:YES];
         
+        [token release];
         return NO;
     }
 }
