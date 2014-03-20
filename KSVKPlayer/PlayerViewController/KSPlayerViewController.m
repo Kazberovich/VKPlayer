@@ -52,9 +52,10 @@ static NSInteger countToLoad = 20;
     [[KSServerManager sharedManager] getAudioWithOffset: [self.audioArray count]
                                                   token: _token
                                                   limit: countToLoad
-                                              onSuccess: ^(NSArray *audioList) {
+                                              onSuccess: ^(NSArray *audioList)
+    {
         
-                                                  [self.audioArray addObjectsFromArray:audioList];
+        [self.audioArray addObjectsFromArray:audioList];
         [_tableView retain];
         [_tableView reloadData];
         

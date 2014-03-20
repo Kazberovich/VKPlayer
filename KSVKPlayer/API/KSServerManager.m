@@ -37,7 +37,7 @@
     self = [super init];
     if (self) {
         NSURL *url = [NSURL URLWithString:@"https://api.vk.com/method/"];
-        self.requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+        self.requestOperationManager = [[[AFHTTPRequestOperationManager alloc] initWithBaseURL:url] autorelease];
     }
     return self;
 }

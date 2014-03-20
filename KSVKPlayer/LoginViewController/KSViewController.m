@@ -44,12 +44,10 @@
     for (NSHTTPCookie* cookie in tmdbCookies)
     {
         [cookies deleteCookie:cookie];
-    }
-    */
+    }*/
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
     
     _webView.delegate = self;
-    
     [self.webView loadRequest:request];
 }
 
@@ -83,7 +81,6 @@
         NSArray *pairs = [query componentsSeparatedByString:@"&"];
         
         for (NSString *pair in pairs) {
-            
             NSArray *values = [pair componentsSeparatedByString:@"="];
             
             if (values.count == 2) {
@@ -120,12 +117,10 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [self.indicator startAnimating];
-    NSLog(@"");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"webViewDidStartLoad");
     [self.indicator stopAnimating];
 }
 
