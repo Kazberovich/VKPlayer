@@ -29,36 +29,34 @@
     [super dealloc];
 }
 
-
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
-    NSLog(@"%@", [KSURLBuilder getAuthorizeURL]);
-    
-   // KSPlayerViewController *player = [[KSPlayerViewController alloc] init];
-   // [self.navigationController pushViewController:player animated:YES];
-    
-    // clear cookies
-    NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray* tmdbCookies = [cookies cookiesForURL:
-                            [NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
-    
-    for (NSHTTPCookie* cookie in tmdbCookies) {
-        [cookies deleteCookie:cookie];
-    }
 
+
+    [super viewDidLoad];
+    NSLog(@"%@", @"viewDidLoad");
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+
+    // clear cookies
+    /*NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray* tmdbCookies = [cookies cookiesForURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
+    
+    for (NSHTTPCookie* cookie in tmdbCookies)
+    {
+        [cookies deleteCookie:cookie];
+    }*/
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
     
     _webView.delegate = self;
-    
     [self.webView loadRequest:request];
-    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UIWebViewDelegate
@@ -81,13 +79,11 @@
         {
             query = array.lastObject;
         }
-        
         KSAccessToken *token = [[KSAccessToken alloc] init];
         
         NSArray *pairs = [query componentsSeparatedByString:@"&"];
         
         for (NSString *pair in pairs) {
-            
             NSArray *values = [pair componentsSeparatedByString:@"="];
             
             if (values.count == 2) {
@@ -106,13 +102,20 @@
                     {
                         token.userID = [values lastObject];
                     }
-                   
                 }
             }
         }
 
         
         NSLog(@"%@  %@  %@", token.userID, token.token, token.expirationDate);
+
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        KSPlayerViewController *playerViewController = (KSPlayerViewController*)[storyboard instantiateViewControllerWithIdentifier:@"player"];
+        playerViewController.token = token;
+        [self.navigationController pushViewController:playerViewController animated:YES];
+        
+        [token release];
+
         return NO;
     }
 }
@@ -120,12 +123,10 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [self.indicator startAnimating];
-    NSLog(@"");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"webViewDidStartLoad");
     [self.indicator stopAnimating];
 }
 
