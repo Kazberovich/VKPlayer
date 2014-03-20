@@ -10,14 +10,21 @@
 
 @implementation KSAudio
 
+@synthesize artist = _artist;
+@synthesize aid = _aid;
+@synthesize title = _title;
+@synthesize genre = _genre;
+@synthesize duration = _duration;
+@synthesize url = _url;
+
 - (void) dealloc
 {
-    [self.aid release];
-    [self.title release];
-    [self.artist release];
-    [self.genre release];
-    [self.duration release];
-    [self.url release];
+    [_aid release];
+    [_title release];
+    [_artist release];
+    [_genre release];
+    [_duration release];
+    [_url release];
     
     [super dealloc];
 }
@@ -32,6 +39,7 @@
         self.genre = [responseObject objectForKey:@"genre"];
         self.duration = [responseObject objectForKey:@"duration"];
         self.url = [responseObject objectForKey:@"url"];
+        
     }
     return self;
 }
