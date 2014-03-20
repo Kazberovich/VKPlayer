@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KSPlayerViewController : UIViewController
+@interface KSPlayerViewController : UITableViewController<UITableViewDataSource>
+
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 @end

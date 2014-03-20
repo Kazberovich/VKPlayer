@@ -10,6 +10,7 @@
 #import "KSURLBuilder.h"
 #import <AFHTTPRequestOperation.h>
 #import "KSAccessToken.h"
+#import "KSPlayerViewController.h"
 
 @interface KSViewController ()
 
@@ -33,6 +34,9 @@
 {
     [super viewDidLoad];    
     NSLog(@"%@", [KSURLBuilder getAuthorizeURL]);
+    
+   // KSPlayerViewController *player = [[KSPlayerViewController alloc] init];
+   // [self.navigationController pushViewController:player animated:YES];
     
     // clear cookies
     NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -106,9 +110,10 @@
                 }
             }
         }
+
         
         NSLog(@"%@  %@  %@", token.userID, token.token, token.expirationDate);
-        return YES;
+        return NO;
     }
 }
 
