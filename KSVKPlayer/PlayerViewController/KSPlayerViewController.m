@@ -16,7 +16,7 @@
 @interface KSPlayerViewController ()
 
 @property (nonatomic, retain) NSMutableArray *audioArray;
-@property (nonatomic, retain) KSAudio* currentAudio;
+@property (nonatomic, retain) KSAudio *currentAudio;
 @property int currentAudioIndex;
 
 @end
@@ -24,13 +24,13 @@
 
 @implementation KSPlayerViewController
 
-static NSInteger countToLoad = 20;
+static NSInteger countToLoad = 10;
 
 @synthesize tableView = _tableView;
 @synthesize token = _token;
 @synthesize currentAudio = _currentAudio;
 
-- (void) dealloc
+- (void)dealloc
 {
     [_tableView release];
     [_token release];
@@ -51,7 +51,7 @@ static NSInteger countToLoad = 20;
 
 #pragma mark - API
 
-- (void) getAudioFromServer
+- (void)getAudioFromServer
 {
     [[KSServerManager sharedManager] getAudioWithOffset: [self.audioArray count]
                                                   token: _token
@@ -62,6 +62,7 @@ static NSInteger countToLoad = 20;
         [self.audioArray addObjectsFromArray:audioList];
         [_tableView retain];
         [_tableView reloadData];
+        [self selectRowAtIndex:_currentAudioIndex];
         
     } onFailure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"error = %@, code = %d", [error localizedDescription], statusCode);
@@ -105,11 +106,16 @@ static NSInteger countToLoad = 20;
     return 1;
 }
 
+- (void)selectRowAtIndex:(int) index
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+}
+
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     if (indexPath.row == [self.audioArray count])
     {
         [self getAudioFromServer];
@@ -119,7 +125,6 @@ static NSInteger countToLoad = 20;
         _currentAudio = [self.audioArray objectAtIndex:indexPath.row];
         _currentAudioIndex = indexPath.row;
     }
-    
 }
 
 #pragma mark - ToolbarActions
@@ -127,7 +132,8 @@ static NSInteger countToLoad = 20;
 - (IBAction)playAudio:(id)sender
 {
     NSLog(@"playAudio");
-    if (self.currentAudioIndex) {
+    if (self.currentAudioIndex)
+    {
         [[KSPlayer sharedInstance] playAudio:_currentAudio];
     }
     else
@@ -135,34 +141,36 @@ static NSInteger countToLoad = 20;
         _currentAudioIndex = 0;
         _currentAudio = [self.audioArray objectAtIndex:_currentAudioIndex];
         [[KSPlayer sharedInstance] playAudio:_currentAudio];
+        [self selectRowAtIndex:_currentAudioIndex];
     }
 }
 
 - (IBAction)nextAudio:(id)sender
 {
     NSLog(@"nextAudio");
-    _currentAudio = [self.audioArray objectAtIndex: (++ self.currentAudioIndex)];
+    if(_currentAudioIndex == [self.audioArray count] - 2)
+    {
+        [self getAudioFromServer];
+    }
+    _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
     [[KSPlayer sharedInstance] playAudio: _currentAudio];
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_currentAudioIndex inSection:0];
-    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+    [self selectRowAtIndex:_currentAudioIndex];    
 }
 
 - (IBAction)previousAudio:(id)sender
 {
     NSLog(@"previousAudio");
     
-    if ((int)_currentAudioIndex >= 1) {
-        _currentAudio = [self.audioArray objectAtIndex: (-- self.currentAudioIndex)];
+    if ((int)_currentAudioIndex >= 1)
+    {
+        _currentAudio = [self.audioArray objectAtIndex: (--self.currentAudioIndex)];
         [[KSPlayer sharedInstance] playAudio: _currentAudio];
+        [self selectRowAtIndex:_currentAudioIndex];
     }
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_currentAudioIndex inSection:0];
-    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
 }
 
-- (IBAction)pauseAudio:(id)sender {
+- (IBAction)pauseAudio:(id)sender
+{
     [[KSPlayer sharedInstance] pauseAudio];
 }
 @end

@@ -11,7 +11,7 @@
 
 @interface KSPlayer()
 
-@property (nonatomic, retain) AVPlayer* audioPlayer;
+@property (nonatomic, retain) AVPlayer *audioPlayer;
 
 @end
 
@@ -20,16 +20,16 @@
 @synthesize currentAudio = _currentAudio;
 @synthesize audioPlayer = _audioPlayer;
 
-- (void) dealloc
+- (void)dealloc
 {
     [_currentAudio release];
     [_audioPlayer release];
     [super dealloc];
 }
 
-+ (KSPlayer*) sharedInstance
++ (KSPlayer *)sharedInstance
 {
-    static KSPlayer* player = nil;
+    static KSPlayer *player = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -47,7 +47,7 @@
     return self;
 }
 
-- (void) playAudio:(KSAudio *)audio
+- (void)playAudio:(KSAudio *)audio
 {
     if (_currentAudio != audio) {
         
@@ -71,13 +71,14 @@
     }
 }
 
-- (void) pauseAudio
+- (void)pauseAudio
 {
     [_audioPlayer pause];
 }
 
 
--(void)itemDidChangeCurrentTime {
+-(void)itemDidChangeCurrentTime
+{
     NSLog(@"itemDidChangeCurrentTime");
 }
 

@@ -16,9 +16,9 @@
     return fullUrl;
 }
 
-+ (NSString *) append:(id) first, ...
++ (NSString *)append:(id) first, ...
 {
-    NSString * result = @"";
+    NSString *result = @"";
     id eachArg;
     va_list alist;
     if(first)
