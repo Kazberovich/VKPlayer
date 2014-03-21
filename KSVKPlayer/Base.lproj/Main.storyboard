@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SHl-g9-b3J">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
@@ -9,11 +10,11 @@
             <objects>
                 <viewController storyboardIdentifier="web" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="KSViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="WkE-So-JJS">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -59,11 +60,11 @@
             <objects>
                 <viewController storyboardIdentifier="player" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0HV-0G-gmN" customClass="KSPlayerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XCZ-Pa-sTG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Qx3-jk-UTB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="495"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -72,45 +73,44 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ldh-T4-MrF">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" systemItem="refresh" id="TJl-mw-SHa"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="eHR-u6-V6a"/>
-                                    <barButtonItem title="Item" systemItem="rewind" id="K5B-0J-WFB"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="YWb-6U-nw2"/>
-                                    <barButtonItem systemItem="play" id="qMv-Im-MPy"/>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Mz7-DM-qss"/>
-                                    <barButtonItem systemItem="fastForward" id="nWR-wL-0xZ"/>
+                                    <barButtonItem title="Item" systemItem="rewind" id="K5B-0J-WFB">
+                                        <connections>
+                                            <action selector="previousAudio:" destination="0HV-0G-gmN" id="5dC-ph-uYN"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="play" id="qMv-Im-MPy">
+                                        <connections>
+                                            <action selector="playAudio:" destination="0HV-0G-gmN" id="iNo-gC-Y57"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="pause" id="6lb-Ge-Qb8">
+                                        <connections>
+                                            <action selector="pauseAudio:" destination="0HV-0G-gmN" id="n9C-sd-n3x"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="fastForward" id="nWR-wL-0xZ">
+                                        <connections>
+                                            <action selector="nextAudio:" destination="0HV-0G-gmN" id="WMG-mn-zNa"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="EaP-Zx-ZxP"/>
-                                    <barButtonItem systemItem="bookmarks" id="wuK-uM-rh1"/>
+                                    <barButtonItem title="Item" id="BzD-IG-c0C"/>
                                 </items>
                             </toolbar>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minValue="0.0" maxValue="9" id="0oA-ho-iXa">
-                                <rect key="frame" x="48" y="491" width="224" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </slider>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JPo-di-0B8">
-                                <rect key="frame" x="0.0" y="503" width="34" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4:02" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XF6-bG-aXc">
-                                <rect key="frame" x="278" y="503" width="34" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Musics" id="t51-AW-EU6">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="n5c-pF-r7N"/>
+                    <navigationItem key="navigationItem" title="Musics" id="2sH-9r-fxo">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="213-u4-AGQ"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Qx3-jk-UTB" id="tqh-Yf-9yZ"/>
+                        <outlet property="toolBar" destination="ldh-T4-MrF" id="hID-Sn-mhT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V2M-G9-5Hd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -121,6 +121,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>
