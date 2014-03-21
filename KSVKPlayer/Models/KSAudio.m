@@ -38,8 +38,7 @@
         self.artist = [responseObject objectForKey:@"artist"];
         self.genre = [responseObject objectForKey:@"genre"];
         self.duration = [responseObject objectForKey:@"duration"];
-        self.url = [responseObject objectForKey:@"url"];
-        
+        self.url = [responseObject objectForKey:@"url"];        
     }
     return self;
 }
