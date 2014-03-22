@@ -17,7 +17,7 @@
 @synthesize duration = _duration;
 @synthesize url = _url;
 
-- (void) dealloc
+- (void)dealloc
 {
     [_aid release];
     [_title release];
@@ -29,7 +29,7 @@
     [super dealloc];
 }
 
-- (id) initWithServerResponse:(NSDictionary*) responseObject
+- (id)initWithServerResponse:(NSDictionary*)responseObject
 {
     self = [super init];
     if (self) {
@@ -38,8 +38,7 @@
         self.artist = [responseObject objectForKey:@"artist"];
         self.genre = [responseObject objectForKey:@"genre"];
         self.duration = [responseObject objectForKey:@"duration"];
-        self.url = [responseObject objectForKey:@"url"];
-        
+        self.url = [responseObject objectForKey:@"url"];        
     }
     return self;
 }

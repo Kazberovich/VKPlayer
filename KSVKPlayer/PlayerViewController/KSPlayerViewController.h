@@ -13,7 +13,12 @@
 @interface KSPlayerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (retain, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (nonatomic, retain) KSAccessToken *token;
 
+- (IBAction)playAudio:(id)sender;
+- (IBAction)nextAudio:(id)sender;
+- (IBAction)previousAudio:(id)sender;
+- (IBAction)pauseAudio:(id)sender;
 
 @end
