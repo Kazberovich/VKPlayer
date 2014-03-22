@@ -57,28 +57,28 @@
     [self.requestOperationManager GET:@"audio.get"
                            parameters:params
                               success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        NSLog(@"JSON: %@", responseObject);
-        NSArray *audioArray = [responseObject objectForKey:@"response"];
-        NSMutableArray *objectsArray = [NSMutableArray array];
-        
-        for (NSDictionary *audioDictionary in audioArray) {
-            KSAudio *audio = [[KSAudio alloc] initWithServerResponse:audioDictionary];
-            [objectsArray addObject:audio];
-            [audio release];
-        }
-        
-        if(success)
-        {
-            success(objectsArray);
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        if (failure) {
-            failure(error, operation.response.statusCode);
-        }        
-    }];
+     {
+         NSLog(@"JSON: %@", responseObject);
+         NSArray *audioArray = [responseObject objectForKey:@"response"];
+         NSMutableArray *objectsArray = [NSMutableArray array];
+         
+         for (NSDictionary *audioDictionary in audioArray) {
+             KSAudio *audio = [[KSAudio alloc] initWithServerResponse:audioDictionary];
+             [objectsArray addObject:audio];
+             [audio release];
+         }
+         
+         if(success)
+         {
+             success(objectsArray);
+         }
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"Error: %@", error);
+         if (failure) {
+             failure(error, operation.response.statusCode);
+         }
+     }];
 }
 
 @end
