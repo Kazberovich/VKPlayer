@@ -56,9 +56,9 @@
         [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
             
             UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
-            UInt64 minutes = currentTimeSec / 60;
-            UInt64 seconds = currentTimeSec % 60;
-            [self.delegate playerCurrentTime:[NSString stringWithFormat: @"%02llu:%02llu", minutes, seconds]];
+            //UInt64 minutes = currentTimeSec / 60;
+            UInt64 seconds = currentTimeSec % 60;            
+            [self.delegate playerCurrentTime: seconds];//[NSString stringWithFormat: @"%02llu:%02llu", minutes, seconds]];
         }];
        
         [self.audioPlayer play];
@@ -82,5 +82,12 @@
     [self.audioPlayer removeAllItems];
     self.audioPlayer = nil;
 }
+
+- (int)getCurrentAudioDuration
+{
+    return  [_currentAudio.duration intValue];
+}
+
+
 
 @end

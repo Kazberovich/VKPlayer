@@ -22,5 +22,6 @@
 - (void)playAudio:(KSAudio *) audio;
 - (void)pauseAudio;
 - (void)stopAudio;
+- (int)getCurrentAudioDuration;
 
 @end

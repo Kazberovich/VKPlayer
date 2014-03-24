@@ -25,13 +25,14 @@
 
 @implementation KSPlayerViewController
 
-static const NSInteger kCountToLoad = 20;
 // offset from the bottom of playlist to load new block of music
 static const NSInteger kOffsetFromTheBottom = 5;
+static const NSInteger kCountToLoad = 20;
 
 @synthesize tableView = _tableView;
 @synthesize token = _token;
 @synthesize currentAudio = _currentAudio;
+@synthesize slider = _slider;
 
 - (void)dealloc
 {
@@ -181,10 +182,25 @@ static const NSInteger kOffsetFromTheBottom = 5;
 
 #pragma mark - KSPlayerDelegate
 
-- (void)playerCurrentTime:(NSString *)time
+- (void)playerCurrentTime:(unsigned long long)current_second
 {
-    NSLog(@"playerCurrentTime = %@", time);
-    self.currentAudioTime.title = time;
+    NSLog(@"playerCurrentTime = %llu", current_second);
+    [self updateProgressBar:current_second];
+    [self updateTimeLabel:current_second];
+}
+
+- (void)updateProgressBar:(unsigned long long)current_second
+{
+    _slider.maximumValue = [[KSPlayer sharedInstance] getCurrentAudioDuration];
+    _slider.minimumValue = 0.0;
+    [_slider setValue:current_second];
+}
+
+- (void)updateTimeLabel:(unsigned long long)current_second
+{
+    UInt64 minutes = current_second / 60;
+    UInt64 seconds = current_second % 60;
+    _currentAudioTime.title = [NSString stringWithFormat: @"%02llu:%02llu", minutes, seconds];
 }
 
 @end

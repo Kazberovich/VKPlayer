@@ -11,6 +11,6 @@
 
 @protocol KSPlayerDelegate <NSObject>
 
-- (void)playerCurrentTime:(NSString *)time;
+- (void)playerCurrentTime:(unsigned long long)time_in_seconds;
 
 @end

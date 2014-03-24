@@ -17,6 +17,7 @@
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolBar;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *currentAudioTime;
+@property (nonatomic, retain) IBOutlet UISlider *slider;
 @property (nonatomic, retain) KSAccessToken *token;
 
 - (IBAction)playAudio:(id)sender;
