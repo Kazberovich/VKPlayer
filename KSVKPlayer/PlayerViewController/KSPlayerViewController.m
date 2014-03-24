@@ -24,7 +24,7 @@
 
 @implementation KSPlayerViewController
 
-static const NSInteger countToLoad = 20;
+static const NSInteger kCountToLoad = 20;
 
 @synthesize tableView = _tableView;
 @synthesize token = _token;
@@ -56,11 +56,11 @@ static const NSInteger countToLoad = 20;
 {
     [[KSServerManager sharedManager] getAudioWithOffset: [self.audioArray count]
                                                   token: _token
-                                                  limit: countToLoad
+                                                  limit: kCountToLoad
      
                                               onSuccess: ^(NSArray *audioList) {
                                                   [self.audioArray addObjectsFromArray:audioList];
-                                                  self.currentLoadedAudios += countToLoad;
+                                                  self.currentLoadedAudios += kCountToLoad;
                                                   [_tableView reloadData];
                             
                                               } onFailure:^(NSError *error, NSInteger statusCode) {

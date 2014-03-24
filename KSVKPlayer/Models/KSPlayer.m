@@ -52,6 +52,7 @@
     if (_currentAudio != audio)
     {
         [_audioPlayer pause];
+        [_currentAudio retain];
         _currentAudio = audio;
         
         AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]];
