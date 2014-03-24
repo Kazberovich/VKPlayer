@@ -8,6 +8,7 @@
 
 #import "KSPlayer.h"
 #import "KSAudio.h"
+#import "KSPlayerDelegate.h"
 
 @interface KSPlayer()
 
@@ -59,9 +60,13 @@
         
         CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
         [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
-            NSLog(@"change");
+            
+            UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
+            UInt32 minutes = currentTimeSec / 60;
+            UInt32 seconds = currentTimeSec % 60;
+            [self.delegate playerCurrentTime:[NSString stringWithFormat: @"%02d:%02d", minutes, seconds]];
         }];
-        
+       
         [self.audioPlayer play];
     }
     else

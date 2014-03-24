@@ -12,6 +12,7 @@
 #import "KSAudio.h"
 #import "KSPlayer.h"
 #import <AVFoundation/AVFoundation.h>
+#import "KSPlayerDelegate.h"
 
 @interface KSPlayerViewController ()
 
@@ -34,6 +35,7 @@ static const NSInteger kOffsetFromTheBottom = 5;
 
 - (void)dealloc
 {
+    [_currentAudio release];
     [_tableView release];
     [_token release];
     [super dealloc];
@@ -41,6 +43,7 @@ static const NSInteger kOffsetFromTheBottom = 5;
 
 - (void)viewDidLoad
 {
+    [KSPlayer sharedInstance].delegate = self;
     [super viewDidLoad];
     self.audioArray = [NSMutableArray array];
     [self getAudioFromServer];
@@ -174,6 +177,14 @@ static const NSInteger kOffsetFromTheBottom = 5;
 - (IBAction)pauseAudio:(id)sender
 {
     [[KSPlayer sharedInstance] pauseAudio];
+}
+
+#pragma mark - KSPlayerDelegate
+
+- (void)playerCurrentTime:(NSString *)time
+{
+    NSLog(@"playerCurrentTime = %@", time);
+    self.currentAudioTime.title = time;
 }
 
 @end

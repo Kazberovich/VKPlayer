@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import "KSPlayerViewController.h"
 
+@protocol KSPlayerDelegate;
 @class KSAudio;
 
 @interface KSPlayer : AVQueuePlayer
 
 @property (nonatomic, retain) KSAudio *currentAudio;
+@property (nonatomic, retain) id <KSPlayerDelegate> delegate;
 
 + (KSPlayer *)sharedInstance;
 - (void)playAudio:(KSAudio *) audio;
