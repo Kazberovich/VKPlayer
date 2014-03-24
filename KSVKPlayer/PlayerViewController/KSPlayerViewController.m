@@ -42,11 +42,13 @@ static NSInteger countToLoad = 10;
     [super viewDidLoad];
     self.audioArray = [NSMutableArray array];
     [self getAudioFromServer];
+
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+
 }
 
 #pragma mark - API
@@ -154,7 +156,7 @@ static NSInteger countToLoad = 10;
     }
     _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
     [[KSPlayer sharedInstance] playAudio: _currentAudio];
-    [self selectRowAtIndex:_currentAudioIndex];    
+    [self selectRowAtIndex:_currentAudioIndex];
 }
 
 - (IBAction)previousAudio:(id)sender

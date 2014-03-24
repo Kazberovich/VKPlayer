@@ -31,12 +31,15 @@
 
 - (void)viewDidLoad
 {
+
+
     [super viewDidLoad];
     NSLog(@"%@", @"viewDidLoad");
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
+
     // clear cookies
     /*NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray* tmdbCookies = [cookies cookiesForURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
@@ -102,14 +105,17 @@
                 }
             }
         }
+
         
         NSLog(@"%@  %@  %@", token.userID, token.token, token.expirationDate);
+
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         KSPlayerViewController *playerViewController = (KSPlayerViewController*)[storyboard instantiateViewControllerWithIdentifier:@"player"];
         playerViewController.token = token;
         [self.navigationController pushViewController:playerViewController animated:YES];
         
         [token release];
+
         return NO;
     }
 }
