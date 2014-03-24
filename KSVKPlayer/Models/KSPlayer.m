@@ -17,10 +17,13 @@
 @end
 
 @implementation KSPlayer
+
 @synthesize currentAudio = _currentAudio;
+@synthesize audioPlayer = _audioPlayer;
 
 - (void)dealloc
 {
+    [_audioPlayer release];
     [_currentAudio release];
     [super dealloc];
 }
@@ -36,23 +39,14 @@
     return player;
 }
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        NSLog(@"Init");
-    }
-    return self;
-}
-
 - (void)playAudio:(KSAudio *)audio
 {
     if (_currentAudio != audio)
     {
         NSLog(@"play new audio");
         [self stopAudio];
-        [_currentAudio retain];
-        _currentAudio = audio;
+        
+        self.currentAudio = audio;
         
         AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]] ;
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
@@ -62,9 +56,9 @@
         [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
             
             UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
-            UInt32 minutes = currentTimeSec / 60;
-            UInt32 seconds = currentTimeSec % 60;
-            [self.delegate playerCurrentTime:[NSString stringWithFormat: @"%02d:%02d", minutes, seconds]];
+            UInt64 minutes = currentTimeSec / 60;
+            UInt64 seconds = currentTimeSec % 60;
+            [self.delegate playerCurrentTime:[NSString stringWithFormat: @"%02llu:%02llu", minutes, seconds]];
         }];
        
         [self.audioPlayer play];
@@ -84,13 +78,9 @@
 - (void)stopAudio
 {
     NSLog(@"stop");
+    
     [self.audioPlayer removeAllItems];
     self.audioPlayer = nil;
-}
-
-- (void)itemDidChangeCurrentTime
-{
-    NSLog(@"itemDidChangeCurrentTime");
 }
 
 @end

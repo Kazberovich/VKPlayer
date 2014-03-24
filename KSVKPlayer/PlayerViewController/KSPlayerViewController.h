@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KSPlayerDelegate.h"
 
 @class KSAccessToken;
 @protocol KSPlayerDelegate;
-
 
 @interface KSPlayerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, KSPlayerDelegate>
 
