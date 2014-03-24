@@ -7,7 +7,7 @@
 //
 
 #import "KSServerManager.h"
-#import <AFNetworking.h>
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "KSAccessToken.h"
 #import "KSAudio.h"
 

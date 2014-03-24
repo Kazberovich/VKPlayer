@@ -148,7 +148,7 @@ static NSInteger countToLoad = 10;
 - (IBAction)nextAudio:(id)sender
 {
     NSLog(@"nextAudio");
-    if(_currentAudioIndex == [self.audioArray count] - 2)
+    if(_currentAudioIndex == [self.audioArray count] - 5)
     {
         [self getAudioFromServer];
     }
