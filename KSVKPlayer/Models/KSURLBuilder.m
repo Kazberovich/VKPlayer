@@ -10,7 +10,7 @@
 
 @implementation KSURLBuilder
 
-+ (NSString*)getAuthorizeURL
++ (NSString *)getAuthorizeURL
 {
     NSString *fullUrl = [self append:kAuthorizeURL, @"?", @"client_id=", kClientID, @"&", @"redirect_uri=", kRedirectURI, @"&", @"display=mobile", @"&scope=friends,audio&response_type=token", nil];
     return fullUrl;

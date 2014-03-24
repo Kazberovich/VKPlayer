@@ -14,6 +14,6 @@
 
 @interface KSURLBuilder : NSObject
 
-+ (NSString*)getAuthorizeURL;
++ (NSString *)getAuthorizeURL;
 
 @end

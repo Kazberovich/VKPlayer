@@ -42,24 +42,23 @@
 {
     self = [super init];
     if (self) {
-        NSLog(@"oo");
+        NSLog(@"Init");
     }
     return self;
 }
 
 - (void)playAudio:(KSAudio *)audio
 {
-    if (_currentAudio != audio) {
-        
+    if (_currentAudio != audio)
+    {
         [_audioPlayer pause];
-        
         _currentAudio = audio;
         
         AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]];
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
         _audioPlayer = [AVPlayer playerWithPlayerItem:playerItem];
         
-        CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC); // 1 second
+        CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
         [_audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
             NSLog(@"change");
         }];
@@ -76,11 +75,9 @@
     [_audioPlayer pause];
 }
 
-
--(void)itemDidChangeCurrentTime
+- (void)itemDidChangeCurrentTime
 {
     NSLog(@"itemDidChangeCurrentTime");
 }
-
 
 @end

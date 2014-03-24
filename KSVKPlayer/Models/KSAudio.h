@@ -17,6 +17,6 @@
 @property (nonatomic, retain) NSString *duration;
 @property (nonatomic, retain) NSString *genre;
 
-- (id)initWithServerResponse:(NSDictionary*)responseObject;
+- (id)initWithServerResponse:(NSDictionary *)responseObject;
 
 @end
