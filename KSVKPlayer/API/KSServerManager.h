@@ -12,12 +12,12 @@
 
 @interface KSServerManager : NSObject
 
-+ (KSServerManager*) sharedManager;
++ (KSServerManager *)sharedManager;
 
 - (void) getAudioWithOffset:(NSInteger) offset
-                      token:(KSAccessToken*) token
+                      token:(KSAccessToken *) token
                       limit:(NSInteger) count
-                  onSuccess:(void(^)(NSArray* audioList)) success
-                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+                  onSuccess:(void(^)(NSArray *audioList)) success
+                  onFailure:(void(^)(NSError *error, NSInteger statusCode)) failure;
 
 @end

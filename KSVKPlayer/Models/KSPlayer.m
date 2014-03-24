@@ -8,22 +8,23 @@
 
 #import "KSPlayer.h"
 #import "KSAudio.h"
+#import "KSPlayerDelegate.h"
 
 @interface KSPlayer()
 
-@property (nonatomic, retain) AVPlayer *audioPlayer;
+@property (nonatomic, retain) AVQueuePlayer *audioPlayer;
 
 @end
 
-
 @implementation KSPlayer
+
 @synthesize currentAudio = _currentAudio;
 @synthesize audioPlayer = _audioPlayer;
 
 - (void)dealloc
 {
-    [_currentAudio release];
     [_audioPlayer release];
+    [_currentAudio release];
     [super dealloc];
 }
 
@@ -38,49 +39,48 @@
     return player;
 }
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        NSLog(@"oo");
-    }
-    return self;
-}
-
 - (void)playAudio:(KSAudio *)audio
 {
-    if (_currentAudio != audio) {
+    if (_currentAudio != audio)
+    {
+        NSLog(@"play new audio");
+        [self stopAudio];
         
-        [_audioPlayer pause];
+        self.currentAudio = audio;
         
-        _currentAudio = audio;
-        
-        AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]];
+        AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]] ;
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
-        _audioPlayer = [AVPlayer playerWithPlayerItem:playerItem];
+        self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];
         
-        CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC); // 1 second
-        [_audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
-            NSLog(@"change");
+        CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
+        [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
+            
+            UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
+            UInt64 minutes = currentTimeSec / 60;
+            UInt64 seconds = currentTimeSec % 60;
+            [self.delegate playerCurrentTime:[NSString stringWithFormat: @"%02llu:%02llu", minutes, seconds]];
         }];
-        [_audioPlayer play];
+       
+        [self.audioPlayer play];
     }
     else
     {
-        [_audioPlayer play];
+        [self.audioPlayer play];
     }
 }
 
 - (void)pauseAudio
 {
-    [_audioPlayer pause];
+    NSLog(@"pause");
+    [self.audioPlayer pause];
 }
 
-
--(void)itemDidChangeCurrentTime
+- (void)stopAudio
 {
-    NSLog(@"itemDidChangeCurrentTime");
+    NSLog(@"stop");
+    
+    [self.audioPlayer removeAllItems];
+    self.audioPlayer = nil;
 }
-
 
 @end

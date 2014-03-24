@@ -20,7 +20,7 @@
 
 @implementation KSServerManager
 
-+ (KSServerManager*) sharedManager
++ (KSServerManager *)sharedManager
 {
     static KSServerManager *manager = nil;
     
@@ -35,7 +35,8 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         NSURL *url = [NSURL URLWithString:@"https://api.vk.com/method/"];
         self.requestOperationManager = [[[AFHTTPRequestOperationManager alloc] initWithBaseURL:url] autorelease];
     }
@@ -43,42 +44,44 @@
 }
 
 - (void) getAudioWithOffset:(NSInteger) offset
-                      token:(KSAccessToken*) token
+                      token:(KSAccessToken *) token
                       limit:(NSInteger) count
-                  onSuccess:(void(^)(NSArray* audioList)) success
-                  onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure     {
+                  onSuccess:(void(^)(NSArray *audioList)) success
+                  onFailure:(void(^)(NSError *error, NSInteger statusCode)) failure {
+    
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             token.userID, @"uid",
                             @(count), @"count",
                             @(offset), @"offset",
-                            token.token, @"access_token",
-                            nil];
+                            token.token, @"access_token", nil];
     
     [self.requestOperationManager GET:@"audio.get"
                            parameters:params
-                              success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         NSLog(@"JSON: %@", responseObject);
-         NSArray *audioArray = [responseObject objectForKey:@"response"];
-         NSMutableArray *objectsArray = [NSMutableArray array];
-         
-         for (NSDictionary *audioDictionary in audioArray) {
-             KSAudio *audio = [[KSAudio alloc] initWithServerResponse:audioDictionary];
-             [objectsArray addObject:audio];
-             [audio release];
-         }
-         
-         if(success)
-         {
-             success(objectsArray);
-         }
-         
-     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"Error: %@", error);
-         if (failure) {
-             failure(error, operation.response.statusCode);
-         }
-     }];
+                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                  NSLog(@"JSON: %@", responseObject);
+                                  NSArray *audioArray = [responseObject objectForKey:@"response"];
+                                  NSMutableArray *objectsArray = [NSMutableArray array];
+                                  
+                                  for (NSDictionary *audioDictionary in audioArray)
+                                  {
+                                      KSAudio *audio = [[KSAudio alloc] initWithServerResponse:audioDictionary];
+                                      [objectsArray addObject:audio];
+                                      [audio release];
+                                  }
+                                  
+                                  if(success)
+                                  {
+                                      success(objectsArray);
+                                  }
+                                  
+                              }
+     
+                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                  NSLog(@"Error: %@", error);
+                                  if (failure) {
+                                      failure(error, operation.response.statusCode);
+                                  }
+                              }];
 }
 
 @end

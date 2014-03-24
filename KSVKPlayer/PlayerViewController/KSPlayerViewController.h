@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KSPlayerDelegate.h"
 
 @class KSAccessToken;
+@protocol KSPlayerDelegate;
 
-@interface KSPlayerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface KSPlayerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, KSPlayerDelegate>
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (retain, nonatomic) IBOutlet UIToolbar *toolBar;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolBar;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *currentAudioTime;
 @property (nonatomic, retain) KSAccessToken *token;
 
 - (IBAction)playAudio:(id)sender;

@@ -29,7 +29,7 @@
     [super dealloc];
 }
 
-- (id)initWithServerResponse:(NSDictionary*)responseObject
+- (id)initWithServerResponse:(NSDictionary *)responseObject
 {
     self = [super init];
     if (self) {

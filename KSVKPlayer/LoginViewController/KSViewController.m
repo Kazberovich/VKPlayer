@@ -21,7 +21,7 @@
 @synthesize indicator = _indicator;
 @synthesize webView = _webView;
 
-- (void) dealloc
+- (void)dealloc
 {
     [_indicator release];
     [_webView release];
@@ -31,13 +31,11 @@
 
 - (void)viewDidLoad
 {
-
-
     [super viewDidLoad];
-    NSLog(@"%@", @"viewDidLoad");
+    NSLog(@"viewDidLoad");
 }
 
-- (void) viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
 
     // clear cookies
@@ -105,17 +103,15 @@
                 }
             }
         }
-
         
         NSLog(@"%@  %@  %@", token.userID, token.token, token.expirationDate);
 
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        KSPlayerViewController *playerViewController = (KSPlayerViewController*)[storyboard instantiateViewControllerWithIdentifier:@"player"];
+        KSPlayerViewController *playerViewController = (KSPlayerViewController *)[storyboard instantiateViewControllerWithIdentifier:@"player"];
         playerViewController.token = token;
         [self.navigationController pushViewController:playerViewController animated:YES];
         
         [token release];
-
         return NO;
     }
 }
