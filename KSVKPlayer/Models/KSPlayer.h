@@ -11,12 +11,13 @@
 
 @class KSAudio;
 
-@interface KSPlayer : AVPlayer
+@interface KSPlayer : AVQueuePlayer
 
 @property (nonatomic, retain) KSAudio *currentAudio;
 
 + (KSPlayer *)sharedInstance;
 - (void)playAudio:(KSAudio *) audio;
 - (void)pauseAudio;
+- (void)stopAudio;
 
 @end

@@ -147,6 +147,7 @@ static const NSInteger kOffsetFromTheBottom = 5;
 
 - (IBAction)nextAudio:(id)sender
 {
+    [[KSPlayer sharedInstance] stopAudio];
     NSLog(@"nextAudio");
     if(_currentAudioIndex == [self.audioArray count] - kOffsetFromTheBottom)
     {
@@ -163,6 +164,7 @@ static const NSInteger kOffsetFromTheBottom = 5;
     
     if ((int)_currentAudioIndex >= 1)
     {
+        [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (--self.currentAudioIndex)];
         [[KSPlayer sharedInstance] playAudio: _currentAudio];
         [self selectRowAtIndex:_currentAudioIndex];
