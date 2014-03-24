@@ -25,6 +25,8 @@
 @implementation KSPlayerViewController
 
 static const NSInteger kCountToLoad = 20;
+// offset from the bottom of playlist to load new block of music
+static const NSInteger kOffsetFromTheBottom = 5;
 
 @synthesize tableView = _tableView;
 @synthesize token = _token;
@@ -146,7 +148,7 @@ static const NSInteger kCountToLoad = 20;
 - (IBAction)nextAudio:(id)sender
 {
     NSLog(@"nextAudio");
-    if(_currentAudioIndex == [self.audioArray count] - 5)
+    if(_currentAudioIndex == [self.audioArray count] - kOffsetFromTheBottom)
     {
         [self getAudioFromServer];
     }
