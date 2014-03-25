@@ -79,6 +79,13 @@
     self.audioPlayer = nil;
 }
 
+- (void)seekToTime:(CMTime)time
+{
+    [self.audioPlayer pause];    
+    [self.audioPlayer seekToTime:time toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    [self.audioPlayer play];
+}
+
 - (int)getCurrentAudioDuration
 {
     return  [_currentAudio.duration intValue];

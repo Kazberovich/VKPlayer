@@ -28,6 +28,7 @@
 // offset from the bottom of playlist to load new block of music
 static const NSInteger kOffsetFromTheBottom = 5;
 static const NSInteger kCountToLoad = 20;
+static const float kSliderBeginPosition = 0.0;
 
 @synthesize tableView = _tableView;
 @synthesize token = _token;
@@ -36,6 +37,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)dealloc
 {
+    [_slider release];
     [_currentAudio release];
     [_tableView release];
     [_token release];
@@ -44,6 +46,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)viewDidLoad
 {
+    _slider.hidden = YES;
     [KSPlayer sharedInstance].delegate = self;
     [super viewDidLoad];
     self.audioArray = [NSMutableArray array];
@@ -136,6 +139,9 @@ static const NSInteger kCountToLoad = 20;
 - (IBAction)playAudio:(id)sender
 {
     NSLog(@"playAudio");
+    
+    _slider.hidden = NO;
+    
     if (self.currentAudioIndex)
     {
         [[KSPlayer sharedInstance] playAudio:_currentAudio];
@@ -151,8 +157,13 @@ static const NSInteger kCountToLoad = 20;
 
 - (IBAction)nextAudio:(id)sender
 {
-    [[KSPlayer sharedInstance] stopAudio];
     NSLog(@"nextAudio");
+    
+    [_slider setValue:kSliderBeginPosition];
+    _slider.hidden = NO;
+    
+    [[KSPlayer sharedInstance] stopAudio];
+    
     if(_currentAudioIndex == [self.audioArray count] - kOffsetFromTheBottom)
     {
         [self getAudioFromServer];
@@ -165,6 +176,9 @@ static const NSInteger kCountToLoad = 20;
 - (IBAction)previousAudio:(id)sender
 {
     NSLog(@"previousAudio");
+    
+    [_slider setValue:kSliderBeginPosition];
+    _slider.hidden = NO;
     
     if ((int)_currentAudioIndex >= 1)
     {
@@ -180,15 +194,11 @@ static const NSInteger kCountToLoad = 20;
     [[KSPlayer sharedInstance] pauseAudio];
 }
 
-#pragma mark - KSPlayerDelegate
-
-- (void)playerCurrentTime:(unsigned long long)current_second
+- (IBAction)valueChangeSliderTimer:(id)sender
 {
-    NSLog(@"playerCurrentTime = %llu", current_second);
-    [_slider setMaximumValue:_currentAudio.duration.intValue];
-    [_slider setValue:current_second animated:YES];
-    
-    [self updateTimeLabel:current_second];
+    float timeInSecond = _slider.value * 1000; //in seconds
+    CMTime cmTime = CMTimeMake(timeInSecond, 1000);
+    [[KSPlayer sharedInstance]seekToTime:cmTime];
 }
 
 - (void)updateTimeLabel:(unsigned long long)current_second
@@ -196,6 +206,17 @@ static const NSInteger kCountToLoad = 20;
     UInt64 minutes = current_second / 60;
     UInt64 seconds = current_second % 60;
     _currentAudioTime.title = [NSString stringWithFormat: @"%02llu:%02llu", minutes, seconds];
+}
+
+#pragma mark - KSPlayerDelegate
+
+- (void)playerCurrentTime:(unsigned long long)current_second
+{
+    NSLog(@"playerCurrentTime = %llu", current_second);
+    
+    [_slider setMaximumValue:[[KSPlayer sharedInstance] getCurrentAudioDuration]];
+    [_slider setValue:current_second animated:YES];
+    [self updateTimeLabel:current_second];
 }
 
 @end

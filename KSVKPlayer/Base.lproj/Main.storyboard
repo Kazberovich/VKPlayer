@@ -102,9 +102,12 @@
                                     <barButtonItem systemItem="stop" id="BzD-IG-c0C"/>
                                 </items>
                             </toolbar>
-                            <slider opaque="NO" tag="1" contentMode="bottom" contentHorizontalAlignment="fill" contentVerticalAlignment="bottom" minValue="0.0" maxValue="2" id="Sbb-k7-F5O">
-                                <rect key="frame" x="-2" y="496" width="324" height="29"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="1zT-cd-mDZ">
+                                <rect key="frame" x="-2" y="491" width="324" height="34"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="valueChangeSliderTimer:" destination="0HV-0G-gmN" eventType="touchUpInside" id="vsr-ij-qiH"/>
+                                </connections>
                             </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -114,7 +117,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="currentAudioTime" destination="Eye-YK-vAP" id="yEu-Q6-dbt"/>
-                        <outlet property="slider" destination="Sbb-k7-F5O" id="zy9-IJ-PTn"/>
+                        <outlet property="slider" destination="1zT-cd-mDZ" id="pMy-Fp-Wnp"/>
                         <outlet property="tableView" destination="Qx3-jk-UTB" id="tqh-Yf-9yZ"/>
                         <outlet property="toolBar" destination="ldh-T4-MrF" id="hID-Sn-mhT"/>
                     </connections>
