@@ -35,8 +35,8 @@
     if (self)
     {
         self.aid = [responseObject objectForKey:@"aid"];
-        self.title = [[responseObject objectForKey:@"title"] stringByReplacingOccurrencesOfString: @"&amp;" withString: @"&"];
-        self.artist = [[responseObject objectForKey:@"artist"] stringByReplacingOccurrencesOfString: @"&amp;" withString: @"&"];
+        self.title = [[responseObject objectForKey:@"title"] stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+        self.artist = [[responseObject objectForKey:@"artist"] stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
         self.genre = [responseObject objectForKey:@"genre"];
         self.duration = [responseObject objectForKey:@"duration"];
         self.url = [responseObject objectForKey:@"url"];        
