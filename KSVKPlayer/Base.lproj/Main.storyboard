@@ -33,7 +33,6 @@
                     <connections>
                         <outlet property="indicator" destination="Wsk-hU-axT" id="N3p-pd-LJh"/>
                         <outlet property="webView" destination="WkE-So-JJS" id="ajS-tp-QOK"/>
-                        <segue destination="0HV-0G-gmN" kind="push" id="Ido-6c-DK6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -99,7 +98,6 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="EaP-Zx-ZxP"/>
-                                    <barButtonItem systemItem="stop" id="BzD-IG-c0C"/>
                                 </items>
                             </toolbar>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="1zT-cd-mDZ">
@@ -112,9 +110,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Musics" id="2sH-9r-fxo">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="213-u4-AGQ"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Musics" id="2sH-9r-fxo"/>
                     <connections>
                         <outlet property="currentAudioTime" destination="Eye-YK-vAP" id="yEu-Q6-dbt"/>
                         <outlet property="slider" destination="1zT-cd-mDZ" id="pMy-Fp-Wnp"/>
