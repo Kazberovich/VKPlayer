@@ -15,11 +15,14 @@ PODS:
   - AFNetworking/Serialization (2.0.0)
   - AFNetworking/UIKit (2.0.0):
     - AFNetworking/NSURLConnection
+  - MWFeedParser/NSString+HTML (1.0.0)
 
 DEPENDENCIES:
   - AFNetworking (= 2.0)
+  - MWFeedParser/NSString+HTML (~> 1.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 3fa983b1beaba69566a3374612511e2a6e3fe845
+  MWFeedParser: eb4fbf12677a1b3d936fdd122f88866b528aca3e
 
 COCOAPODS: 0.29.0
