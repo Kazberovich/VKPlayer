@@ -28,7 +28,6 @@
 // offset from the bottom of playlist to load new block of music
 static const NSInteger kOffsetFromTheBottom = 5;
 static const NSInteger kCountToLoad = 20;
-static const float kSliderBeginPosition = 0.0;
 
 @synthesize tableView = _tableView;
 @synthesize token = _token;
@@ -46,7 +45,7 @@ static const float kSliderBeginPosition = 0.0;
 
 - (void)viewDidLoad
 {
-    _slider.hidden = YES;
+    [_slider setHidden:YES];
     [KSPlayer sharedInstance].delegate = self;
     [super viewDidLoad];
     self.audioArray = [NSMutableArray array];
@@ -140,16 +139,18 @@ static const float kSliderBeginPosition = 0.0;
 {
     NSLog(@"playAudio");
     
-    _slider.hidden = NO;
+    [_slider setHidden:NO];
     
     if (self.currentAudioIndex)
     {
+        [_slider setMaximumValue:_currentAudio.duration.intValue];
         [[KSPlayer sharedInstance] playAudio:_currentAudio];
     }
     else
     {
         _currentAudioIndex = 0;
         _currentAudio = [self.audioArray objectAtIndex:_currentAudioIndex];
+        [_slider setMaximumValue:_currentAudio.duration.intValue];
         [[KSPlayer sharedInstance] playAudio:_currentAudio];
         [self selectRowAtIndex:_currentAudioIndex];
     }
@@ -159,8 +160,7 @@ static const float kSliderBeginPosition = 0.0;
 {
     NSLog(@"nextAudio");
     
-    [_slider setValue:kSliderBeginPosition];
-    _slider.hidden = NO;
+    [_slider setHidden:NO];
     
     [[KSPlayer sharedInstance] stopAudio];
     
@@ -169,6 +169,7 @@ static const float kSliderBeginPosition = 0.0;
         [self getAudioFromServer];
     }
     _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
+    [_slider setMaximumValue:_currentAudio.duration.intValue];
     [[KSPlayer sharedInstance] playAudio: _currentAudio];
     [self selectRowAtIndex:_currentAudioIndex];
 }
@@ -177,13 +178,13 @@ static const float kSliderBeginPosition = 0.0;
 {
     NSLog(@"previousAudio");
     
-    [_slider setValue:kSliderBeginPosition];
-    _slider.hidden = NO;
+    [_slider setHidden:NO];
     
     if ((int)_currentAudioIndex >= 1)
     {
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (--self.currentAudioIndex)];
+        [_slider setMaximumValue:_currentAudio.duration.intValue];
         [[KSPlayer sharedInstance] playAudio: _currentAudio];
         [self selectRowAtIndex:_currentAudioIndex];
     }
@@ -196,9 +197,7 @@ static const float kSliderBeginPosition = 0.0;
 
 - (IBAction)valueChangeSliderTimer:(id)sender
 {
-    float timeInSecond = _slider.value * 1000; //in seconds
-    CMTime cmTime = CMTimeMake(timeInSecond, 1000);
-    [[KSPlayer sharedInstance]seekToTime:cmTime];
+    [[KSPlayer sharedInstance] seekToTime:_slider.value];
 }
 
 - (void)updateTimeLabel:(unsigned long long)current_second
@@ -214,7 +213,6 @@ static const float kSliderBeginPosition = 0.0;
 {
     NSLog(@"playerCurrentTime = %llu", current_second);
     
-    [_slider setMaximumValue:[[KSPlayer sharedInstance] getCurrentAudioDuration]];
     [_slider setValue:current_second animated:YES];
     [self updateTimeLabel:current_second];
 }

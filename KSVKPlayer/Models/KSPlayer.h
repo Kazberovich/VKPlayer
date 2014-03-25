@@ -22,7 +22,6 @@
 - (void)playAudio:(KSAudio *) audio;
 - (void)pauseAudio;
 - (void)stopAudio;
-- (void)seekToTime:(CMTime)time;
-- (int)getCurrentAudioDuration;
+- (void)seekToTime:(float)second;
 
 @end

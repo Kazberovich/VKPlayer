@@ -55,7 +55,7 @@
         CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
         [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
             UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
-            [self.delegate playerCurrentTime: currentTimeSec];
+            [self.delegate playerCurrentTime:currentTimeSec];
         }];
         [self.audioPlayer play];
     }
@@ -79,16 +79,11 @@
     self.audioPlayer = nil;
 }
 
-- (void)seekToTime:(CMTime)time
+- (void)seekToTime:(float)second
 {
     [self.audioPlayer pause];    
-    [self.audioPlayer seekToTime:time toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    [self.audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     [self.audioPlayer play];
-}
-
-- (int)getCurrentAudioDuration
-{
-    return  [_currentAudio.duration intValue];
 }
 
 @end
