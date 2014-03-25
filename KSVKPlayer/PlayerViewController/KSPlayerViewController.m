@@ -185,15 +185,10 @@ static const NSInteger kCountToLoad = 20;
 - (void)playerCurrentTime:(unsigned long long)current_second
 {
     NSLog(@"playerCurrentTime = %llu", current_second);
-    [self updateProgressBar:current_second];
+    [_slider setMaximumValue:_currentAudio.duration.intValue];
+    [_slider setValue:current_second animated:YES];
+    
     [self updateTimeLabel:current_second];
-}
-
-- (void)updateProgressBar:(unsigned long long)current_second
-{
-    _slider.maximumValue = [[KSPlayer sharedInstance] getCurrentAudioDuration];
-    _slider.minimumValue = 0.0;
-    [_slider setValue:current_second];
 }
 
 - (void)updateTimeLabel:(unsigned long long)current_second
