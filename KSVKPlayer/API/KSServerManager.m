@@ -17,7 +17,6 @@
 
 @end
 
-
 @implementation KSServerManager
 
 + (KSServerManager *)sharedManager
@@ -72,8 +71,7 @@
                                   if(success)
                                   {
                                       success(objectsArray);
-                                  }
-                                  
+                                  }                                  
                               }
      
                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
