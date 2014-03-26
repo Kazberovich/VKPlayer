@@ -124,12 +124,14 @@ static const NSInteger kCountToLoad = 20;
 {
     if (indexPath.row == [self.audioArray count])
     {
-        [self getAudioFromServer];
+        [self getAudioFromServer]; //ned to load new block of data
     }
     else
     {
         _currentAudio = [self.audioArray objectAtIndex:indexPath.row];
         _currentAudioIndex = indexPath.row;
+        [_slider setMaximumValue:_currentAudio.duration.intValue];
+        [[KSPlayer sharedInstance] playAudio:_currentAudio];
     }
 }
 
