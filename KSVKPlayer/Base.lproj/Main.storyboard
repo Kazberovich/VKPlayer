@@ -33,6 +33,7 @@
                     <connections>
                         <outlet property="indicator" destination="Wsk-hU-axT" id="N3p-pd-LJh"/>
                         <outlet property="webView" destination="WkE-So-JJS" id="ajS-tp-QOK"/>
+                        <segue destination="0HV-0G-gmN" kind="push" identifier="push" id="Rkq-d5-i6z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -54,7 +55,7 @@
             </objects>
             <point key="canvasLocation" x="-3409" y="-1206"/>
         </scene>
-        <!--Player View Controller - Musics-->
+        <!--Player View Controller - Title-->
         <scene sceneID="Ml5-fK-P9Y">
             <objects>
                 <viewController storyboardIdentifier="player" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0HV-0G-gmN" customClass="KSPlayerViewController" sceneMemberID="viewController">
@@ -110,7 +111,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Musics" id="2sH-9r-fxo"/>
+                    <navigationItem key="navigationItem" title="Title" id="inV-xD-BM9"/>
                     <connections>
                         <outlet property="currentAudioTime" destination="Eye-YK-vAP" id="yEu-Q6-dbt"/>
                         <outlet property="slider" destination="1zT-cd-mDZ" id="pMy-Fp-Wnp"/>
