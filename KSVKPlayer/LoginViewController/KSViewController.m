@@ -29,32 +29,38 @@
     [super dealloc];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    NSLog(@"viewDidLoad");
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
-
-    // clear cookies
-    /*NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray* tmdbCookies = [cookies cookiesForURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
+    self.navigationItem.title = @"Log in";
     
-    for (NSHTTPCookie* cookie in tmdbCookies)
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:kAccessToken] != nil || [[defaults objectForKey:kAccessToken] length] > 0 )
     {
-        [cookies deleteCookie:cookie];
-    }*/
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
-    
-    _webView.delegate = self;
-    [self.webView loadRequest:request];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
+        self.navigationItem.title = @"Log out";
+        KSAccessToken *token = [[KSAccessToken alloc] init];
+        
+        [token setUserID:[defaults objectForKey:kUserID]];
+        [token setToken:[defaults objectForKey:kAccessToken]];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        KSPlayerViewController *playerViewController = (KSPlayerViewController *)[storyboard instantiateViewControllerWithIdentifier:@"player"];
+        playerViewController.token = token;
+        [token release];
+        [self.navigationController pushViewController:playerViewController animated:YES];
+    }
+    else
+    {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
+        _webView.delegate = self;
+        
+        NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        NSArray* tmdbCookies = [cookies cookiesForURL:request.URL];
+        
+        for (NSHTTPCookie* cookie in tmdbCookies) {
+            [cookies deleteCookie:cookie];
+        }
+        [self.webView loadRequest:request];
+    }
 }
 
 #pragma mark - UIWebViewDelegate
@@ -63,7 +69,7 @@
 {
     NSLog(@"shouldStartLoadWithRequest, %@", [request description]);
     
-    if ([[[request URL] absoluteString] rangeOfString:@"access_token"].location == NSNotFound)
+    if ([[[request URL] absoluteString] rangeOfString:kAccessToken].location == NSNotFound)
     {
         NSLog(@"not authorized");
         return YES;
@@ -87,16 +93,16 @@
             if (values.count == 2) {
                 NSString *key = [values firstObject];
                 {
-                    if([key isEqualToString:@"access_token"])
+                    if([key isEqualToString:kAccessToken])
                     {
                         token.token = [values lastObject];
                     }
-                    else if ([key isEqualToString:@"expires_in"])
+                    else if ([key isEqualToString:kExpirationDate])
                     {
                         NSTimeInterval interval = [[values lastObject] doubleValue];
                         token.expirationDate = [NSDate dateWithTimeIntervalSinceNow:interval];
                     }
-                    else if ([key isEqualToString:@"user_id"])
+                    else if ([key isEqualToString:kUserID])
                     {
                         token.userID = [values lastObject];
                     }
@@ -104,8 +110,13 @@
             }
         }
         
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:token.token forKey:kAccessToken];
+        [defaults setObject:token.userID forKey:kUserID];
+        [defaults synchronize];
+        
         NSLog(@"%@  %@  %@", token.userID, token.token, token.expirationDate);
-
+        self.navigationItem.title = @"Log out";
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         KSPlayerViewController *playerViewController = (KSPlayerViewController *)[storyboard instantiateViewControllerWithIdentifier:@"player"];
         playerViewController.token = token;

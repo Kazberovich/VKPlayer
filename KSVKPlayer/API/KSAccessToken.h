@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define kAccessToken @"access_token"
+#define kUserID @"user_id"
+#define kExpirationDate @"expires_in"
+
 @interface KSAccessToken : NSObject
 
 @property (nonatomic, retain) NSString *token;
