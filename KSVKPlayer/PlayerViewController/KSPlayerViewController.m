@@ -168,7 +168,7 @@ static const NSInteger kCountToLoad = 20;
     {
         [self getAudioFromServer];
     }
-    if (self.currentAudioIndex != [self.audioArray count] -1)
+    if (self.currentAudioIndex != [self.audioArray count] - 1)
     {
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
@@ -229,7 +229,7 @@ static const NSInteger kCountToLoad = 20;
     [self updateTimeLabel:current_second];
 }
 
-- (void)startNextAudio
+- (void)playerDidFinishPlayingItem
 {
     [self nextAudio:nil];
 }

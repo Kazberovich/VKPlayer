@@ -12,6 +12,6 @@
 @protocol KSPlayerDelegate <NSObject>
 
 - (void)playerCurrentTime:(unsigned long long)time_in_seconds;
-- (void)startNextAudio;
+- (void)playerDidFinishPlayingItem;
 
 @end

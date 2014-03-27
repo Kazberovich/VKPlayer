@@ -74,9 +74,9 @@
     }
 }
 
--(void)itemDidFinishPlaying:(NSNotification *) notification
+- (void)itemDidFinishPlaying:(NSNotification *)notification
 {
-    [self.delegate startNextAudio];
+    [self.delegate playerDidFinishPlayingItem];
 }
 
 - (void)pauseAudio
