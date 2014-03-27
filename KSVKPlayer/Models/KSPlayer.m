@@ -79,7 +79,6 @@
     [self.delegate startNextAudio];
 }
 
-
 - (void)pauseAudio
 {
     NSLog(@"pause");
