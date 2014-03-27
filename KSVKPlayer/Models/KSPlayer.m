@@ -53,10 +53,19 @@
         self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];
         
         CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
-        [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
-            UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
-            [self.delegate playerCurrentTime:currentTimeSec];
-        }];
+        
+        [self.audioPlayer addPeriodicTimeObserverForInterval:interval
+                                                       queue:nil
+                                                  usingBlock:^(CMTime time) {
+                                                      UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
+                                                      [self.delegate playerCurrentTime:currentTimeSec];
+                                                  }];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(itemDidFinishPlaying:)
+                                                     name:AVPlayerItemDidPlayToEndTimeNotification
+                                                   object:playerItem];
+        
         [self.audioPlayer play];
     }
     else
@@ -64,6 +73,12 @@
         [self.audioPlayer play];
     }
 }
+
+-(void)itemDidFinishPlaying:(NSNotification *) notification
+{
+    [self.delegate startNextAudio];
+}
+
 
 - (void)pauseAudio
 {
