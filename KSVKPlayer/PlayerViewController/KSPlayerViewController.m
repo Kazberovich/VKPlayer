@@ -133,6 +133,9 @@ static const NSInteger kCountToLoad = 20;
     [defaults setObject:nil forKey:kAccessToken];
     [defaults setObject:nil forKey:kUserID];
     [defaults synchronize];
+    
+    [[KSPlayer sharedInstance] stopAudio];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
