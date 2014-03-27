@@ -29,12 +29,6 @@
     [super dealloc];
 }
 
-- (void)viewDidLoad
-{
-    NSLog(@"viewDidLoad");
-    [super viewDidLoad];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     self.navigationItem.title = @"Log in";
@@ -65,14 +59,8 @@
         for (NSHTTPCookie* cookie in tmdbCookies) {
             [cookies deleteCookie:cookie];
         }
-        
         [self.webView loadRequest:request];
     }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - UIWebViewDelegate
