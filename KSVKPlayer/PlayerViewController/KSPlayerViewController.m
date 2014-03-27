@@ -122,17 +122,10 @@ static const NSInteger kCountToLoad = 20;
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == [self.audioArray count])
-    {
-        [self getAudioFromServer]; //ned to load new block of data
-    }
-    else
-    {
-        _currentAudio = [self.audioArray objectAtIndex:indexPath.row];
-        _currentAudioIndex = indexPath.row;
-        [_slider setMaximumValue:_currentAudio.duration.intValue];
-        [[KSPlayer sharedInstance] playAudio:_currentAudio];
-    }
+    [_slider setHidden:NO];
+    _currentAudio = [self.audioArray objectAtIndex:indexPath.row];
+    _currentAudioIndex = indexPath.row;
+    [self playAndUpdateSlider];
 }
 
 #pragma mark - ToolbarActions
@@ -145,15 +138,13 @@ static const NSInteger kCountToLoad = 20;
     
     if (self.currentAudioIndex)
     {
-        [_slider setMaximumValue:_currentAudio.duration.intValue];
-        [[KSPlayer sharedInstance] playAudio:_currentAudio];
+        [self playAndUpdateSlider];
     }
     else
     {
         _currentAudioIndex = 0;
         _currentAudio = [self.audioArray objectAtIndex:_currentAudioIndex];
-        [_slider setMaximumValue:_currentAudio.duration.intValue];
-        [[KSPlayer sharedInstance] playAudio:_currentAudio];
+        [self playAndUpdateSlider];
         [self selectRowAtIndex:_currentAudioIndex];
     }
 }
@@ -171,8 +162,7 @@ static const NSInteger kCountToLoad = 20;
         [self getAudioFromServer];
     }
     _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
-    [_slider setMaximumValue:_currentAudio.duration.intValue];
-    [[KSPlayer sharedInstance] playAudio: _currentAudio];
+    [self playAndUpdateSlider];
     [self selectRowAtIndex:_currentAudioIndex];
 }
 
@@ -186,10 +176,15 @@ static const NSInteger kCountToLoad = 20;
     {
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (--self.currentAudioIndex)];
-        [_slider setMaximumValue:_currentAudio.duration.intValue];
-        [[KSPlayer sharedInstance] playAudio: _currentAudio];
+        [self playAndUpdateSlider];
         [self selectRowAtIndex:_currentAudioIndex];
     }
+}
+
+- (void)playAndUpdateSlider
+{
+    [_slider setMaximumValue:_currentAudio.duration.intValue];
+    [[KSPlayer sharedInstance] playAudio: _currentAudio];
 }
 
 - (IBAction)pauseAudio:(id)sender
