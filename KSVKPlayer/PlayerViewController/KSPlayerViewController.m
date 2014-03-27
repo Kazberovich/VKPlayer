@@ -53,11 +53,6 @@ static const NSInteger kCountToLoad = 20;
     [self getAudioFromServer];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - API
 
 - (void)getAudioFromServer
