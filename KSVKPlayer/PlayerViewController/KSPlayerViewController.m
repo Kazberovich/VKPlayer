@@ -164,15 +164,22 @@ static const NSInteger kCountToLoad = 20;
     
     [_slider setHidden:NO];
     
-    [[KSPlayer sharedInstance] stopAudio];
     
     if(_currentAudioIndex == [self.audioArray count] - kOffsetFromTheBottom)
     {
         [self getAudioFromServer];
     }
-    _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
-    [self playAndUpdateSlider];
-    [self selectRowAtIndex:_currentAudioIndex];
+    if (self.currentAudioIndex != [self.audioArray count] - 1)
+    {
+        [[KSPlayer sharedInstance] stopAudio];
+        _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
+        [self playAndUpdateSlider];
+        [self selectRowAtIndex:_currentAudioIndex];
+    }
+    else
+    {
+        [[KSPlayer sharedInstance] pauseAudio];
+    }
 }
 
 - (IBAction)previousAudio:(id)sender
@@ -221,6 +228,11 @@ static const NSInteger kCountToLoad = 20;
     
     [_slider setValue:current_second animated:YES];
     [self updateTimeLabel:current_second];
+}
+
+- (void)playerDidFinishPlayingItem
+{
+    [self nextAudio:nil];
 }
 
 @end
