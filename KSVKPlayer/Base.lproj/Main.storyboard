@@ -55,7 +55,7 @@
             </objects>
             <point key="canvasLocation" x="-3409" y="-1206"/>
         </scene>
-        <!--Player View Controller - Title-->
+        <!--Player View Controller - Music-->
         <scene sceneID="Ml5-fK-P9Y">
             <objects>
                 <viewController storyboardIdentifier="player" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0HV-0G-gmN" customClass="KSPlayerViewController" sceneMemberID="viewController">
@@ -111,7 +111,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="inV-xD-BM9"/>
+                    <navigationItem key="navigationItem" title="Music" id="inV-xD-BM9">
+                        <barButtonItem key="rightBarButtonItem" title="Log out" id="gjs-J4-uxS">
+                            <connections>
+                                <action selector="logOut:" destination="0HV-0G-gmN" id="iSp-5L-XzN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="currentAudioTime" destination="Eye-YK-vAP" id="yEu-Q6-dbt"/>
                         <outlet property="slider" destination="1zT-cd-mDZ" id="pMy-Fp-Wnp"/>

@@ -45,6 +45,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)viewDidLoad
 {
+    [self.navigationItem setHidesBackButton:YES];
     [_slider setHidden:YES];
     [KSPlayer sharedInstance].delegate = self;
     [super viewDidLoad];
@@ -55,7 +56,6 @@ static const NSInteger kCountToLoad = 20;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-
 }
 
 #pragma mark - API
@@ -134,6 +134,17 @@ static const NSInteger kCountToLoad = 20;
 }
 
 #pragma mark - ToolbarActions
+
+- (IBAction)logOut:(id)sender
+{
+    NSLog(@"log out");
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:kAccessToken];
+    [defaults setObject:nil forKey:kUserID];
+    [defaults synchronize];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (IBAction)playAudio:(id)sender
 {

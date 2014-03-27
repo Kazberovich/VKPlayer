@@ -31,16 +31,20 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     NSLog(@"viewDidLoad");
+    [super viewDidLoad];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    self.navigationItem.title = @"Log in";
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:kAccessToken] != nil || [[defaults objectForKey:kAccessToken] length] > 0 ) {
-       
+    if ([defaults objectForKey:kAccessToken] != nil || [[defaults objectForKey:kAccessToken] length] > 0 )
+    {
+        self.navigationItem.title = @"Log out";
         KSAccessToken *token = [[KSAccessToken alloc] init];
+        
         [token setUserID:[defaults objectForKey:kUserID]];
         [token setToken:[defaults objectForKey:kAccessToken]];
         
@@ -54,6 +58,14 @@
     {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
         _webView.delegate = self;
+        
+        NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        NSArray* tmdbCookies = [cookies cookiesForURL:request.URL];
+        
+        for (NSHTTPCookie* cookie in tmdbCookies) {
+            [cookies deleteCookie:cookie];
+        }
+        
         [self.webView loadRequest:request];
     }
 }
@@ -116,7 +128,7 @@
         [defaults synchronize];
         
         NSLog(@"%@  %@  %@", token.userID, token.token, token.expirationDate);
-
+        self.navigationItem.title = @"Log out";
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         KSPlayerViewController *playerViewController = (KSPlayerViewController *)[storyboard instantiateViewControllerWithIdentifier:@"player"];
         playerViewController.token = token;

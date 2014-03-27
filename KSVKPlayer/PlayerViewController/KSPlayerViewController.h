@@ -20,6 +20,7 @@
 @property (nonatomic, retain) IBOutlet UISlider *slider;
 @property (nonatomic, retain) KSAccessToken *token;
 
+- (IBAction)logOut:(id)sender;
 - (IBAction)playAudio:(id)sender;
 - (IBAction)nextAudio:(id)sender;
 - (IBAction)previousAudio:(id)sender;
