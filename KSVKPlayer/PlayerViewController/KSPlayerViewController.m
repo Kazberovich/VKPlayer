@@ -20,6 +20,7 @@
 @property (nonatomic, retain) KSAudio *currentAudio;
 @property int currentAudioIndex;
 @property int currentLoadedAudios;
+@property (nonatomic, retain) NSMutableArray *barItems;
 
 @end
 
@@ -33,6 +34,12 @@ static const NSInteger kCountToLoad = 20;
 @synthesize token = _token;
 @synthesize currentAudio = _currentAudio;
 @synthesize slider = _slider;
+@synthesize barItems = _barItems;
+@synthesize flexibleSpace1 = _flexibleSpace1;
+@synthesize flexibleSpace2 = _flexibleSpace2;
+@synthesize timeSpace = _timeSpace;
+@synthesize nextButton = _nextButton;
+@synthesize previousButton = _previousButton;
 
 - (void)dealloc
 {
@@ -51,6 +58,9 @@ static const NSInteger kCountToLoad = 20;
     [super viewDidLoad];
     self.audioArray = [NSMutableArray array];
     [self getAudioFromServer];
+    
+    _barItems = [[self.toolBar items] mutableCopy];
+    [self showToolBarItem:_playButton];
 }
 
 #pragma mark - API
@@ -144,6 +154,7 @@ static const NSInteger kCountToLoad = 20;
     NSLog(@"playAudio");
     
     [_slider setHidden:NO];
+    [self showToolBarItem:_pauseButton];
     
     if (self.currentAudioIndex)
     {
@@ -163,7 +174,6 @@ static const NSInteger kCountToLoad = 20;
     NSLog(@"nextAudio");
     
     [_slider setHidden:NO];
-    
     
     if(_currentAudioIndex == [self.audioArray count] - kOffsetFromTheBottom)
     {
@@ -205,6 +215,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (IBAction)pauseAudio:(id)sender
 {
+    [self showToolBarItem:_playButton];
     [[KSPlayer sharedInstance] pauseAudio];
 }
 
@@ -218,6 +229,19 @@ static const NSInteger kCountToLoad = 20;
     UInt64 minutes = current_second / 60;
     UInt64 seconds = current_second % 60;
     _currentAudioTime.title = [NSString stringWithFormat: @"%02llu:%02llu", minutes, seconds];
+}
+
+- (void)showToolBarItem:(UIBarButtonItem *)item
+{
+    [_barItems removeAllObjects];
+    [_barItems addObject:_timeSpace];
+    [_barItems addObject:_flexibleSpace1];
+    [_barItems addObject:_previousButton];
+    [_barItems addObject:item];
+    [_barItems addObject:_nextButton];
+    [_barItems addObject:_flexibleSpace2];
+    
+    [self.toolBar setItems:_barItems];
 }
 
 #pragma mark - KSPlayerDelegate
