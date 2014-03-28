@@ -53,12 +53,9 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
         _webView.delegate = self;
         
-        NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-        NSArray* tmdbCookies = [cookies cookiesForURL:request.URL];
+        [self clearCookieForURL:request.URL];
+        [self clearCookieForURL:[NSURL URLWithString:@"https://login.vk.com/"]];
         
-        for (NSHTTPCookie* cookie in tmdbCookies) {
-            [cookies deleteCookie:cookie];
-        }
         [self.webView loadRequest:request];
     }
 }
@@ -143,4 +140,14 @@
     [self.indicator stopAnimating];
 }
 
+- (void)clearCookieForURL:(NSURL *)url
+{
+    NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray* oauthCookies = [cookies cookiesForURL:url];
+    
+    for (NSHTTPCookie* cookie in oauthCookies)
+    {
+        [cookies deleteCookie:cookie];
+    }
+}
 @end
