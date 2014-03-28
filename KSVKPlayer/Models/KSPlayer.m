@@ -93,7 +93,6 @@
 {
     [self.audioPlayer pause];    
     [self.audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
-    [self.audioPlayer play];
 }
 
 @end

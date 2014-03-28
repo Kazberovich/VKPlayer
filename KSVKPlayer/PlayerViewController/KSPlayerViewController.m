@@ -171,6 +171,7 @@ static const NSInteger kCountToLoad = 20;
     }
     if (self.currentAudioIndex != [self.audioArray count] - 1)
     {
+        [_slider setValue:0.0 animated:YES];
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
         [self playAndUpdateSlider];
@@ -190,6 +191,7 @@ static const NSInteger kCountToLoad = 20;
     
     if ((int)_currentAudioIndex >= 1)
     {
+        [_slider setValue:0.0 animated:YES];
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (--self.currentAudioIndex)];
         [self playAndUpdateSlider];
@@ -210,7 +212,14 @@ static const NSInteger kCountToLoad = 20;
 
 - (IBAction)valueChangeSliderTimer:(id)sender
 {
+    NSLog(@"start changing");
     [[KSPlayer sharedInstance] seekToTime:_slider.value];
+}
+
+- (IBAction)valueChangeEnded:(id)sender
+{
+    NSLog(@"changed");
+    [[KSPlayer sharedInstance] playAudio:_currentAudio];
 }
 
 - (void)updateTimeLabel:(unsigned long long)current_second
@@ -225,7 +234,7 @@ static const NSInteger kCountToLoad = 20;
 - (void)playerCurrentTime:(unsigned long long)current_second
 {
     NSLog(@"playerCurrentTime = %llu", current_second);
-    
+
     [_slider setValue:current_second animated:YES];
     [self updateTimeLabel:current_second];
 }
