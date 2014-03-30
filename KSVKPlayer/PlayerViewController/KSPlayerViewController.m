@@ -43,6 +43,8 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)dealloc
 {
+    [_audioArray release];
+    [_barItems release];
     [_playButton release];
     [_pauseButton release];
     [_currentAudioTime release];
