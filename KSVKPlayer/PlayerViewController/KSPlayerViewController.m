@@ -29,7 +29,7 @@
 // offset from the bottom of playlist to load new block of music
 static const NSInteger kOffsetFromTheBottom = 5;
 static const NSInteger kPlayPauseToolbarIndex = 3;
-static const NSInteger kPauseInitialToolbarIndex = 3;
+static const NSInteger kPauseInitialToolbarIndex = 4;
 static const NSInteger kCountToLoad = 20;
 
 @synthesize tableView = _tableView;
