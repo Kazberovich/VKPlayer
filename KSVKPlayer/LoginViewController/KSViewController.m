@@ -12,6 +12,8 @@
 #import "KSAccessToken.h"
 #import "KSPlayerViewController.h"
 
+#define kLoginRedirecrURL @"https://login.vk.com/"
+
 @interface KSViewController ()
 
 @end
@@ -54,7 +56,7 @@
         _webView.delegate = self;
         
         [self clearCookieForURL:request.URL];
-        [self clearCookieForURL:[NSURL URLWithString:@"https://login.vk.com/"]];
+        [self clearCookieForURL:[NSURL URLWithString:kLoginRedirecrURL]];
         
         [self.webView loadRequest:request];
     }
@@ -142,10 +144,10 @@
 
 - (void)clearCookieForURL:(NSURL *)url
 {
-    NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray* oauthCookies = [cookies cookiesForURL:url];
+    NSHTTPCookieStorage *cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray *oauthCookies = [cookies cookiesForURL:url];
     
-    for (NSHTTPCookie* cookie in oauthCookies)
+    for (NSHTTPCookie *cookie in oauthCookies)
     {
         [cookies deleteCookie:cookie];
     }
