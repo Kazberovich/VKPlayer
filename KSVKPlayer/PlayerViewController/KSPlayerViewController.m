@@ -28,21 +28,24 @@
 
 // offset from the bottom of playlist to load new block of music
 static const NSInteger kOffsetFromTheBottom = 5;
+static const NSInteger kPlayPauseToolbarIndex = 3;
+static const NSInteger kPauseInitialToolbarIndex = 3;
 static const NSInteger kCountToLoad = 20;
 
 @synthesize tableView = _tableView;
 @synthesize token = _token;
 @synthesize currentAudio = _currentAudio;
+@synthesize currentAudioTime = _currentAudioTime;
 @synthesize slider = _slider;
 @synthesize barItems = _barItems;
-@synthesize flexibleSpace1 = _flexibleSpace1;
-@synthesize flexibleSpace2 = _flexibleSpace2;
-@synthesize timeSpace = _timeSpace;
-@synthesize nextButton = _nextButton;
-@synthesize previousButton = _previousButton;
+@synthesize playButton = _playButton;
+@synthesize pauseButton = _pauseButton;
 
 - (void)dealloc
 {
+    [_playButton release];
+    [_pauseButton release];
+    [_currentAudioTime release];
     [_slider release];
     [_currentAudio release];
     [_tableView release];
@@ -60,6 +63,7 @@ static const NSInteger kCountToLoad = 20;
     [self getAudioFromServer];
     
     _barItems = [[self.toolBar items] mutableCopy];
+    [_barItems removeObjectAtIndex:kPauseInitialToolbarIndex];
     [self showToolBarItem:_playButton];
 }
 
@@ -233,14 +237,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)showToolBarItem:(UIBarButtonItem *)item
 {
-    [_barItems removeAllObjects];
-    [_barItems addObject:_timeSpace];
-    [_barItems addObject:_flexibleSpace1];
-    [_barItems addObject:_previousButton];
-    [_barItems addObject:item];
-    [_barItems addObject:_nextButton];
-    [_barItems addObject:_flexibleSpace2];
-    
+    [_barItems replaceObjectAtIndex:kPlayPauseToolbarIndex withObject:item];
     [self.toolBar setItems:_barItems];
 }
 
