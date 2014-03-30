@@ -12,7 +12,7 @@
 #import "KSAccessToken.h"
 #import "KSPlayerViewController.h"
 
-#define kLoginRedirecrURL @"https://login.vk.com/"
+#define kLoginRedirectURL @"https://login.vk.com/"
 
 @interface KSViewController ()
 
@@ -56,7 +56,7 @@
         _webView.delegate = self;
         
         [self clearCookieForURL:request.URL];
-        [self clearCookieForURL:[NSURL URLWithString:kLoginRedirecrURL]];
+        [self clearCookieForURL:[NSURL URLWithString:kLoginRedirectURL]];
         
         [self.webView loadRequest:request];
     }
