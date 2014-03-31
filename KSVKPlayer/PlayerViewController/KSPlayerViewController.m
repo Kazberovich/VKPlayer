@@ -18,7 +18,6 @@
 
 @property (nonatomic, retain) NSMutableArray *audioArray;
 @property (nonatomic, retain) KSAudio *currentAudio;
-@property (nonatomic, retain) NSArray *barItems;
 @property int currentAudioIndex;
 @property int currentLoadedAudios;
 @property bool isPlaying;
@@ -29,8 +28,6 @@
 
 // offset from the bottom of playlist to load new block of music
 static const NSInteger kOffsetFromTheBottom = 5;
-static const NSInteger kPlayPauseToolbarIndex = 3;
-static const NSInteger kPauseInitialToolbarIndex = 4;
 static const NSInteger kCountToLoad = 20;
 
 @synthesize tableView = _tableView;
@@ -38,7 +35,6 @@ static const NSInteger kCountToLoad = 20;
 @synthesize currentAudio = _currentAudio;
 @synthesize currentAudioTime = _currentAudioTime;
 @synthesize slider = _slider;
-@synthesize barItems = _barItems;
 @synthesize playBarItems = _playBarItems;
 @synthesize pauseBarItems = _pauseBarItems;
 
@@ -47,7 +43,6 @@ static const NSInteger kCountToLoad = 20;
     [_playBarItems release];
     [_pauseBarItems release];
     [_audioArray release];
-    [_barItems release];
     [_currentAudioTime release];
     [_slider release];
     [_currentAudio release];
@@ -65,8 +60,7 @@ static const NSInteger kCountToLoad = 20;
     self.audioArray = [NSMutableArray array];
     [self getAudioFromServer];
     
-    self.isPlaying = NO;
-    [self showToolBarItems];
+    [self setupToolBarWithPlaying:NO];
 }
 
 #pragma mark - API
@@ -160,9 +154,7 @@ static const NSInteger kCountToLoad = 20;
     NSLog(@"playAudio");
     
     [_slider setHidden:NO];
-    
-    self.isPlaying = YES;
-    [self showToolBarItems];
+    [self setupToolBarWithPlaying:YES];
     
     if (self.currentAudioIndex)
     {
@@ -223,8 +215,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (IBAction)pauseAudio:(id)sender
 {
-    self.isPlaying = NO;
-    [self showToolBarItems];
+    [self setupToolBarWithPlaying:NO];
     [[KSPlayer sharedInstance] pauseAudio];
 }
 
@@ -240,10 +231,9 @@ static const NSInteger kCountToLoad = 20;
     _currentAudioTime.title = [NSString stringWithFormat: @"%02llu:%02llu", minutes, seconds];
 }
 
-- (void)showToolBarItems
+- (void)setupToolBarWithPlaying:(BOOL)isPlaying
 {
-    _barItems = (self.isPlaying) ? _pauseBarItems : _playBarItems;
-    [self.toolBar setItems:_barItems];
+    [self.toolBar setItems:(self.isPlaying) ? _pauseBarItems : _playBarItems];
 }
 
 #pragma mark - KSPlayerDelegate
