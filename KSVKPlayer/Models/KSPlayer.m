@@ -91,8 +91,10 @@
 
 - (void)seekToTime:(float)second
 {
-    [self.audioPlayer pause];    
+    self.delegate = nil;
     [self.audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    [self.delegate playerCurrentTime:second];
+    [self.audioPlayer play];
 }
 
 @end

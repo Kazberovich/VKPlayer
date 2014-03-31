@@ -105,8 +105,7 @@
                                 <rect key="frame" x="-2" y="491" width="324" height="34"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <action selector="valueChangeEnded:" destination="0HV-0G-gmN" eventType="touchUpInside" id="SRo-MR-2OP"/>
-                                    <action selector="valueChangeSliderTimer:" destination="0HV-0G-gmN" eventType="valueChanged" id="UN2-VO-YJl"/>
+                                    <action selector="valueChangeSliderTimer:" destination="0HV-0G-gmN" eventType="touchUpInside" id="vkT-q0-X6q"/>
                                 </connections>
                             </slider>
                         </subviews>

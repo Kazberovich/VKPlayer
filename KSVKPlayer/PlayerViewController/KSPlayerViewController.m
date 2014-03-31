@@ -216,12 +216,6 @@ static const NSInteger kCountToLoad = 20;
     [[KSPlayer sharedInstance] seekToTime:_slider.value];
 }
 
-- (IBAction)valueChangeEnded:(id)sender
-{
-    NSLog(@"changed");
-    [[KSPlayer sharedInstance] playAudio:_currentAudio];
-}
-
 - (void)updateTimeLabel:(unsigned long long)current_second
 {
     UInt64 minutes = current_second / 60;
