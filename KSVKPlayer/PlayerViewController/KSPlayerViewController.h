@@ -18,10 +18,8 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *toolBar;
 @property (nonatomic, retain) IBOutlet UISlider *slider;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *currentAudioTime;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *playButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *pauseButton;
-
-
+@property (nonatomic, retain) IBOutletCollection(UIBarButtonItem) NSArray *playBarItems;
+@property (nonatomic, retain) IBOutletCollection(UIBarButtonItem) NSArray *pauseBarItems;
 
 @property (nonatomic, retain) KSAccessToken *token;
 

@@ -18,9 +18,10 @@
 
 @property (nonatomic, retain) NSMutableArray *audioArray;
 @property (nonatomic, retain) KSAudio *currentAudio;
+@property (nonatomic, retain) NSArray *barItems;
 @property int currentAudioIndex;
 @property int currentLoadedAudios;
-@property (nonatomic, retain) NSMutableArray *barItems;
+@property bool isPlaying;
 
 @end
 
@@ -38,15 +39,15 @@ static const NSInteger kCountToLoad = 20;
 @synthesize currentAudioTime = _currentAudioTime;
 @synthesize slider = _slider;
 @synthesize barItems = _barItems;
-@synthesize playButton = _playButton;
-@synthesize pauseButton = _pauseButton;
+@synthesize playBarItems = _playBarItems;
+@synthesize pauseBarItems = _pauseBarItems;
 
 - (void)dealloc
 {
+    [_playBarItems release];
+    [_pauseBarItems release];
     [_audioArray release];
     [_barItems release];
-    [_playButton release];
-    [_pauseButton release];
     [_currentAudioTime release];
     [_slider release];
     [_currentAudio release];
@@ -64,9 +65,8 @@ static const NSInteger kCountToLoad = 20;
     self.audioArray = [NSMutableArray array];
     [self getAudioFromServer];
     
-    _barItems = [[self.toolBar items] mutableCopy];
-    [_barItems removeObjectAtIndex:kPauseInitialToolbarIndex];
-    [self showToolBarItem:_playButton];
+    self.isPlaying = NO;
+    [self showToolBarItems];
 }
 
 #pragma mark - API
@@ -160,7 +160,9 @@ static const NSInteger kCountToLoad = 20;
     NSLog(@"playAudio");
     
     [_slider setHidden:NO];
-    [self showToolBarItem:_pauseButton];
+    
+    self.isPlaying = YES;
+    [self showToolBarItems];
     
     if (self.currentAudioIndex)
     {
@@ -221,7 +223,8 @@ static const NSInteger kCountToLoad = 20;
 
 - (IBAction)pauseAudio:(id)sender
 {
-    [self showToolBarItem:_playButton];
+    self.isPlaying = NO;
+    [self showToolBarItems];
     [[KSPlayer sharedInstance] pauseAudio];
 }
 
@@ -237,9 +240,9 @@ static const NSInteger kCountToLoad = 20;
     _currentAudioTime.title = [NSString stringWithFormat: @"%02llu:%02llu", minutes, seconds];
 }
 
-- (void)showToolBarItem:(UIBarButtonItem *)item
+- (void)showToolBarItems
 {
-    [_barItems replaceObjectAtIndex:kPlayPauseToolbarIndex withObject:item];
+    _barItems = (self.isPlaying) ? _pauseBarItems : _playBarItems;
     [self.toolBar setItems:_barItems];
 }
 
