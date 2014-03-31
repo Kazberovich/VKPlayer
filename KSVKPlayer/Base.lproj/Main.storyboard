@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="SHl-g9-b3J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="SHl-g9-b3J">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
@@ -10,11 +10,11 @@
             <objects>
                 <viewController storyboardIdentifier="web" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="KSViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="WkE-So-JJS">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -60,11 +60,11 @@
             <objects>
                 <viewController storyboardIdentifier="player" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0HV-0G-gmN" customClass="KSPlayerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XCZ-Pa-sTG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Qx3-jk-UTB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -73,7 +73,7 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ldh-T4-MrF">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="460" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" id="Eye-YK-vAP"/>
@@ -102,7 +102,7 @@
                                 </items>
                             </toolbar>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="1zT-cd-mDZ">
-                                <rect key="frame" x="-2" y="491" width="324" height="34"/>
+                                <rect key="frame" x="-2" y="433" width="324" height="28"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="valueChangeSliderTimer:" destination="0HV-0G-gmN" eventType="touchUpInside" id="vsr-ij-qiH"/>
@@ -123,6 +123,18 @@
                         <outlet property="slider" destination="1zT-cd-mDZ" id="pMy-Fp-Wnp"/>
                         <outlet property="tableView" destination="Qx3-jk-UTB" id="tqh-Yf-9yZ"/>
                         <outlet property="toolBar" destination="ldh-T4-MrF" id="hID-Sn-mhT"/>
+                        <outletCollection property="playBarItems" destination="Eye-YK-vAP" id="mdk-b7-YN9"/>
+                        <outletCollection property="playBarItems" destination="eHR-u6-V6a" id="RSV-p9-hw6"/>
+                        <outletCollection property="playBarItems" destination="K5B-0J-WFB" id="rcb-PL-scH"/>
+                        <outletCollection property="playBarItems" destination="qMv-Im-MPy" id="t0t-9u-tDF"/>
+                        <outletCollection property="playBarItems" destination="nWR-wL-0xZ" id="hXy-Uy-YfZ"/>
+                        <outletCollection property="playBarItems" destination="EaP-Zx-ZxP" id="x2X-mu-TBX"/>
+                        <outletCollection property="pauseBarItems" destination="Eye-YK-vAP" id="Slv-La-DjR"/>
+                        <outletCollection property="pauseBarItems" destination="eHR-u6-V6a" id="EFL-c6-QCR"/>
+                        <outletCollection property="pauseBarItems" destination="K5B-0J-WFB" id="z6p-yV-hsx"/>
+                        <outletCollection property="pauseBarItems" destination="6lb-Ge-Qb8" id="Wqt-7q-JxK"/>
+                        <outletCollection property="pauseBarItems" destination="nWR-wL-0xZ" id="cMj-eK-Prk"/>
+                        <outletCollection property="pauseBarItems" destination="EaP-Zx-ZxP" id="bwp-7P-zA3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V2M-G9-5Hd" userLabel="First Responder" sceneMemberID="firstResponder"/>

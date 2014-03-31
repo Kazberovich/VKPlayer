@@ -32,10 +32,20 @@ static const NSInteger kCountToLoad = 20;
 @synthesize tableView = _tableView;
 @synthesize token = _token;
 @synthesize currentAudio = _currentAudio;
+@synthesize currentAudioTime = _currentAudioTime;
 @synthesize slider = _slider;
+@synthesize playBarItems = _playBarItems;
+@synthesize pauseBarItems = _pauseBarItems;
+@synthesize audioArray = _audioArray;
+@synthesize toolBar = _toolBar;
 
 - (void)dealloc
 {
+    [_toolBar release];
+    [_playBarItems release];
+    [_pauseBarItems release];
+    [_audioArray release];
+    [_currentAudioTime release];
     [_slider release];
     [_currentAudio release];
     [_tableView release];
@@ -51,6 +61,8 @@ static const NSInteger kCountToLoad = 20;
     [super viewDidLoad];
     self.audioArray = [NSMutableArray array];
     [self getAudioFromServer];
+    
+    [self setupToolBarWithPlaying:NO];
 }
 
 #pragma mark - API
@@ -118,6 +130,7 @@ static const NSInteger kCountToLoad = 20;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_slider setHidden:NO];
+    [self setupToolBarWithPlaying:YES];
     _currentAudio = [self.audioArray objectAtIndex:indexPath.row];
     _currentAudioIndex = indexPath.row;
     [self playAndUpdateSlider];
@@ -144,6 +157,7 @@ static const NSInteger kCountToLoad = 20;
     NSLog(@"playAudio");
     
     [_slider setHidden:NO];
+    [self setupToolBarWithPlaying:YES];
     
     if (self.currentAudioIndex)
     {
@@ -164,13 +178,13 @@ static const NSInteger kCountToLoad = 20;
     
     [_slider setHidden:NO];
     
-    
     if(_currentAudioIndex == [self.audioArray count] - kOffsetFromTheBottom)
     {
         [self getAudioFromServer];
     }
     if (self.currentAudioIndex != [self.audioArray count] - 1)
     {
+        [self setupToolBarWithPlaying:YES];
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
         [self playAndUpdateSlider];
@@ -205,6 +219,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (IBAction)pauseAudio:(id)sender
 {
+    [self setupToolBarWithPlaying:NO];
     [[KSPlayer sharedInstance] pauseAudio];
 }
 
@@ -218,6 +233,11 @@ static const NSInteger kCountToLoad = 20;
     UInt64 minutes = current_second / 60;
     UInt64 seconds = current_second % 60;
     _currentAudioTime.title = [NSString stringWithFormat: @"%02llu:%02llu", minutes, seconds];
+}
+
+- (void)setupToolBarWithPlaying:(BOOL)isPlaying
+{
+    [_toolBar setItems:(isPlaying) ? _pauseBarItems : _playBarItems];
 }
 
 #pragma mark - KSPlayerDelegate
