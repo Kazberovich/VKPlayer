@@ -13,6 +13,7 @@
 @interface KSPlayer()
 
 @property (nonatomic, retain) AVQueuePlayer *audioPlayer;
+@property (nonatomic, retain) id playbackObserver;
 
 @end
 
@@ -20,9 +21,11 @@
 
 @synthesize currentAudio = _currentAudio;
 @synthesize audioPlayer = _audioPlayer;
+@synthesize playbackObserver = _playbackObserver;
 
 - (void)dealloc
 {
+    [_playbackObserver release];
     [_audioPlayer release];
     [_currentAudio release];
     [super dealloc];
@@ -31,7 +34,7 @@
 + (KSPlayer *)sharedInstance
 {
     static KSPlayer *player = nil;
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         player = [[KSPlayer alloc] init];
@@ -42,7 +45,7 @@
 - (void)playAudio:(KSAudio *)audio
 {
     if (_currentAudio != audio)
-    {
+    {        
         NSLog(@"play new audio");
         [self stopAudio];
         
@@ -51,22 +54,21 @@
         AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]] ;
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
         self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];
+
+        [_audioPlayer play];
         
         CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
-        
-        [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
-            UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
+        _playbackObserver = [_audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
+            UInt64 currentTimeSec = _audioPlayer.currentTime.value / _audioPlayer.currentTime.timescale;
             [self.delegate playerCurrentTime:currentTimeSec];
         }];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
             name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
-        
-        [self.audioPlayer play];
     }
     else
     {
-        [self.audioPlayer play];
+        [_audioPlayer play];
     }
 }
 
@@ -78,23 +80,34 @@
 - (void)pauseAudio
 {
     NSLog(@"pause");
-    [self.audioPlayer pause];
+    [_audioPlayer pause];
 }
 
 - (void)stopAudio
 {
     NSLog(@"stop");
     
-    [self.audioPlayer removeAllItems];
-    self.audioPlayer = nil;
+    [_audioPlayer removeAllItems];
+    _audioPlayer = nil;
 }
 
 - (void)seekToTime:(float)second
 {
-    self.delegate = nil;
-    [self.audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
-    [self.delegate playerCurrentTime:second];
-    [self.audioPlayer play];
+    [_audioPlayer removeTimeObserver:_playbackObserver];
+    _playbackObserver = nil;
+    [_audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    
+    CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
+    __block int i = 0;
+    _playbackObserver = [_audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
+        UInt64 currentTimeSec = _audioPlayer.currentTime.value / _audioPlayer.currentTime.timescale;
+        //workaround. ignore jumping to previous slider's position
+        if(i > 2)
+        {
+             [self.delegate playerCurrentTime:currentTimeSec];
+        }
+        i++;
+    }];
 }
 
 @end

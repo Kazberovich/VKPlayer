@@ -117,6 +117,7 @@ static const NSInteger kCountToLoad = 20;
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [_slider setValue:0.0 animated:YES];
     [_slider setHidden:NO];
     _currentAudio = [self.audioArray objectAtIndex:indexPath.row];
     _currentAudioIndex = indexPath.row;
@@ -213,6 +214,7 @@ static const NSInteger kCountToLoad = 20;
 - (IBAction)valueChangeSliderTimer:(id)sender
 {
     NSLog(@"start changing");
+
     [[KSPlayer sharedInstance] seekToTime:_slider.value];
 }
 
