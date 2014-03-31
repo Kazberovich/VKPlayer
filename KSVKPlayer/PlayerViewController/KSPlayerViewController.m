@@ -36,9 +36,12 @@ static const NSInteger kCountToLoad = 20;
 @synthesize slider = _slider;
 @synthesize playBarItems = _playBarItems;
 @synthesize pauseBarItems = _pauseBarItems;
+@synthesize audioArray = _audioArray;
+@synthesize toolBar = _toolBar;
 
 - (void)dealloc
 {
+    [_toolBar release];
     [_playBarItems release];
     [_pauseBarItems release];
     [_audioArray release];
@@ -127,6 +130,7 @@ static const NSInteger kCountToLoad = 20;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_slider setHidden:NO];
+    [self setupToolBarWithPlaying:YES];
     _currentAudio = [self.audioArray objectAtIndex:indexPath.row];
     _currentAudioIndex = indexPath.row;
     [self playAndUpdateSlider];
@@ -180,6 +184,7 @@ static const NSInteger kCountToLoad = 20;
     }
     if (self.currentAudioIndex != [self.audioArray count] - 1)
     {
+        [self setupToolBarWithPlaying:YES];
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
         [self playAndUpdateSlider];
@@ -232,7 +237,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)setupToolBarWithPlaying:(BOOL)isPlaying
 {
-    [self.toolBar setItems:(isPlaying) ? _pauseBarItems : _playBarItems];
+    [_toolBar setItems:(isPlaying) ? _pauseBarItems : _playBarItems];
 }
 
 #pragma mark - KSPlayerDelegate
