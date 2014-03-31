@@ -20,7 +20,6 @@
 @property (nonatomic, retain) KSAudio *currentAudio;
 @property int currentAudioIndex;
 @property int currentLoadedAudios;
-@property bool isPlaying;
 
 @end
 
@@ -233,7 +232,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)setupToolBarWithPlaying:(BOOL)isPlaying
 {
-    [self.toolBar setItems:(self.isPlaying) ? _pauseBarItems : _playBarItems];
+    [self.toolBar setItems:(isPlaying) ? _pauseBarItems : _playBarItems];
 }
 
 #pragma mark - KSPlayerDelegate
