@@ -58,11 +58,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
             name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
-        
-        if(self.audioPlayer.status == AVPlayerStatusReadyToPlay &&
-           self.audioPlayer.currentItem.status == AVPlayerItemStatusReadyToPlay) {
-            [self.audioPlayer play];
-        }
+
+        [self.audioPlayer play];
     }
     else
     {
