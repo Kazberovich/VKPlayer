@@ -62,7 +62,7 @@
         }];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
-                                                     name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+            name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
         
         [self.audioPlayer play];
     }
