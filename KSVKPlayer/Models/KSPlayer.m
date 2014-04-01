@@ -60,6 +60,7 @@
             UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
             [self.delegate playerCurrentTime:currentTimeSec];
         }];
+        [_playbackObserver retain];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
             name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
@@ -94,6 +95,7 @@
 - (void)seekToTime:(float)second
 {
     [self.audioPlayer removeTimeObserver:_playbackObserver];
+    [_playbackObserver release];
     
     [_audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     
@@ -108,6 +110,7 @@
         }
         i++;
     }];
+    [_playbackObserver retain];
 }
 
 @end
