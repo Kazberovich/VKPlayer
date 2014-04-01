@@ -129,6 +129,7 @@ static const NSInteger kCountToLoad = 20;
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [_slider setValue:0.0 animated:YES];
     [_slider setHidden:NO];
     [self setupToolBarWithPlaying:YES];
     _currentAudio = [self.audioArray objectAtIndex:indexPath.row];
@@ -184,7 +185,9 @@ static const NSInteger kCountToLoad = 20;
     }
     if (self.currentAudioIndex != [self.audioArray count] - 1)
     {
+        [_slider setValue:0.0 animated:YES];
         [self setupToolBarWithPlaying:YES];
+        
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
         [self playAndUpdateSlider];
@@ -204,6 +207,7 @@ static const NSInteger kCountToLoad = 20;
     
     if ((int)_currentAudioIndex >= 1)
     {
+        [_slider setValue:0.0 animated:YES];
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (--self.currentAudioIndex)];
         [self playAndUpdateSlider];
@@ -225,6 +229,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (IBAction)valueChangeSliderTimer:(id)sender
 {
+    NSLog(@"start changing");
     [[KSPlayer sharedInstance] seekToTime:_slider.value];
 }
 
@@ -245,7 +250,6 @@ static const NSInteger kCountToLoad = 20;
 - (void)playerCurrentTime:(unsigned long long)current_second
 {
     NSLog(@"playerCurrentTime = %llu", current_second);
-    
     [_slider setValue:current_second animated:YES];
     [self updateTimeLabel:current_second];
 }

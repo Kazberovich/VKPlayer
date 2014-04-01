@@ -13,6 +13,7 @@
 @interface KSPlayer()
 
 @property (nonatomic, retain) AVQueuePlayer *audioPlayer;
+@property (nonatomic, retain) id playbackObserver;
 
 @end
 
@@ -20,9 +21,11 @@
 
 @synthesize currentAudio = _currentAudio;
 @synthesize audioPlayer = _audioPlayer;
+@synthesize playbackObserver = _playbackObserver;
 
 - (void)dealloc
 {
+    [_playbackObserver release];
     [_audioPlayer release];
     [_currentAudio release];
     [super dealloc];
@@ -31,7 +34,6 @@
 + (KSPlayer *)sharedInstance
 {
     static KSPlayer *player = nil;
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         player = [[KSPlayer alloc] init];
@@ -52,16 +54,10 @@
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
         self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];
         
-        CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
-        
-        [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
-            UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
-            [self.delegate playerCurrentTime:currentTimeSec];
-        }];
+        [self setCurrentTimeObserver:YES];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
             name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
-        
         [self.audioPlayer play];
     }
     else
@@ -91,9 +87,30 @@
 
 - (void)seekToTime:(float)second
 {
-    [self.audioPlayer pause];    
-    [self.audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
-    [self.audioPlayer play];
+    [self setCurrentTimeObserver:NO];
+    [_audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) completionHandler:^(BOOL finished) {
+        [self setCurrentTimeObserver:YES];
+    }];
+}
+
+- (void)setCurrentTimeObserver:(BOOL)needToSet
+{
+    if ([self.audioPlayer observationInfo])
+    {
+        [self.audioPlayer removeTimeObserver:_playbackObserver];
+        [_playbackObserver release];
+        _playbackObserver = nil;
+    }
+    
+    if (needToSet)
+    {
+        CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
+        _playbackObserver = [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
+            UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
+            [self.delegate playerCurrentTime:currentTimeSec];
+        }];
+        [_playbackObserver retain];
+    }
 }
 
 @end
