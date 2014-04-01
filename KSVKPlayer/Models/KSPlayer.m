@@ -54,21 +54,22 @@
         AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]] ;
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
         self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];
-
-        [_audioPlayer play];
         
         CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
-        _playbackObserver = [_audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
-            UInt64 currentTimeSec = _audioPlayer.currentTime.value / _audioPlayer.currentTime.timescale;
+        
+        _playbackObserver = [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
+            UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
             [self.delegate playerCurrentTime:currentTimeSec];
         }];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
-            name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+                                                     name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+        
+        [self.audioPlayer play];
     }
     else
     {
-        [_audioPlayer play];
+        [self.audioPlayer play];
     }
 }
 
@@ -80,31 +81,31 @@
 - (void)pauseAudio
 {
     NSLog(@"pause");
-    [_audioPlayer pause];
+    [self.audioPlayer pause];
 }
 
 - (void)stopAudio
 {
     NSLog(@"stop");
     
-    [_audioPlayer removeAllItems];
-    _audioPlayer = nil;
+    [self.audioPlayer removeAllItems];
+    self.audioPlayer = nil;
 }
 
 - (void)seekToTime:(float)second
 {
-    [_audioPlayer removeTimeObserver:_playbackObserver];
+    [self.audioPlayer removeTimeObserver:_playbackObserver];
     _playbackObserver = nil;
     [_audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     
     CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
     __block int i = 0;
-    _playbackObserver = [_audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
-        UInt64 currentTimeSec = _audioPlayer.currentTime.value / _audioPlayer.currentTime.timescale;
+    _playbackObserver = [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
+        UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
         //workaround. ignore jumping to previous slider's position
         if(i > 2)
         {
-             [self.delegate playerCurrentTime:currentTimeSec];
+            [self.delegate playerCurrentTime:currentTimeSec];
         }
         i++;
     }];
