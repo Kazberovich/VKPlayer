@@ -27,5 +27,4 @@
 - (IBAction)pauseAudio:(id)sender;
 - (IBAction)valueChangeSliderTimer:(id)sender;
 
-
 @end
