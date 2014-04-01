@@ -44,7 +44,7 @@
 - (void)playAudio:(KSAudio *)audio
 {
     if (_currentAudio != audio)
-    {        
+    {
         NSLog(@"play new audio");
         [self stopAudio];
         
