@@ -54,11 +54,10 @@
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
         self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];
         
-        [self setCurrentTimeObserver];
+        [self setCurrentTimeObserver:YES];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
             name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
-
         [self.audioPlayer play];
     }
     else
@@ -88,22 +87,34 @@
 
 - (void)seekToTime:(float)second
 {
-    [self.audioPlayer removeTimeObserver:_playbackObserver];
-    [_playbackObserver release];
-    
+    [self setCurrentTimeObserver:NO];
     [_audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) completionHandler:^(BOOL finished) {
-        [self setCurrentTimeObserver];
+        [self setCurrentTimeObserver:YES];
     }];
 }
 
-- (void)setCurrentTimeObserver
+- (void)setCurrentTimeObserver:(BOOL)needToSet
 {
-    CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
-    _playbackObserver = [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
-        UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
-        [self.delegate playerCurrentTime:currentTimeSec];
-    }];
-    [_playbackObserver retain];
+    if (needToSet)
+    {
+        if ([_audioPlayer observationInfo])
+        {
+            [self.audioPlayer removeTimeObserver:_playbackObserver];
+            [_playbackObserver release];
+        }
+        
+        CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
+        _playbackObserver = [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
+            UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
+            [self.delegate playerCurrentTime:currentTimeSec];
+        }];
+        [_playbackObserver retain];
+    }
+    else
+    {
+        [self.audioPlayer removeTimeObserver:_playbackObserver];
+        [_playbackObserver release];
+    }
 }
 
 @end
