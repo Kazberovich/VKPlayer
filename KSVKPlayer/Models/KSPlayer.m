@@ -96,6 +96,8 @@
 {
     [self.audioPlayer removeTimeObserver:_playbackObserver];
     _playbackObserver = nil;
+    [_playbackObserver release];
+    
     [_audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     
     CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
