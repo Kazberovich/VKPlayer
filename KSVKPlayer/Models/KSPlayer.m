@@ -54,18 +54,15 @@
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
         self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];
         
-        CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
-        
-        _playbackObserver = [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
-            UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
-            [self.delegate playerCurrentTime:currentTimeSec];
-        }];
-        [_playbackObserver retain];
+        [self setCurrentTimeObserver];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
             name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
         
-        [self.audioPlayer play];
+        if(self.audioPlayer.status == AVPlayerStatusReadyToPlay &&
+           self.audioPlayer.currentItem.status == AVPlayerItemStatusReadyToPlay) {
+            [self.audioPlayer play];
+        }
     }
     else
     {
@@ -97,18 +94,17 @@
     [self.audioPlayer removeTimeObserver:_playbackObserver];
     [_playbackObserver release];
     
-    [_audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
-    
+    [_audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) completionHandler:^(BOOL finished) {
+        [self setCurrentTimeObserver];
+    }];
+}
+
+- (void)setCurrentTimeObserver
+{
     CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
-    __block int i = 0;
     _playbackObserver = [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
         UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
-        //workaround. ignore jumping to previous slider's position
-        if(i > 2)
-        {
-            [self.delegate playerCurrentTime:currentTimeSec];
-        }
-        i++;
+        [self.delegate playerCurrentTime:currentTimeSec];
     }];
     [_playbackObserver retain];
 }
