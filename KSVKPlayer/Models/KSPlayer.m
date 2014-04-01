@@ -34,7 +34,6 @@
 + (KSPlayer *)sharedInstance
 {
     static KSPlayer *player = nil;
-
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         player = [[KSPlayer alloc] init];
@@ -95,8 +94,6 @@
 - (void)seekToTime:(float)second
 {
     [self.audioPlayer removeTimeObserver:_playbackObserver];
-    _playbackObserver = nil;
-    [_playbackObserver release];
     
     [_audioPlayer seekToTime:CMTimeMake(second * 1000, 1000) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     

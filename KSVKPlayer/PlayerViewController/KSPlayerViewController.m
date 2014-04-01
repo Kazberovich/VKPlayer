@@ -214,7 +214,6 @@ static const NSInteger kCountToLoad = 20;
 - (IBAction)valueChangeSliderTimer:(id)sender
 {
     NSLog(@"start changing");
-
     [[KSPlayer sharedInstance] seekToTime:_slider.value];
 }
 
@@ -230,7 +229,6 @@ static const NSInteger kCountToLoad = 20;
 - (void)playerCurrentTime:(unsigned long long)current_second
 {
     NSLog(@"playerCurrentTime = %llu", current_second);
-
     [_slider setValue:current_second animated:YES];
     [self updateTimeLabel:current_second];
 }
