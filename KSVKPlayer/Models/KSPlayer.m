@@ -95,25 +95,21 @@
 
 - (void)setCurrentTimeObserver:(BOOL)needToSet
 {
+    if ([self.audioPlayer observationInfo])
+    {
+        [self.audioPlayer removeTimeObserver:_playbackObserver];
+        [_playbackObserver release];
+        _playbackObserver = nil;
+    }
+    
     if (needToSet)
     {
-        if ([_audioPlayer observationInfo])
-        {
-            [self.audioPlayer removeTimeObserver:_playbackObserver];
-            [_playbackObserver release];
-        }
-        
         CMTime interval = CMTimeMakeWithSeconds(1.0, NSEC_PER_SEC);
         _playbackObserver = [self.audioPlayer addPeriodicTimeObserverForInterval:interval queue:nil usingBlock:^(CMTime time) {
             UInt64 currentTimeSec = self.audioPlayer.currentTime.value / self.audioPlayer.currentTime.timescale;
             [self.delegate playerCurrentTime:currentTimeSec];
         }];
         [_playbackObserver retain];
-    }
-    else
-    {
-        [self.audioPlayer removeTimeObserver:_playbackObserver];
-        [_playbackObserver release];
     }
 }
 
