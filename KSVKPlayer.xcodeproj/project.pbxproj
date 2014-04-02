@@ -22,7 +22,6 @@
 		FB0656F118DC2E6600778D29 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB0656F018DC2E6600778D29 /* AVFoundation.framework */; };
 		FB0656F418DC40AC00778D29 /* KSPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0656F318DC40AC00778D29 /* KSPlayer.m */; };
 		FB0656F718DC6BCD00778D29 /* KSStatusListener.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0656F618DC6BCD00778D29 /* KSStatusListener.m */; };
-		FB82CBCF18EC150300501F68 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB82CBD118EC150300501F68 /* Localizable.strings */; };
 		FBA8F65718DB2A3000A30418 /* KSAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8F65618DB2A3000A30418 /* KSAudio.m */; };
 		FBA8F65D18DB2BB000A30418 /* KSAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8F65A18DB2BB000A30418 /* KSAccessToken.m */; };
 		FBA8F65E18DB2BB000A30418 /* KSServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8F65C18DB2BB000A30418 /* KSServerManager.m */; };
@@ -58,8 +57,6 @@
 		FB2DB8AB18E0485D0025758E /* KSPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KSPlayerDelegate.h; path = Models/KSPlayerDelegate.h; sourceTree = "<group>"; };
 		FB82CBCD18EC14E700501F68 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		FB82CBCE18EC14E700501F68 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		FB82CBD018EC150300501F68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FB82CBD218EC150A00501F68 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FBA8F65518DB2A3000A30418 /* KSAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAudio.h; path = Models/KSAudio.h; sourceTree = "<group>"; };
 		FBA8F65618DB2A3000A30418 /* KSAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSAudio.m; path = Models/KSAudio.m; sourceTree = "<group>"; };
 		FBA8F65918DB2BB000A30418 /* KSAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAccessToken.h; path = API/KSAccessToken.h; sourceTree = "<group>"; };
@@ -138,7 +135,6 @@
 				FB04FBA618D97CA80066A18E /* InfoPlist.strings */,
 				FB04FBA918D97CA80066A18E /* main.m */,
 				FB04FBAB18D97CA80066A18E /* KSVKPlayer-Prefix.pch */,
-				FB82CBD118EC150300501F68 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -245,7 +241,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB04FBB618D97CA80066A18E /* Images.xcassets in Resources */,
-				FB82CBCF18EC150300501F68 /* Localizable.strings in Resources */,
 				FB04FBA818D97CA80066A18E /* InfoPlist.strings in Resources */,
 				FB04FBB118D97CA80066A18E /* Main.storyboard in Resources */,
 			);
@@ -323,15 +318,6 @@
 				FB82CBCD18EC14E700501F68 /* ru */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FB82CBD118EC150300501F68 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FB82CBD018EC150300501F68 /* Base */,
-				FB82CBD218EC150A00501F68 /* ru */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
