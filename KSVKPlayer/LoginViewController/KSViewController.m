@@ -33,12 +33,9 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    self.navigationItem.title = @"Log in";
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:kAccessToken] != nil || [[defaults objectForKey:kAccessToken] length] > 0 )
     {
-        self.navigationItem.title = @"Log out";
         KSAccessToken *token = [[KSAccessToken alloc] init];
         
         [token setUserID:[defaults objectForKey:kUserID]];
@@ -115,7 +112,6 @@
         [defaults synchronize];
         
         NSLog(@"%@  %@  %@", token.userID, token.token, token.expirationDate);
-        self.navigationItem.title = @"Log out";
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         KSPlayerViewController *playerViewController = (KSPlayerViewController *)[storyboard instantiateViewControllerWithIdentifier:@"player"];
         playerViewController.token = token;
