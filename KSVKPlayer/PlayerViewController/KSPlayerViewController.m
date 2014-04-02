@@ -74,6 +74,9 @@ static const NSInteger kCountToLoad = 20;
                                                   limit: kCountToLoad
      
                                               onSuccess: ^(NSArray *audioList) {
+                                                  
+                                                  //WIP token's expiration time
+                                                  
                                                   [self.audioArray addObjectsFromArray:audioList];
                                                   self.currentLoadedAudios += kCountToLoad;
                                                   [_tableView reloadData];
