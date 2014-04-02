@@ -12,7 +12,8 @@
 
 + (NSString *)getAuthorizeURL
 {
-    NSString *fullUrl = [self append:kAuthorizeURL, @"?", @"client_id=", kClientID, @"&", @"redirect_uri=", kRedirectURI, @"&", @"display=mobile", @"&scope=audio&response_type=token&revoke=1", nil];
+    //65544 - bitmask = offline(+65536) = audio(+8)
+    NSString *fullUrl = [self append:kAuthorizeURL, @"?", @"client_id=", kClientID, @"&", @"redirect_uri=", kRedirectURI, @"&", @"display=mobile", @"&scope=65544&response_type=token&revoke=1", nil];
     return fullUrl;
 }
 
