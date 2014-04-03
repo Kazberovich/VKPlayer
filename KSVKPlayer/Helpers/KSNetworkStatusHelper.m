@@ -102,17 +102,17 @@ static KSNetworkStatusHelper *sNetworkStatusHelper = nil;
 {
     return self;
 }
-    
+
 - (id)retain
 {
     return self;
 }
-    
+
 - (NSUInteger)retainCount
 {
     return NSUIntegerMax;
 }
-    
+
 - (id)autorelease
 {
     return self;

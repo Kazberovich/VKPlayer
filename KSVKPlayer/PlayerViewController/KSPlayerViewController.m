@@ -259,4 +259,14 @@ static const NSInteger kCountToLoad = 20;
     [self nextAudio:nil];
 }
 
+- (void)playerInternetConnectionFailed
+{
+    UIAlertView *noInetrnet = [[UIAlertView alloc] initWithTitle: @"VK Player"
+                                                         message: @"No Internet"
+                                                        delegate: self.navigationController
+                                               cancelButtonTitle: @"Ok" otherButtonTitles: nil];
+    [noInetrnet show];
+    [noInetrnet release];
+}
+
 @end

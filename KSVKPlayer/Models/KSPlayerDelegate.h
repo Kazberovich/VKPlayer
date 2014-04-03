@@ -13,5 +13,6 @@
 
 - (void)playerCurrentTime:(unsigned long long)time_in_seconds;
 - (void)playerDidFinishPlayingItem;
+- (void)playerInternetConnectionFailed;
 
 @end

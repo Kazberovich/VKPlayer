@@ -26,12 +26,27 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <view contentMode="scaleToFill" id="OHp-dh-rod">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no internet connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3zI-rd-Lot">
+                                        <rect key="frame" x="0.0" y="112" width="320" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Log in" id="nyN-XP-C7d"/>
                     <connections>
                         <outlet property="indicator" destination="Wsk-hU-axT" id="N3p-pd-LJh"/>
+                        <outlet property="noConnectionLabel" destination="3zI-rd-Lot" id="bxi-Au-k4R"/>
+                        <outlet property="noConnectionView" destination="OHp-dh-rod" id="gOS-Lr-aI4"/>
                         <outlet property="webView" destination="WkE-So-JJS" id="ajS-tp-QOK"/>
                         <segue destination="0HV-0G-gmN" kind="push" identifier="push" id="Rkq-d5-i6z"/>
                     </connections>

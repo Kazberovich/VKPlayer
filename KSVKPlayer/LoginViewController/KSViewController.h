@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KSNetworkStatusHelper.h"
 
 @class KSAccessToken;
 
-@interface KSViewController : UIViewController <UIWebViewDelegate>
+@interface KSViewController : UIViewController <UIWebViewDelegate, NetworkStatusDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *indicator;
+@property (nonatomic, retain) IBOutlet UIView *noConnectionView;
+@property (nonatomic, retain) IBOutlet UILabel *noConnectionLabel;
 
 @end
