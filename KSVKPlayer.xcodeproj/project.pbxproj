@@ -11,7 +11,6 @@
 		FB04FB9E18D97CA80066A18E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB04FB9D18D97CA80066A18E /* Foundation.framework */; };
 		FB04FBA018D97CA80066A18E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB04FB9F18D97CA80066A18E /* CoreGraphics.framework */; };
 		FB04FBA218D97CA80066A18E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB04FBA118D97CA80066A18E /* UIKit.framework */; };
-		FB04FBA818D97CA80066A18E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB04FBA618D97CA80066A18E /* InfoPlist.strings */; };
 		FB04FBAA18D97CA80066A18E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB04FBA918D97CA80066A18E /* main.m */; };
 		FB04FBAE18D97CA80066A18E /* KSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB04FBAD18D97CA80066A18E /* KSAppDelegate.m */; };
 		FB04FBB118D97CA80066A18E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB04FBAF18D97CA80066A18E /* Main.storyboard */; };
@@ -35,7 +34,6 @@
 		FB04FB9F18D97CA80066A18E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FB04FBA118D97CA80066A18E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FB04FBA518D97CA80066A18E /* KSVKPlayer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KSVKPlayer-Info.plist"; sourceTree = "<group>"; };
-		FB04FBA718D97CA80066A18E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FB04FBA918D97CA80066A18E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FB04FBAB18D97CA80066A18E /* KSVKPlayer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KSVKPlayer-Prefix.pch"; sourceTree = "<group>"; };
 		FB04FBAC18D97CA80066A18E /* KSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSAppDelegate.h; sourceTree = "<group>"; };
@@ -56,7 +54,6 @@
 		FB0656F618DC6BCD00778D29 /* KSStatusListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSStatusListener.m; path = Models/KSStatusListener.m; sourceTree = "<group>"; };
 		FB2DB8AB18E0485D0025758E /* KSPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KSPlayerDelegate.h; path = Models/KSPlayerDelegate.h; sourceTree = "<group>"; };
 		FB82CBCD18EC14E700501F68 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-		FB82CBCE18EC14E700501F68 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FBA8F65518DB2A3000A30418 /* KSAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAudio.h; path = Models/KSAudio.h; sourceTree = "<group>"; };
 		FBA8F65618DB2A3000A30418 /* KSAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSAudio.m; path = Models/KSAudio.m; sourceTree = "<group>"; };
 		FBA8F65918DB2BB000A30418 /* KSAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAccessToken.h; path = API/KSAccessToken.h; sourceTree = "<group>"; };
@@ -132,7 +129,6 @@
 			children = (
 				FB04FBB518D97CA80066A18E /* Images.xcassets */,
 				FB04FBA518D97CA80066A18E /* KSVKPlayer-Info.plist */,
-				FB04FBA618D97CA80066A18E /* InfoPlist.strings */,
 				FB04FBA918D97CA80066A18E /* main.m */,
 				FB04FBAB18D97CA80066A18E /* KSVKPlayer-Prefix.pch */,
 			);
@@ -241,7 +237,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB04FBB618D97CA80066A18E /* Images.xcassets in Resources */,
-				FB04FBA818D97CA80066A18E /* InfoPlist.strings in Resources */,
 				FB04FBB118D97CA80066A18E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,15 +297,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		FB04FBA618D97CA80066A18E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FB04FBA718D97CA80066A18E /* en */,
-				FB82CBCE18EC14E700501F68 /* ru */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		FB04FBAF18D97CA80066A18E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
