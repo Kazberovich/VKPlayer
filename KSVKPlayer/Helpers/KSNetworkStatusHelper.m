@@ -13,88 +13,29 @@
 
 @synthesize isNetworkConnection = _isNetworkConnection;
 
-static KSNetworkStatusHelper *sNetworkStatusHelper = nil;
-
 + (KSNetworkStatusHelper *)sharedInstance
 {
-    @synchronized(self)
-    {
-        if(sNetworkStatusHelper == nil)
-        {
-            sNetworkStatusHelper = [NSAllocateObject([self class], 0, NULL) init];
-        }
-    }
-    return sNetworkStatusHelper;
-}
-
-- (void)dealloc
-{
-    if (self.reachability)
-    {
-        [self.reachability stopNotifier];
-    }
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_reachability release];
-    [super dealloc];
-}
-
-- (id)init
-{
-    self = [super init];
-    if (self)
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNetworkChange:)name:kReachabilityChangedNotification object:nil];
-            self.reachability = [Reachability reachabilityForInternetConnection];
-            [self.reachability startNotifier];
-    }
-    return self;
-}
-
-- (void)handleNetworkChange:(NSNotification*) notice
-{
-    NetworkStatus remoteHostStatus = [self.reachability currentReachabilityStatus];
-    if(remoteHostStatus == NotReachable)
-    {
-        NSLog(@"no Internet");
-        _isNetworkConnection = NO;
-        [self.delegate statusWasChanged:self];
-    }
-    else if(remoteHostStatus == ReachableViaWiFi)
-    {
-        NSLog(@"wifi");
-        _isNetworkConnection = YES;
-        [self.delegate statusWasChanged:self];
-    }
-    else if(remoteHostStatus == ReachableViaWWAN)
-    {
-        NSLog(@"3G");
-        _isNetworkConnection = YES;
-        [self.delegate statusWasChanged:self];
-    }
+    static KSNetworkStatusHelper *sharedInstance = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    
+    return sharedInstance;
 }
 
 + (BOOL)isInternetActive
 {
     NetworkStatus netStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
     
-    switch (netStatus)
+    if(netStatus == ReachableViaWWAN || netStatus == ReachableViaWiFi)
     {
-        case NotReachable:
-        {
-            NSLog(@"Access Not Available");
-            return NO;
-        }
-        
-        case ReachableViaWWAN:
-        {
-            NSLog(@"Reachable WWAN");
-            return YES;
-        }
-        case ReachableViaWiFi:
-        {
-            NSLog(@"Reachable WiFi");
-            return YES;
-        }
+        return YES;
+    }
+    else
+    {
+        return NO;
     }
 }
 

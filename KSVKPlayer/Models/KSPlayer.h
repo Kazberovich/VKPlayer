@@ -16,7 +16,7 @@
 @interface KSPlayer : AVQueuePlayer
 
 @property (nonatomic, retain) KSAudio *currentAudio;
-@property (nonatomic, retain) id <KSPlayerDelegate> delegate;
+@property (nonatomic, assign) id <KSPlayerDelegate> delegate;
 
 + (KSPlayer *)sharedInstance;
 - (void)playAudio:(KSAudio *) audio;

@@ -13,19 +13,9 @@
 
 @interface KSNetworkStatusHelper : NSObject
 
-@property (nonatomic, retain) Reachability *reachability;
-@property (nonatomic, retain) id <NetworkStatusDelegate> delegate;
 @property (nonatomic, assign) BOOL isNetworkConnection;
 
 + (KSNetworkStatusHelper *)sharedInstance;
 + (BOOL)isInternetActive;
-
-@end
-
-@protocol NetworkStatusDelegate
-
-@required
-
-- (void)statusWasChanged:(KSNetworkStatusHelper *)helper;
 
 @end

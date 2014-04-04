@@ -11,11 +11,12 @@
 
 @class KSAccessToken;
 
-@interface KSViewController : UIViewController <UIWebViewDelegate, NetworkStatusDelegate>
+@interface KSViewController : UIViewController <UIWebViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *indicator;
 @property (nonatomic, retain) IBOutlet UIView *noConnectionView;
 @property (nonatomic, retain) IBOutlet UILabel *noConnectionLabel;
+@property (nonatomic, retain) Reachability *reachability;
 
 @end

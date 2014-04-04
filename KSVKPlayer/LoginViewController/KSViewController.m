@@ -11,6 +11,7 @@
 #import <AFHTTPRequestOperation.h>
 #import "KSAccessToken.h"
 #import "KSPlayerViewController.h"
+#import "Reachability.h"
 
 #define kLoginRedirectURL @"https://login.vk.com/"
 
@@ -24,9 +25,12 @@
 @synthesize webView = _webView;
 @synthesize noConnectionLabel = _noConnectionLabel;
 @synthesize noConnectionView = _noConnectionView;
+@synthesize reachability = _reachability;
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_reachability release];
     [_noConnectionView release];
     [_noConnectionLabel release];
     [_indicator release];
@@ -35,11 +39,17 @@
     [super dealloc];
 }
 
+- (void)viewDidLoad
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNetworkChange:)name:kReachabilityChangedNotification object:nil];
+    self.reachability = [Reachability reachabilityForInternetConnection];
+    [self.reachability startNotifier];
+    [super viewDidLoad];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     self.navigationItem.title = @"Log in";
-    [KSNetworkStatusHelper sharedInstance].delegate = self;
-    
     if([KSNetworkStatusHelper isInternetActive])
     {
         [_noConnectionView setHidden:YES];
@@ -47,7 +57,7 @@
         [_indicator setHidden:NO];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if ([defaults objectForKey:kAccessToken] != nil || [[defaults objectForKey:kAccessToken] length] > 0 )
+        if ([defaults objectForKey:kAccessToken] != nil)
         {
             self.navigationItem.title = @"Log out";
             KSAccessToken *token = [[KSAccessToken alloc] init];
@@ -78,6 +88,11 @@
         [_webView setHidden:YES];
         [_indicator setHidden:YES];
     }
+}
+
+- (void)handleNetworkChange:(NSNotification *)notice
+{
+    [self viewDidAppear:YES];
 }
 
 #pragma mark - UIWebViewDelegate
@@ -169,13 +184,6 @@
     {
         [cookies deleteCookie:cookie];
     }
-}
-
-#pragma mark - NetworkStatusDelegate
-
-- (void)statusWasChanged:(KSNetworkStatusHelper *)helper
-{
-    [self viewDidAppear:YES];
 }
 
 @end
