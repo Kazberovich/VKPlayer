@@ -21,6 +21,7 @@
 		FB0656F118DC2E6600778D29 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB0656F018DC2E6600778D29 /* AVFoundation.framework */; };
 		FB0656F418DC40AC00778D29 /* KSPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0656F318DC40AC00778D29 /* KSPlayer.m */; };
 		FB0656F718DC6BCD00778D29 /* KSStatusListener.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0656F618DC6BCD00778D29 /* KSStatusListener.m */; };
+		FB6F339D18EEEDDE000994CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB6F339F18EEEDDE000994CB /* Localizable.strings */; };
 		FBA5124918ED65C20096F6B6 /* KSNetworkStatusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA5124818ED65C20096F6B6 /* KSNetworkStatusHelper.m */; };
 		FBA8F65718DB2A3000A30418 /* KSAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8F65618DB2A3000A30418 /* KSAudio.m */; };
 		FBA8F65D18DB2BB000A30418 /* KSAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8F65A18DB2BB000A30418 /* KSAccessToken.m */; };
@@ -54,12 +55,11 @@
 		FB0656F518DC6BCD00778D29 /* KSStatusListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSStatusListener.h; path = Models/KSStatusListener.h; sourceTree = "<group>"; };
 		FB0656F618DC6BCD00778D29 /* KSStatusListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSStatusListener.m; path = Models/KSStatusListener.m; sourceTree = "<group>"; };
 		FB2DB8AB18E0485D0025758E /* KSPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KSPlayerDelegate.h; path = Models/KSPlayerDelegate.h; sourceTree = "<group>"; };
-
+		FB6F339E18EEEDDE000994CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FB6F33A018EEEDE0000994CB /* ru */ = {isa = PBXFileReference; lastKnownFileType = file; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB82CBCD18EC14E700501F68 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-
 		FBA5124718ED65C20096F6B6 /* KSNetworkStatusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSNetworkStatusHelper.h; path = Helpers/KSNetworkStatusHelper.h; sourceTree = "<group>"; };
 		FBA5124818ED65C20096F6B6 /* KSNetworkStatusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSNetworkStatusHelper.m; path = Helpers/KSNetworkStatusHelper.m; sourceTree = "<group>"; };
-
 		FBA8F65518DB2A3000A30418 /* KSAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAudio.h; path = Models/KSAudio.h; sourceTree = "<group>"; };
 		FBA8F65618DB2A3000A30418 /* KSAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSAudio.m; path = Models/KSAudio.m; sourceTree = "<group>"; };
 		FBA8F65918DB2BB000A30418 /* KSAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAccessToken.h; path = API/KSAccessToken.h; sourceTree = "<group>"; };
@@ -138,6 +138,7 @@
 				FB04FBA518D97CA80066A18E /* KSVKPlayer-Info.plist */,
 				FB04FBA918D97CA80066A18E /* main.m */,
 				FB04FBAB18D97CA80066A18E /* KSVKPlayer-Prefix.pch */,
+				FB6F339F18EEEDDE000994CB /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -253,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB04FBB618D97CA80066A18E /* Images.xcassets in Resources */,
+				FB6F339D18EEEDDE000994CB /* Localizable.strings in Resources */,
 				FB04FBB118D97CA80066A18E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +323,15 @@
 				FB82CBCD18EC14E700501F68 /* ru */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FB6F339F18EEEDDE000994CB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB6F339E18EEEDDE000994CB /* Base */,
+				FB6F33A018EEEDE0000994CB /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
