@@ -3,3 +3,4 @@ inhibit_all_warnings!
 
 pod 'AFNetworking', '2.0'
 pod 'MWFeedParser/NSString+HTML', '~> 1.0'
+pod 'Reachability', '3.0'

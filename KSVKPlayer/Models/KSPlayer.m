@@ -9,6 +9,7 @@
 #import "KSPlayer.h"
 #import "KSAudio.h"
 #import "KSPlayerDelegate.h"
+#import "KSNetworkStatusHelper.h"
 
 @interface KSPlayer()
 
@@ -16,6 +17,8 @@
 @property (nonatomic, retain) id playbackObserver;
 
 @end
+
+NSString* const KSPlayerConnectionFailedNotification = @"KSPlayerConnectionFailedNotification";
 
 @implementation KSPlayer
 
@@ -43,26 +46,34 @@
 
 - (void)playAudio:(KSAudio *)audio
 {
-    if (_currentAudio != audio)
+    if ([KSNetworkStatusHelper isInternetActive])
     {
-        NSLog(@"play new audio");
-        [self stopAudio];
-        
-        self.currentAudio = audio;
-        
-        AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]] ;
-        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
-        self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];
-        
-        [self setCurrentTimeObserver:YES];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
-            name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
-        [self.audioPlayer play];
+        if (_currentAudio != audio)
+        {
+            NSLog(@"play new audio");
+            [self stopAudio];
+            
+            self.currentAudio = audio;
+            
+            AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]] ;
+            AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
+            self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];
+            
+            [self setCurrentTimeObserver:YES];
+            
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
+                name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+            [self.audioPlayer play];
+        }
+        else
+        {
+            [self.audioPlayer play];
+        }
     }
     else
     {
-        [self.audioPlayer play];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KSPlayerConnectionFailedNotification object:nil];
+        [self pauseAudio];
     }
 }
 

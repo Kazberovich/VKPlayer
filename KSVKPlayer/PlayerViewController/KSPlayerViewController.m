@@ -41,6 +41,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_toolBar release];
     [_playBarItems release];
     [_pauseBarItems release];
@@ -55,6 +56,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)viewDidLoad
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed) name:KSPlayerConnectionFailedNotification object:nil];
     [self.navigationItem setHidesBackButton:YES];
     [_slider setHidden:YES];
     [KSPlayer sharedInstance].delegate = self;
@@ -63,6 +65,18 @@ static const NSInteger kCountToLoad = 20;
     [self getAudioFromServer];
     
     [self setupToolBarWithPlaying:NO];
+}
+
+#pragma mark - Notification
+
+- (void)connectionFailed
+{
+    NSLog(@"connection failed");
+    UIAlertView *noInetrnet = [[UIAlertView alloc] initWithTitle: @"VK Player" message: @"No Internet"
+            delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
+    
+    [noInetrnet show];
+    [noInetrnet release];
 }
 
 #pragma mark - API
@@ -193,7 +207,6 @@ static const NSInteger kCountToLoad = 20;
         
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
-        [self playAndUpdateSlider];
         [self selectRowAtIndex:_currentAudioIndex];
     }
     else
@@ -213,7 +226,6 @@ static const NSInteger kCountToLoad = 20;
         [_slider setValue:0.0 animated:YES];
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (--self.currentAudioIndex)];
-        [self playAndUpdateSlider];
         [self selectRowAtIndex:_currentAudioIndex];
     }
 }

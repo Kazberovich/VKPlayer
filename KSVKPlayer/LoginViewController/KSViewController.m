@@ -11,6 +11,7 @@
 #import <AFHTTPRequestOperation.h>
 #import "KSAccessToken.h"
 #import "KSPlayerViewController.h"
+#import "Reachability.h"
 
 #define kLoginRedirectURL @"https://login.vk.com/"
 
@@ -22,44 +23,76 @@
 
 @synthesize indicator = _indicator;
 @synthesize webView = _webView;
+@synthesize noConnectionLabel = _noConnectionLabel;
+@synthesize noConnectionView = _noConnectionView;
+@synthesize reachability = _reachability;
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_reachability release];
+    [_noConnectionView release];
+    [_noConnectionLabel release];
     [_indicator release];
     [_webView release];
     _webView.delegate = nil;
     [super dealloc];
 }
 
+- (void)viewDidLoad
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNetworkChange:)name:kReachabilityChangedNotification object:nil];
+    self.reachability = [Reachability reachabilityForInternetConnection];
+    [self.reachability startNotifier];
+    [super viewDidLoad];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     self.navigationItem.title = @"Log in";
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:kAccessToken] != nil || [[defaults objectForKey:kAccessToken] length] > 0 )
+    if([KSNetworkStatusHelper isInternetActive])
     {
-        self.navigationItem.title = @"Log out";
-        KSAccessToken *token = [[KSAccessToken alloc] init];
+        [_noConnectionView setHidden:YES];
+        [_webView setHidden:NO];
+        [_indicator setHidden:NO];
         
-        [token setUserID:[defaults objectForKey:kUserID]];
-        [token setToken:[defaults objectForKey:kAccessToken]];
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        KSPlayerViewController *playerViewController = (KSPlayerViewController *)[storyboard instantiateViewControllerWithIdentifier:@"player"];
-        playerViewController.token = token;
-        [token release];
-        [self.navigationController pushViewController:playerViewController animated:YES];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults objectForKey:kAccessToken] != nil)
+        {
+            self.navigationItem.title = @"Log out";
+            KSAccessToken *token = [[KSAccessToken alloc] init];
+            
+            [token setUserID:[defaults objectForKey:kUserID]];
+            [token setToken:[defaults objectForKey:kAccessToken]];
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            KSPlayerViewController *playerViewController = (KSPlayerViewController *)[storyboard instantiateViewControllerWithIdentifier:@"player"];
+            playerViewController.token = token;
+            [token release];
+            [self.navigationController pushViewController:playerViewController animated:YES];
+        }
+        else
+        {
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
+            _webView.delegate = self;
+            
+            [self clearCookieForURL:request.URL];
+            [self clearCookieForURL:[NSURL URLWithString:kLoginRedirectURL]];
+            
+            [self.webView loadRequest:request];
+        }
     }
     else
     {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[KSURLBuilder getAuthorizeURL]]];
-        _webView.delegate = self;
-        
-        [self clearCookieForURL:request.URL];
-        [self clearCookieForURL:[NSURL URLWithString:kLoginRedirectURL]];
-        
-        [self.webView loadRequest:request];
+        [_noConnectionView setHidden:NO];
+        [_webView setHidden:YES];
+        [_indicator setHidden:YES];
     }
+}
+
+- (void)handleNetworkChange:(NSNotification *)notice
+{
+    [self viewDidAppear:YES];
 }
 
 #pragma mark - UIWebViewDelegate
@@ -152,4 +185,5 @@
         [cookies deleteCookie:cookie];
     }
 }
+
 @end
