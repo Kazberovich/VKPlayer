@@ -26,6 +26,6 @@
 
 @required
 
-- (void)statusWasChanged: (KSNetworkStatusHelper *)helper;
+- (void)statusWasChanged:(KSNetworkStatusHelper *)helper;
 
 @end

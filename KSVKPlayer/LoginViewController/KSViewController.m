@@ -173,7 +173,7 @@
 
 #pragma mark - NetworkStatusDelegate
 
-- (void)statusWasChanged: (KSNetworkStatusHelper *)helper
+- (void)statusWasChanged:(KSNetworkStatusHelper *)helper
 {
     [self viewDidAppear:YES];
 }
