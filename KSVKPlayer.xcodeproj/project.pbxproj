@@ -22,7 +22,6 @@
 		FB0656F118DC2E6600778D29 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB0656F018DC2E6600778D29 /* AVFoundation.framework */; };
 		FB0656F418DC40AC00778D29 /* KSPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0656F318DC40AC00778D29 /* KSPlayer.m */; };
 		FB0656F718DC6BCD00778D29 /* KSStatusListener.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0656F618DC6BCD00778D29 /* KSStatusListener.m */; };
-		FBA5124518ED64DE0096F6B6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA5124418ED64DE0096F6B6 /* Reachability.m */; };
 		FBA5124918ED65C20096F6B6 /* KSNetworkStatusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA5124818ED65C20096F6B6 /* KSNetworkStatusHelper.m */; };
 		FBA8F65718DB2A3000A30418 /* KSAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8F65618DB2A3000A30418 /* KSAudio.m */; };
 		FBA8F65D18DB2BB000A30418 /* KSAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8F65A18DB2BB000A30418 /* KSAccessToken.m */; };
@@ -57,8 +56,6 @@
 		FB0656F518DC6BCD00778D29 /* KSStatusListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSStatusListener.h; path = Models/KSStatusListener.h; sourceTree = "<group>"; };
 		FB0656F618DC6BCD00778D29 /* KSStatusListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSStatusListener.m; path = Models/KSStatusListener.m; sourceTree = "<group>"; };
 		FB2DB8AB18E0485D0025758E /* KSPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KSPlayerDelegate.h; path = Models/KSPlayerDelegate.h; sourceTree = "<group>"; };
-		FBA5124318ED647E0096F6B6 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ThrirdParty/Reachability.h; sourceTree = "<group>"; };
-		FBA5124418ED64DE0096F6B6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ThrirdParty/Reachability.m; sourceTree = "<group>"; };
 		FBA5124718ED65C20096F6B6 /* KSNetworkStatusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSNetworkStatusHelper.h; path = Helpers/KSNetworkStatusHelper.h; sourceTree = "<group>"; };
 		FBA5124818ED65C20096F6B6 /* KSNetworkStatusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSNetworkStatusHelper.m; path = Helpers/KSNetworkStatusHelper.m; sourceTree = "<group>"; };
 		FBA8F65518DB2A3000A30418 /* KSAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAudio.h; path = Models/KSAudio.h; sourceTree = "<group>"; };
@@ -88,7 +85,6 @@
 		FB04FB9118D97CA80066A18E = {
 			isa = PBXGroup;
 			children = (
-				FBA5124218ED64410096F6B6 /* ThrirdParty */,
 				FB04FBA318D97CA80066A18E /* KSVKPlayer */,
 				FB04FB9C18D97CA80066A18E /* Frameworks */,
 				FB04FB9B18D97CA80066A18E /* Products */,
@@ -177,15 +173,6 @@
 				FB04FBDF18D9E4AE0066A18E /* KSPlayerViewController.m */,
 			);
 			name = PlayerViewController;
-			sourceTree = "<group>";
-		};
-		FBA5124218ED64410096F6B6 /* ThrirdParty */ = {
-			isa = PBXGroup;
-			children = (
-				FBA5124318ED647E0096F6B6 /* Reachability.h */,
-				FBA5124418ED64DE0096F6B6 /* Reachability.m */,
-			);
-			name = ThrirdParty;
 			sourceTree = "<group>";
 		};
 		FBA5124618ED656C0096F6B6 /* Helpers */ = {
@@ -312,7 +299,6 @@
 				FB04FBAE18D97CA80066A18E /* KSAppDelegate.m in Sources */,
 				FB04FBAA18D97CA80066A18E /* main.m in Sources */,
 				FBA8F65D18DB2BB000A30418 /* KSAccessToken.m in Sources */,
-				FBA5124518ED64DE0096F6B6 /* Reachability.m in Sources */,
 				FB0656F718DC6BCD00778D29 /* KSStatusListener.m in Sources */,
 				FB04FBDD18D99EAE0066A18E /* KSURLBuilder.m in Sources */,
 				FBA5124918ED65C20096F6B6 /* KSNetworkStatusHelper.m in Sources */,
