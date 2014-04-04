@@ -74,9 +74,17 @@ static const NSInteger kCountToLoad = 20;
                                                   limit: kCountToLoad
      
                                               onSuccess: ^(NSArray *audioList) {
-                                                  [self.audioArray addObjectsFromArray:audioList];
-                                                  self.currentLoadedAudios += kCountToLoad;
-                                                  [_tableView reloadData];
+                                                  if (audioList == nil)
+                                                  {
+                                                      [self clearAccessData];
+                                                      [self.navigationController popViewControllerAnimated:YES];
+                                                  }
+                                                  else
+                                                  {
+                                                      [self.audioArray addObjectsFromArray:audioList];
+                                                      self.currentLoadedAudios += kCountToLoad;
+                                                      [_tableView reloadData];
+                                                  }
                             
                                               } onFailure:^(NSError *error, NSInteger statusCode) {
                                                   NSLog(@"error = %@, code = %d", [error localizedDescription], statusCode);
@@ -143,13 +151,8 @@ static const NSInteger kCountToLoad = 20;
 {
     NSLog(@"log out");
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:nil forKey:kAccessToken];
-    [defaults setObject:nil forKey:kUserID];
-    [defaults synchronize];
-    
     [[KSPlayer sharedInstance] stopAudio];
-    
+    [self clearAccessData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -219,6 +222,14 @@ static const NSInteger kCountToLoad = 20;
 {
     [_slider setMaximumValue:_currentAudio.duration.intValue];
     [[KSPlayer sharedInstance] playAudio: _currentAudio];
+}
+
+- (void)clearAccessData
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:kAccessToken];
+    [defaults setObject:nil forKey:kUserID];
+    [defaults synchronize];
 }
 
 - (IBAction)pauseAudio:(id)sender
