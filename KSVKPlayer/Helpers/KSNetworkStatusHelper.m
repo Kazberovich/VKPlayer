@@ -28,35 +28,7 @@
 + (BOOL)isInternetActive
 {
     NetworkStatus netStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    
-    if(netStatus == ReachableViaWWAN || netStatus == ReachableViaWiFi)
-    {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-}
-
-- (id)copyWithZone:(NSZone*)zone
-{
-    return self;
-}
-
-- (id)retain
-{
-    return self;
-}
-
-- (NSUInteger)retainCount
-{
-    return NSUIntegerMax;
-}
-
-- (id)autorelease
-{
-    return self;
+    return (netStatus == ReachableViaWWAN || netStatus == ReachableViaWiFi) ? YES : NO;
 }
 
 @end
