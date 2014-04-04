@@ -190,7 +190,6 @@ static const NSInteger kCountToLoad = 20;
         
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (++self.currentAudioIndex)];
-        [self playAndUpdateSlider];
         [self selectRowAtIndex:_currentAudioIndex];
     }
     else
@@ -210,7 +209,6 @@ static const NSInteger kCountToLoad = 20;
         [_slider setValue:0.0 animated:YES];
         [[KSPlayer sharedInstance] stopAudio];
         _currentAudio = [self.audioArray objectAtIndex: (--self.currentAudioIndex)];
-        [self playAndUpdateSlider];
         [self selectRowAtIndex:_currentAudioIndex];
     }
 }
@@ -263,7 +261,7 @@ static const NSInteger kCountToLoad = 20;
 {
     UIAlertView *noInetrnet = [[UIAlertView alloc] initWithTitle: @"VK Player"
                                                          message: @"No Internet"
-                                                        delegate: self.navigationController
+                                                        delegate: self
                                                cancelButtonTitle: @"Ok" otherButtonTitles: nil];
     [noInetrnet show];
     [noInetrnet release];

@@ -70,7 +70,7 @@
     }
     else
     {
-        [self.audioPlayer pause];
+        [self pauseAudio];
         [self.delegate playerInternetConnectionFailed];
     }
 }
