@@ -18,6 +18,8 @@
 
 @end
 
+NSString* const KSPlayerConnectionFailedNotification = @"KSPlayerConnectionFailedNotification";
+
 @implementation KSPlayer
 
 @synthesize currentAudio = _currentAudio;
@@ -60,7 +62,7 @@
             [self setCurrentTimeObserver:YES];
             
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:)
-                                                         name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+                name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
             [self.audioPlayer play];
         }
         else
@@ -70,8 +72,8 @@
     }
     else
     {
+        [[NSNotificationCenter defaultCenter] postNotificationName:KSPlayerConnectionFailedNotification object:nil];
         [self pauseAudio];
-        [self.delegate playerInternetConnectionFailed];
     }
 }
 

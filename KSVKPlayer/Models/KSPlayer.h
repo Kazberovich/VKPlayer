@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "KSPlayerViewController.h"
+#import "Reachability.h"
+
+extern NSString* const KSPlayerConnectionFailedNotification;
 
 @protocol KSPlayerDelegate;
 @class KSAudio;
