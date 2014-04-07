@@ -10,7 +10,6 @@
 #import "KSAudio.h"
 #import "KSPlayerDelegate.h"
 #import "KSNetworkStatusHelper.h"
-#import "KSServerManager.h"
 
 @interface KSPlayer()
 
@@ -55,6 +54,7 @@ NSString* const KSPlayerConnectionFailedNotification = @"KSPlayerConnectionFaile
             [self stopAudio];
             
             self.currentAudio = audio;
+            
             AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]] ;
             AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
             self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];

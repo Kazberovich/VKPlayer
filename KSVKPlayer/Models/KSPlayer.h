@@ -22,7 +22,7 @@ extern NSString* const KSPlayerConnectionFailedNotification;
 @property (nonatomic, assign) id <KSPlayerDelegate> delegate;
 
 + (KSPlayer *)sharedInstance;
-- (void)playAudio:(KSAudio *)audio;
+- (void)playAudio:(KSAudio *) audio;
 - (void)pauseAudio;
 - (void)stopAudio;
 - (void)seekToTime:(float)second;
