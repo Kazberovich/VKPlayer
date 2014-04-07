@@ -42,17 +42,16 @@
     return self;
 }
 
-- (void) getAudioWithOffset:(NSInteger) offset
-                      token:(KSAccessToken *) token
-                      limit:(NSInteger) count
-                  onSuccess:(void(^)(NSArray *audioList)) success
-                  onFailure:(void(^)(NSError *error, NSInteger statusCode)) failure {
+- (void) getAudioWithOffset:(NSInteger)offset
+                      token:(KSAccessToken *)token
+                      limit:(NSInteger)count
+                  onSuccess:(void(^)(NSArray *audioList))success
+                  onFailure:(void(^)(NSError *error, NSInteger statusCode))failure {
     
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            token.userID, @"uid",
-                            @(count), @"count",
-                            @(offset), @"offset",
-                            token.token, @"access_token", nil];
+    NSDictionary *params = @{@"uid": token.userID,
+                             @"count": @(count),
+                             @"offset": @(offset),
+                             @"access_token": token.token};
     
     [self.requestOperationManager GET:@"audio.get"
                            parameters:params
@@ -79,6 +78,32 @@
                                       {
                                           success(objectsArray);
                                       }
+                                  }
+                              }
+     
+                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                  NSLog(@"Error: %@", error);
+                                  if (failure) {
+                                      failure(error, operation.response.statusCode);
+                                  }
+                              }];
+}
+
+- (void)setBroadcast:(KSAudio *)audio
+           onSuccess:(void(^)(NSArray *response))success
+           onFailure:(void(^)(NSError *error, NSInteger statusCode))failure {
+    
+    NSDictionary *params = @{@"access_token":[[NSUserDefaults standardUserDefaults]objectForKey:kAccessToken],
+                             @"audio":[NSString stringWithFormat:@"%d_%d",audio.ownerID.intValue, audio.aid.intValue]};
+    
+    [self.requestOperationManager GET:@"audio.setBroadcast"
+                           parameters:params
+                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                  NSLog(@"JSON: %@", responseObject);
+                                  
+                                  if([responseObject objectForKey:@"error"])
+                                  {
+                                      success(nil);
                                   }
                               }
      

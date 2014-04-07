@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString *url;
 @property (nonatomic, retain) NSString *duration;
 @property (nonatomic, retain) NSString *genre;
+@property (nonatomic, retain) NSString *ownerID;
 
 - (id)initWithServerResponse:(NSDictionary *)responseObject;
 
