@@ -26,6 +26,5 @@ extern NSString* const KSPlayerConnectionFailedNotification;
 - (void)pauseAudio;
 - (void)stopAudio;
 - (void)seekToTime:(float)second;
-- (void)setBroadcast;
 
 @end

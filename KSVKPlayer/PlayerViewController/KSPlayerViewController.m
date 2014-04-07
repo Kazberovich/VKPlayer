@@ -105,6 +105,17 @@ static const NSInteger kCountToLoad = 20;
                                               }];
 }
 
+- (void)setBroadcast
+{
+    [[KSServerManager sharedManager] setBroadcast:_currentAudio
+                                        onSuccess:^(NSArray *response) {
+                                            NSLog(@"Broadcast");
+                                        }
+                                        onFailure:^(NSError *error, NSInteger statusCode) {
+                                            NSLog(@"Error with updating status");
+                                        }];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -232,6 +243,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)playAndUpdateSlider
 {
+    [self setBroadcast];
     [_slider setMaximumValue:_currentAudio.duration.intValue];
     [[KSPlayer sharedInstance] playAudio: _currentAudio];
 }

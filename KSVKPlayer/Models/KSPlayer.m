@@ -55,7 +55,6 @@ NSString* const KSPlayerConnectionFailedNotification = @"KSPlayerConnectionFaile
             [self stopAudio];
             
             self.currentAudio = audio;
-            [self setBroadcast];
             AVAsset *asset = [AVAsset assetWithURL:[NSURL URLWithString:_currentAudio.url]] ;
             AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
             self.audioPlayer = [AVQueuePlayer playerWithPlayerItem:playerItem];
@@ -123,18 +122,6 @@ NSString* const KSPlayerConnectionFailedNotification = @"KSPlayerConnectionFaile
         }];
         [_playbackObserver retain];
     }
-}
-
-#pragma mark - API
-
-- (void)setBroadcast
-{    
-    [[KSServerManager sharedManager] setBroadcast:_currentAudio
-                                        onSuccess:^(NSArray *response) {
-        NSLog(@"Broadcast");
-    } onFailure:^(NSError *error, NSInteger statusCode) {
-        NSLog(@"Error with updating status");
-    }];
 }
 
 @end
