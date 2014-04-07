@@ -90,4 +90,32 @@
                               }];
 }
 
+- (void)setBroadcast:(KSAudio *) audio
+           onSuccess:(void(^)(NSArray *response)) success
+           onFailure:(void(^)(NSError *error, NSInteger statusCode)) failure {
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [[NSUserDefaults standardUserDefaults]objectForKey:kAccessToken], @"access_token",
+                            [NSString stringWithFormat:@"%d_%d",audio.ownerID.intValue, audio.aid.intValue], @"audio", //owner_id_audio_id
+                            nil];
+    
+    [self.requestOperationManager GET:@"audio.setBroadcast"
+                           parameters:params
+                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                  NSLog(@"JSON: %@", responseObject);
+                                  
+                                  if([responseObject objectForKey:@"error"])
+                                  {
+                                      success(nil);
+                                  }
+                              }
+     
+                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                  NSLog(@"Error: %@", error);
+                                  if (failure) {
+                                      failure(error, operation.response.statusCode);
+                                  }
+                              }];
+}
+
 @end

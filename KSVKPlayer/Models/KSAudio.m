@@ -17,9 +17,11 @@
 @synthesize genre = _genre;
 @synthesize duration = _duration;
 @synthesize url = _url;
+@synthesize ownerID = _ownerID;
 
 - (void)dealloc
 {
+    [_ownerID release];
     [_aid release];
     [_title release];
     [_artist release];
@@ -40,7 +42,8 @@
         self.artist = [[responseObject objectForKey:@"artist"] stringByDecodingHTMLEntities];
         self.genre = [responseObject objectForKey:@"genre"];
         self.duration = [responseObject objectForKey:@"duration"];
-        self.url = [responseObject objectForKey:@"url"];        
+        self.url = [responseObject objectForKey:@"url"];
+        self.ownerID = [responseObject objectForKey:@"owner_id"];
     }
     return self;
 }
