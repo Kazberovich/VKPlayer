@@ -46,6 +46,8 @@ NSString* const KSPlayerConnectionFailedNotification = @"KSPlayerConnectionFaile
 
 - (void)playAudio:(KSAudio *)audio
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
     if ([KSNetworkStatusHelper isInternetActive])
     {
         if (_currentAudio != audio)
@@ -77,6 +79,11 @@ NSString* const KSPlayerConnectionFailedNotification = @"KSPlayerConnectionFaile
     }
 }
 
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
+    [self.audioPlayer performSelector:@selector(play) withObject:nil afterDelay:0.01];
+}
+
 - (void)itemDidFinishPlaying:(NSNotification *)notification
 {
     [self.delegate playerDidFinishPlayingItem];
@@ -84,6 +91,7 @@ NSString* const KSPlayerConnectionFailedNotification = @"KSPlayerConnectionFaile
 
 - (void)pauseAudio
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
     NSLog(@"pause");
     [self.audioPlayer pause];
 }
