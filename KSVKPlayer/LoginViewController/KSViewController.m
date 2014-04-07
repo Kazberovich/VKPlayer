@@ -44,12 +44,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNetworkChange:)name:kReachabilityChangedNotification object:nil];
     self.reachability = [Reachability reachabilityForInternetConnection];
     [self.reachability startNotifier];
+    _noConnectionLabel.text = NSLocalizedString(@"no internet connection", nil);
     [super viewDidLoad];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    self.navigationItem.title = @"Log in";
     if([KSNetworkStatusHelper isInternetActive])
     {
         [_noConnectionView setHidden:YES];
@@ -59,7 +59,6 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if ([defaults objectForKey:kAccessToken] != nil)
         {
-            self.navigationItem.title = @"Log out";
             KSAccessToken *token = [[KSAccessToken alloc] init];
             
             [token setUserID:[defaults objectForKey:kUserID]];
@@ -148,7 +147,6 @@
         [defaults synchronize];
         
         NSLog(@"%@  %@  %@", token.userID, token.token, token.expirationDate);
-        self.navigationItem.title = @"Log out";
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         KSPlayerViewController *playerViewController = (KSPlayerViewController *)[storyboard instantiateViewControllerWithIdentifier:@"player"];
         playerViewController.token = token;
