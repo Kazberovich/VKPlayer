@@ -88,8 +88,8 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[KSPlayer sharedInstance] pause];
     [super viewWillDisappear:animated];
+    [[KSPlayer sharedInstance] pause];
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
     [self resignFirstResponder];
 }
