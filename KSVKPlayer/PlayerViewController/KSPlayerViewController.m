@@ -152,7 +152,7 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)setBroadcast
 {
-    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"isBroadcast"] boolValue])
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"isBroadcast"])
     {
         [[KSServerManager sharedManager] setBroadcast:_currentAudio
                                             onSuccess:^(NSArray *response) {
