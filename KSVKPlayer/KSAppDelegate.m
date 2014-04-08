@@ -14,9 +14,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSError *setCategoryErr = nil;
-    NSError *activationErr  = nil;
+    NSError *activationErr = nil;
+    
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:&setCategoryErr];
+    NSLog(@"Error: %@", [setCategoryErr localizedDescription]);
+    
     [[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
+    NSLog(@"Error: %@", [activationErr localizedDescription]);
     
     UInt32 doChangeDefaultRoute = 1;
     AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof(doChangeDefaultRoute), &doChangeDefaultRoute);
@@ -26,7 +30,6 @@
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }

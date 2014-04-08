@@ -67,7 +67,7 @@ static const NSInteger kCountToLoad = 20;
     [self setupToolBarWithPlaying:NO];
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
@@ -94,21 +94,31 @@ static const NSInteger kCountToLoad = 20;
     [self resignFirstResponder];
 }
 
-- (void)remoteControlReceivedWithEvent:(UIEvent *)event {
-    switch (event.subtype) {
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event
+{
+    switch (event.subtype)
+    {
         case UIEventSubtypeRemoteControlTogglePlayPause:
-            if([[KSPlayer sharedInstance] rate] == 0){
+        {
+            if([[KSPlayer sharedInstance] rate] == 0)
+            {
                 [[KSPlayer sharedInstance] playAudio:_currentAudio];
-            } else {
+            } else
+            {
                 [[KSPlayer sharedInstance] pauseAudio];
             }
             break;
+        }
         case UIEventSubtypeRemoteControlPlay:
+        {
             [[KSPlayer sharedInstance] playAudio:_currentAudio];
             break;
+        }
         case UIEventSubtypeRemoteControlPause:
+        {
             [[KSPlayer sharedInstance] pauseAudio];
             break;
+        }
         default:
             break;
     }
