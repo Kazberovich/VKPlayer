@@ -152,13 +152,16 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)setBroadcast
 {
-    [[KSServerManager sharedManager] setBroadcast:_currentAudio
-                                        onSuccess:^(NSArray *response) {
-                                            NSLog(@"Broadcast");
-                                        }
-                                        onFailure:^(NSError *error, NSInteger statusCode) {
-                                            NSLog(@"Error with updating status");
-                                        }];
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"isBroadcast"])
+    {
+        [[KSServerManager sharedManager] setBroadcast:_currentAudio
+                                            onSuccess:^(NSArray *response) {
+                                                NSLog(@"Broadcast");
+                                            }
+                                            onFailure:^(NSError *error, NSInteger statusCode) {
+                                                NSLog(@"Error with updating status");
+                                            }];
+    }
 }
 
 #pragma mark - UITableViewDataSource
