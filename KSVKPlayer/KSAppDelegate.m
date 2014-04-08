@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 mac-214. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "KSAppDelegate.h"
 #import "KSViewController.h"
 
@@ -13,12 +15,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSError *setCategoryErr = nil;
+    NSError *activationErr = nil;
     
-   /* UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    KSViewController *web = (KSViewController*)[storyboard instantiateViewControllerWithIdentifier:@"web"];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:web];
-    */
-    // Override point for customization after application launch.
+    if (![[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:&setCategoryErr])
+    {
+        NSLog(@"Error: %@", [setCategoryErr localizedDescription]);
+    }
+    
+    if(![[AVAudioSession sharedInstance] setActive:YES error:&activationErr])
+    {
+        NSLog(@"Error: %@", [activationErr localizedDescription]);
+    }
+    
+    UInt32 doChangeDefaultRoute = 1;
+    AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof(doChangeDefaultRoute), &doChangeDefaultRoute);
+    
     return YES;
 }
 							
