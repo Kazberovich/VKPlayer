@@ -16,17 +16,16 @@
 		FB04FBB118D97CA80066A18E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB04FBAF18D97CA80066A18E /* Main.storyboard */; };
 		FB04FBB618D97CA80066A18E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB04FBB518D97CA80066A18E /* Images.xcassets */; };
 		FB04FBDA18D99C100066A18E /* KSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB04FBD918D99C100066A18E /* KSViewController.m */; };
-		FB04FBDD18D99EAE0066A18E /* KSURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = FB04FBDC18D99EAE0066A18E /* KSURLBuilder.m */; };
 		FB04FBE018D9E4AE0066A18E /* KSPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB04FBDF18D9E4AE0066A18E /* KSPlayerViewController.m */; };
 		FB0656F118DC2E6600778D29 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB0656F018DC2E6600778D29 /* AVFoundation.framework */; };
-		FB0656F418DC40AC00778D29 /* KSPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0656F318DC40AC00778D29 /* KSPlayer.m */; };
-		FB0656F718DC6BCD00778D29 /* KSStatusListener.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0656F618DC6BCD00778D29 /* KSStatusListener.m */; };
 		FB6F339D18EEEDDE000994CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB6F339F18EEEDDE000994CB /* Localizable.strings */; };
 		FBA5124918ED65C20096F6B6 /* KSNetworkStatusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA5124818ED65C20096F6B6 /* KSNetworkStatusHelper.m */; };
 		FBA8F65718DB2A3000A30418 /* KSAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8F65618DB2A3000A30418 /* KSAudio.m */; };
-		FBA8F65D18DB2BB000A30418 /* KSAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8F65A18DB2BB000A30418 /* KSAccessToken.m */; };
 		FBA8F65E18DB2BB000A30418 /* KSServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA8F65C18DB2BB000A30418 /* KSServerManager.m */; };
 		FBDCFFEB18F43A9E00E99D05 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FBDCFFEA18F43A9E00E99D05 /* Settings.bundle */; };
+		FBDCFFF118F441A700E99D05 /* KSPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDCFFEF18F441A700E99D05 /* KSPlayer.m */; };
+		FBDCFFF418F441E100E99D05 /* KSURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDCFFF318F441E100E99D05 /* KSURLBuilder.m */; };
+		FBDCFFF718F4427500E99D05 /* KSAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FBDCFFF618F4427500E99D05 /* KSAccessToken.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,16 +45,9 @@
 		FB04FBBC18D97CA80066A18E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		FB04FBD818D99C100066A18E /* KSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSViewController.h; path = LoginViewController/KSViewController.h; sourceTree = "<group>"; };
 		FB04FBD918D99C100066A18E /* KSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSViewController.m; path = LoginViewController/KSViewController.m; sourceTree = "<group>"; };
-		FB04FBDB18D99EAE0066A18E /* KSURLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSURLBuilder.h; path = Models/KSURLBuilder.h; sourceTree = "<group>"; };
-		FB04FBDC18D99EAE0066A18E /* KSURLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSURLBuilder.m; path = Models/KSURLBuilder.m; sourceTree = "<group>"; };
 		FB04FBDE18D9E4AE0066A18E /* KSPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPlayerViewController.h; path = PlayerViewController/KSPlayerViewController.h; sourceTree = "<group>"; };
 		FB04FBDF18D9E4AE0066A18E /* KSPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPlayerViewController.m; path = PlayerViewController/KSPlayerViewController.m; sourceTree = "<group>"; };
 		FB0656F018DC2E6600778D29 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		FB0656F218DC40AC00778D29 /* KSPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPlayer.h; path = Models/KSPlayer.h; sourceTree = "<group>"; };
-		FB0656F318DC40AC00778D29 /* KSPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPlayer.m; path = Models/KSPlayer.m; sourceTree = "<group>"; };
-		FB0656F518DC6BCD00778D29 /* KSStatusListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSStatusListener.h; path = Models/KSStatusListener.h; sourceTree = "<group>"; };
-		FB0656F618DC6BCD00778D29 /* KSStatusListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSStatusListener.m; path = Models/KSStatusListener.m; sourceTree = "<group>"; };
-		FB2DB8AB18E0485D0025758E /* KSPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KSPlayerDelegate.h; path = Models/KSPlayerDelegate.h; sourceTree = "<group>"; };
 		FB6F339E18EEEDDE000994CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB6F33A018EEEDE0000994CB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB82CBCD18EC14E700501F68 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -63,11 +55,16 @@
 		FBA5124818ED65C20096F6B6 /* KSNetworkStatusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSNetworkStatusHelper.m; path = Helpers/KSNetworkStatusHelper.m; sourceTree = "<group>"; };
 		FBA8F65518DB2A3000A30418 /* KSAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAudio.h; path = Models/KSAudio.h; sourceTree = "<group>"; };
 		FBA8F65618DB2A3000A30418 /* KSAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSAudio.m; path = Models/KSAudio.m; sourceTree = "<group>"; };
-		FBA8F65918DB2BB000A30418 /* KSAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAccessToken.h; path = API/KSAccessToken.h; sourceTree = "<group>"; };
-		FBA8F65A18DB2BB000A30418 /* KSAccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSAccessToken.m; path = API/KSAccessToken.m; sourceTree = "<group>"; };
 		FBA8F65B18DB2BB000A30418 /* KSServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSServerManager.h; path = API/KSServerManager.h; sourceTree = "<group>"; };
 		FBA8F65C18DB2BB000A30418 /* KSServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSServerManager.m; path = API/KSServerManager.m; sourceTree = "<group>"; };
 		FBDCFFEA18F43A9E00E99D05 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
+		FBDCFFEE18F441A700E99D05 /* KSPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPlayer.h; path = Player/KSPlayer.h; sourceTree = "<group>"; };
+		FBDCFFEF18F441A700E99D05 /* KSPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPlayer.m; path = Player/KSPlayer.m; sourceTree = "<group>"; };
+		FBDCFFF018F441A700E99D05 /* KSPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPlayerDelegate.h; path = Player/KSPlayerDelegate.h; sourceTree = "<group>"; };
+		FBDCFFF218F441E100E99D05 /* KSURLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSURLBuilder.h; path = Helpers/KSURLBuilder.h; sourceTree = "<group>"; };
+		FBDCFFF318F441E100E99D05 /* KSURLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSURLBuilder.m; path = Helpers/KSURLBuilder.m; sourceTree = "<group>"; };
+		FBDCFFF518F4427500E99D05 /* KSAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAccessToken.h; path = Models/KSAccessToken.h; sourceTree = "<group>"; };
+		FBDCFFF618F4427500E99D05 /* KSAccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSAccessToken.m; path = Models/KSAccessToken.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +123,7 @@
 				FB04FBE118D9E4B20066A18E /* PlayerViewController */,
 				FB04FBD718D99B8A0066A18E /* LoginViewController */,
 				FBA8F65818DB2A3C00A30418 /* Api */,
+				FBDCFFED18F4413400E99D05 /* Player */,
 				FB04FBD518D98D970066A18E /* Models */,
 				FBA5124618ED656C0096F6B6 /* Helpers */,
 				FB04FBA418D97CA80066A18E /* Supporting Files */,
@@ -149,15 +147,10 @@
 		FB04FBD518D98D970066A18E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FB04FBDB18D99EAE0066A18E /* KSURLBuilder.h */,
-				FB04FBDC18D99EAE0066A18E /* KSURLBuilder.m */,
+				FBDCFFF518F4427500E99D05 /* KSAccessToken.h */,
+				FBDCFFF618F4427500E99D05 /* KSAccessToken.m */,
 				FBA8F65518DB2A3000A30418 /* KSAudio.h */,
 				FBA8F65618DB2A3000A30418 /* KSAudio.m */,
-				FB0656F218DC40AC00778D29 /* KSPlayer.h */,
-				FB0656F318DC40AC00778D29 /* KSPlayer.m */,
-				FB0656F518DC6BCD00778D29 /* KSStatusListener.h */,
-				FB0656F618DC6BCD00778D29 /* KSStatusListener.m */,
-				FB2DB8AB18E0485D0025758E /* KSPlayerDelegate.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -183,6 +176,8 @@
 		FBA5124618ED656C0096F6B6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FBDCFFF218F441E100E99D05 /* KSURLBuilder.h */,
+				FBDCFFF318F441E100E99D05 /* KSURLBuilder.m */,
 				FBA5124718ED65C20096F6B6 /* KSNetworkStatusHelper.h */,
 				FBA5124818ED65C20096F6B6 /* KSNetworkStatusHelper.m */,
 			);
@@ -192,12 +187,20 @@
 		FBA8F65818DB2A3C00A30418 /* Api */ = {
 			isa = PBXGroup;
 			children = (
-				FBA8F65918DB2BB000A30418 /* KSAccessToken.h */,
-				FBA8F65A18DB2BB000A30418 /* KSAccessToken.m */,
 				FBA8F65B18DB2BB000A30418 /* KSServerManager.h */,
 				FBA8F65C18DB2BB000A30418 /* KSServerManager.m */,
 			);
 			name = Api;
+			sourceTree = "<group>";
+		};
+		FBDCFFED18F4413400E99D05 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				FBDCFFEE18F441A700E99D05 /* KSPlayer.h */,
+				FBDCFFEF18F441A700E99D05 /* KSPlayer.m */,
+				FBDCFFF018F441A700E99D05 /* KSPlayerDelegate.h */,
+			);
+			name = Player;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,13 +307,12 @@
 			files = (
 				FB04FBAE18D97CA80066A18E /* KSAppDelegate.m in Sources */,
 				FB04FBAA18D97CA80066A18E /* main.m in Sources */,
-				FBA8F65D18DB2BB000A30418 /* KSAccessToken.m in Sources */,
-				FB0656F718DC6BCD00778D29 /* KSStatusListener.m in Sources */,
-				FB04FBDD18D99EAE0066A18E /* KSURLBuilder.m in Sources */,
 				FBA5124918ED65C20096F6B6 /* KSNetworkStatusHelper.m in Sources */,
 				FBA8F65E18DB2BB000A30418 /* KSServerManager.m in Sources */,
+				FBDCFFF118F441A700E99D05 /* KSPlayer.m in Sources */,
 				FB04FBE018D9E4AE0066A18E /* KSPlayerViewController.m in Sources */,
-				FB0656F418DC40AC00778D29 /* KSPlayer.m in Sources */,
+				FBDCFFF418F441E100E99D05 /* KSURLBuilder.m in Sources */,
+				FBDCFFF718F4427500E99D05 /* KSAccessToken.m in Sources */,
 				FBA8F65718DB2A3000A30418 /* KSAudio.m in Sources */,
 				FB04FBDA18D99C100066A18E /* KSViewController.m in Sources */,
 			);
