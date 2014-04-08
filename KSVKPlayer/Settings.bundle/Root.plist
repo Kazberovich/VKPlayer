@@ -16,7 +16,7 @@
 			<key>Title</key>
 			<string>Broadcast Audio</string>
 			<key>Key</key>
-			<string></string>
+			<string>isBroadcast</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
