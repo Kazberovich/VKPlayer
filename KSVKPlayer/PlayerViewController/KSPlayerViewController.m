@@ -67,6 +67,13 @@ static const NSInteger kCountToLoad = 20;
     [self setupToolBarWithPlaying:NO];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
+}
+
 #pragma mark - Notification
 
 - (void)connectionFailed
@@ -77,6 +84,44 @@ static const NSInteger kCountToLoad = 20;
     
     [noInetrnet show];
     [noInetrnet release];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[KSPlayer sharedInstance] pause];
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    [self resignFirstResponder];
+}
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event
+{
+    switch (event.subtype)
+    {
+        case UIEventSubtypeRemoteControlTogglePlayPause:
+        {
+            if([[KSPlayer sharedInstance] rate] == 0)
+            {
+                [[KSPlayer sharedInstance] playAudio:_currentAudio];
+            } else
+            {
+                [[KSPlayer sharedInstance] pauseAudio];
+            }
+            break;
+        }
+        case UIEventSubtypeRemoteControlPlay:
+        {
+            [[KSPlayer sharedInstance] playAudio:_currentAudio];
+            break;
+        }
+        case UIEventSubtypeRemoteControlPause:
+        {
+            [[KSPlayer sharedInstance] pauseAudio];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark - API
@@ -107,13 +152,16 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)setBroadcast
 {
-    [[KSServerManager sharedManager] setBroadcast:_currentAudio
-                                        onSuccess:^(NSArray *response) {
-                                            NSLog(@"Broadcast");
-                                        }
-                                        onFailure:^(NSError *error, NSInteger statusCode) {
-                                            NSLog(@"Error with updating status");
-                                        }];
+    if([[[NSUserDefaults standardUserDefaults]objectForKey:@"isBroadcast"] boolValue]) //send broadcast
+    {
+        [[KSServerManager sharedManager] setBroadcast:_currentAudio
+                                            onSuccess:^(NSArray *response) {
+                                                NSLog(@"Broadcast");
+                                            }
+                                            onFailure:^(NSError *error, NSInteger statusCode) {
+                                                NSLog(@"Error with updating status");
+                                            }];
+    }
 }
 
 #pragma mark - UITableViewDataSource
