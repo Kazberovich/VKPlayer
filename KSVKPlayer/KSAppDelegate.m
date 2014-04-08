@@ -16,11 +16,15 @@
     NSError *setCategoryErr = nil;
     NSError *activationErr = nil;
     
-    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:&setCategoryErr];
-    NSLog(@"Error: %@", [setCategoryErr localizedDescription]);
+    if (![[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:&setCategoryErr])
+    {
+        NSLog(@"Error: %@", [setCategoryErr localizedDescription]);
+    }
     
-    [[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
-    NSLog(@"Error: %@", [activationErr localizedDescription]);
+    if(![[AVAudioSession sharedInstance] setActive:YES error:&activationErr])
+    {
+        NSLog(@"Error: %@", [activationErr localizedDescription]);
+    }
     
     UInt32 doChangeDefaultRoute = 1;
     AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof(doChangeDefaultRoute), &doChangeDefaultRoute);

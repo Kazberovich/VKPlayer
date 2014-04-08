@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface KSAppDelegate : UIResponder <UIApplicationDelegate, AVAudioPlayerDelegate>
+@interface KSAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (retain, nonatomic) UIWindow *window;
 
