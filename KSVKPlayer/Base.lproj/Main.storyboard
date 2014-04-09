@@ -108,6 +108,11 @@
                                             <action selector="pauseAudio:" destination="0HV-0G-gmN" id="n9C-sd-n3x"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem systemItem="stop" id="2lI-t4-Qxi">
+                                        <connections>
+                                            <action selector="stopAudio:" destination="0HV-0G-gmN" id="2Cr-Vy-wTm"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem systemItem="fastForward" id="nWR-wL-0xZ">
                                         <connections>
                                             <action selector="nextAudio:" destination="0HV-0G-gmN" id="WMG-mn-zNa"/>
@@ -138,18 +143,20 @@
                         <outlet property="slider" destination="1zT-cd-mDZ" id="pMy-Fp-Wnp"/>
                         <outlet property="tableView" destination="Qx3-jk-UTB" id="tqh-Yf-9yZ"/>
                         <outlet property="toolBar" destination="ldh-T4-MrF" id="hID-Sn-mhT"/>
-                        <outletCollection property="playBarItems" destination="Eye-YK-vAP" id="mdk-b7-YN9"/>
-                        <outletCollection property="playBarItems" destination="eHR-u6-V6a" id="RSV-p9-hw6"/>
-                        <outletCollection property="playBarItems" destination="K5B-0J-WFB" id="rcb-PL-scH"/>
-                        <outletCollection property="playBarItems" destination="qMv-Im-MPy" id="t0t-9u-tDF"/>
-                        <outletCollection property="playBarItems" destination="nWR-wL-0xZ" id="hXy-Uy-YfZ"/>
-                        <outletCollection property="playBarItems" destination="EaP-Zx-ZxP" id="x2X-mu-TBX"/>
-                        <outletCollection property="pauseBarItems" destination="Eye-YK-vAP" id="Slv-La-DjR"/>
-                        <outletCollection property="pauseBarItems" destination="eHR-u6-V6a" id="EFL-c6-QCR"/>
-                        <outletCollection property="pauseBarItems" destination="K5B-0J-WFB" id="z6p-yV-hsx"/>
-                        <outletCollection property="pauseBarItems" destination="6lb-Ge-Qb8" id="Wqt-7q-JxK"/>
-                        <outletCollection property="pauseBarItems" destination="nWR-wL-0xZ" id="cMj-eK-Prk"/>
-                        <outletCollection property="pauseBarItems" destination="EaP-Zx-ZxP" id="bwp-7P-zA3"/>
+                        <outletCollection property="playBarItems" destination="Eye-YK-vAP" id="R0b-uS-GS8"/>
+                        <outletCollection property="playBarItems" destination="eHR-u6-V6a" id="Kiv-bn-GMS"/>
+                        <outletCollection property="playBarItems" destination="K5B-0J-WFB" id="FY4-Ls-Wnn"/>
+                        <outletCollection property="playBarItems" destination="qMv-Im-MPy" id="77D-N2-jVB"/>
+                        <outletCollection property="playBarItems" destination="2lI-t4-Qxi" id="h72-HF-Yfq"/>
+                        <outletCollection property="playBarItems" destination="nWR-wL-0xZ" id="Mh4-dS-kgz"/>
+                        <outletCollection property="playBarItems" destination="EaP-Zx-ZxP" id="8YR-gv-yCM"/>
+                        <outletCollection property="pauseBarItems" destination="Eye-YK-vAP" id="pNq-Dc-Gub"/>
+                        <outletCollection property="pauseBarItems" destination="eHR-u6-V6a" id="tDG-hJ-QEN"/>
+                        <outletCollection property="pauseBarItems" destination="K5B-0J-WFB" id="e74-Dg-Xrt"/>
+                        <outletCollection property="pauseBarItems" destination="6lb-Ge-Qb8" id="1cI-n6-hJu"/>
+                        <outletCollection property="pauseBarItems" destination="2lI-t4-Qxi" id="z36-Mw-oEW"/>
+                        <outletCollection property="pauseBarItems" destination="nWR-wL-0xZ" id="Wua-yr-RH6"/>
+                        <outletCollection property="pauseBarItems" destination="EaP-Zx-ZxP" id="b8G-Dl-fGf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V2M-G9-5Hd" userLabel="First Responder" sceneMemberID="firstResponder"/>
