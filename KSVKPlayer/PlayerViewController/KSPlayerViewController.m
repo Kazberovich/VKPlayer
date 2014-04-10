@@ -311,7 +311,6 @@ static const NSInteger kCountToLoad = 20;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0f];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-    [UIView setAnimationDelegate:self];
     _slider.alpha = (!isNeed) ? 0.0f : 1.0f;
     [UIView commitAnimations];
 }
