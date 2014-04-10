@@ -13,6 +13,7 @@
 
 #define kUsersMusic @"audio.get"
 #define kPopularMusic @"audio.getPopular"
+#define kRecommendationMusic @"audio.getRecommendations"
 
 @interface KSServerManager : NSObject
 

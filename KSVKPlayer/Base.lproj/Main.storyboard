@@ -132,9 +132,9 @@
                             <rect key="frame" x="5" y="7" width="238" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="My Music"/>
-                                <segment title="Popular"/>
-                                <segment title="Search"/>
+                                <segment title="My Music" width="65"/>
+                                <segment title="Popular" width="65"/>
+                                <segment title="Recommended"/>
                             </segments>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" title="Log out" id="gjs-J4-uxS">

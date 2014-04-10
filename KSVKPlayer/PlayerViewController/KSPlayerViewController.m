@@ -187,14 +187,7 @@ static const NSInteger kCountToLoad = 20;
     
     if (indexPath.row == self.currentLoadedAudios - 1)
     {
-        if([_segmentControl selectedSegmentIndex] == 0) // my music
-        {
-            [self getAudioFromServer:kUsersMusic];
-        }
-        else if ([_segmentControl selectedSegmentIndex] == 1) // popular music
-        {
-            [self getAudioFromServer:kPopularMusic];
-        }
+        [self loadNewMusicPart];
     }
     else
     {
@@ -267,14 +260,7 @@ static const NSInteger kCountToLoad = 20;
     
     if(_currentAudioIndex == [self.audioArray count] - kOffsetFromTheBottom)
     {
-        if([_segmentControl selectedSegmentIndex] == 0)
-        {
-            [self getAudioFromServer:kUsersMusic];
-        }
-        else if ([_segmentControl selectedSegmentIndex] == 1)
-        {
-            [self getAudioFromServer:kPopularMusic];
-        }
+        [self loadNewMusicPart];
     }
     if (self.currentAudioIndex != [self.audioArray count] - 1)
     {
@@ -375,6 +361,10 @@ static const NSInteger kCountToLoad = 20;
     {
         [self updateTableWithData:kPopularMusic];
     }
+    else if ([_segmentControl selectedSegmentIndex] == 2)
+    {
+        [self updateTableWithData:kRecommendationMusic];
+    }
 }
 
 - (void)updateTableWithData:(NSString *)data
@@ -384,6 +374,22 @@ static const NSInteger kCountToLoad = 20;
     self.currentLoadedAudios = 0;
     [self.audioArray removeAllObjects];
     [self getAudioFromServer:data];
+}
+
+- (void)loadNewMusicPart
+{
+    if([_segmentControl selectedSegmentIndex] == 0) // my music
+    {
+        [self getAudioFromServer:kUsersMusic];
+    }
+    else if ([_segmentControl selectedSegmentIndex] == 1) // popular music
+    {
+        [self getAudioFromServer:kPopularMusic];
+    }
+    else if ([_segmentControl selectedSegmentIndex] == 2) // recommended music
+    {
+        [self getAudioFromServer:kRecommendationMusic];
+    }
 }
 
 @end
