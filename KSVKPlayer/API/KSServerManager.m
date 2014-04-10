@@ -45,6 +45,7 @@
 - (void) getAudioWithOffset:(NSInteger)offset
                       token:(KSAccessToken *)token
                       limit:(NSInteger)count
+                 whichMusic:(NSString *)kindOfMusic
                   onSuccess:(void(^)(NSArray *audioList))success
                   onFailure:(void(^)(NSError *error, NSInteger statusCode))failure {
     
@@ -53,7 +54,7 @@
                              @"offset": @(offset),
                              @"access_token": token.token};
     
-    [self.requestOperationManager GET:@"audio.get"
+    [self.requestOperationManager GET:kindOfMusic
                            parameters:params
                               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                   NSLog(@"JSON: %@", responseObject);

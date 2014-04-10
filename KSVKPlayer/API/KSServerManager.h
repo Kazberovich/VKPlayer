@@ -11,6 +11,10 @@
 @class KSAccessToken;
 @class KSAudio;
 
+#define kUsersMusic @"audio.get"
+#define kPopularMusic @"audio.getPopular"
+#define kRecommendationMusic @"audio.getRecommendations"
+
 @interface KSServerManager : NSObject
 
 + (KSServerManager *)sharedManager;
@@ -18,6 +22,7 @@
 - (void)getAudioWithOffset:(NSInteger)offset
                       token:(KSAccessToken *)token
                       limit:(NSInteger)count
+                whichMusic:(NSString *)kindOfMusic
                   onSuccess:(void(^)(NSArray *audioList))success
                   onFailure:(void(^)(NSError *error, NSInteger statusCode))failure;
 

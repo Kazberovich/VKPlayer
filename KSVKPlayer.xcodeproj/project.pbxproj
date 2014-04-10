@@ -48,9 +48,9 @@
 		FB04FBDE18D9E4AE0066A18E /* KSPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSPlayerViewController.h; path = PlayerViewController/KSPlayerViewController.h; sourceTree = "<group>"; };
 		FB04FBDF18D9E4AE0066A18E /* KSPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSPlayerViewController.m; path = PlayerViewController/KSPlayerViewController.m; sourceTree = "<group>"; };
 		FB0656F018DC2E6600778D29 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FB5938C118F6CCF40004D774 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		FB6F339E18EEEDDE000994CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB6F33A018EEEDE0000994CB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FB82CBCD18EC14E700501F68 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		FBA5124718ED65C20096F6B6 /* KSNetworkStatusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSNetworkStatusHelper.h; path = Helpers/KSNetworkStatusHelper.h; sourceTree = "<group>"; };
 		FBA5124818ED65C20096F6B6 /* KSNetworkStatusHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSNetworkStatusHelper.m; path = Helpers/KSNetworkStatusHelper.m; sourceTree = "<group>"; };
 		FBA8F65518DB2A3000A30418 /* KSAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSAudio.h; path = Models/KSAudio.h; sourceTree = "<group>"; };
@@ -325,7 +325,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				FB04FBB018D97CA80066A18E /* Base */,
-				FB82CBCD18EC14E700501F68 /* ru */,
+				FB5938C118F6CCF40004D774 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

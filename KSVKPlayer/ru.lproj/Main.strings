@@ -1,8 +1,18 @@
-/* Class = "IBUIBarButtonItem"; title = "Log out"; ObjectID = "gjs-J4-uxS"; */
+
+/* Class = "IBUISegmentedControl"; NoK-gg-2ff.segmentTitles[0] = "Моя музыка"; ObjectID = "NoK-gg-2ff"; */
+"NoK-gg-2ff.segmentTitles[0]" = "Моя музыка";
+
+/* Class = "IBUISegmentedControl"; NoK-gg-2ff.segmentTitles[1] = "Популярное"; ObjectID = "NoK-gg-2ff"; */
+"NoK-gg-2ff.segmentTitles[1]" = "Популярное";
+
+/* Class = "IBUISegmentedControl"; NoK-gg-2ff.segmentTitles[2] = "Рекомендации"; ObjectID = "NoK-gg-2ff"; */
+"NoK-gg-2ff.segmentTitles[2]" = "Рекомендации";
+
+/* Class = "IBUIBarButtonItem"; title = "Выход"; ObjectID = "gjs-J4-uxS"; */
 "gjs-J4-uxS.title" = "Выход";
 
-/* Class = "IBUINavigationItem"; title = "Music"; ObjectID = "inV-xD-BM9"; */
+/* Class = "IBUINavigationItem"; title = "Аудиозаписи"; ObjectID = "inV-xD-BM9"; */
 "inV-xD-BM9.title" = "Аудиозаписи";
 
-/* Class = "IBUINavigationItem"; title = "Log in"; ObjectID = "nyN-XP-C7d"; */
+/* Class = "IBUINavigationItem"; title = "Вход"; ObjectID = "nyN-XP-C7d"; */
 "nyN-XP-C7d.title" = "Вход";
