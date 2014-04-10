@@ -20,6 +20,7 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *currentAudioTime;
 @property (nonatomic, retain) IBOutletCollection(UIBarButtonItem) NSArray *playBarItems;
 @property (nonatomic, retain) IBOutletCollection(UIBarButtonItem) NSArray *pauseBarItems;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *segmentControl;
 
 @property (nonatomic, retain) KSAccessToken *token;
 

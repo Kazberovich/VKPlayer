@@ -38,10 +38,12 @@ static const NSInteger kCountToLoad = 20;
 @synthesize pauseBarItems = _pauseBarItems;
 @synthesize audioArray = _audioArray;
 @synthesize toolBar = _toolBar;
+@synthesize segmentControl = _segmentControl;
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_segmentControl release];
     [_toolBar release];
     [_playBarItems release];
     [_pauseBarItems release];
@@ -56,13 +58,14 @@ static const NSInteger kCountToLoad = 20;
 
 - (void)viewDidLoad
 {
+    [_segmentControl addTarget:self action:@selector(segmentControlChanged:) forControlEvents:UIControlEventValueChanged];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed) name:KSPlayerConnectionFailedNotification object:nil];
     [self.navigationItem setHidesBackButton:YES];
     [_slider setHidden:YES];
     [KSPlayer sharedInstance].delegate = self;
     [super viewDidLoad];
     self.audioArray = [NSMutableArray array];
-    [self getAudioFromServer];
+    [self getAudioFromServer:kUsersMusic];
     
     [self setupToolBarWithPlaying:NO];
 }
@@ -126,12 +129,12 @@ static const NSInteger kCountToLoad = 20;
 
 #pragma mark - API
 
-- (void)getAudioFromServer
+- (void)getAudioFromServer:(NSString *)whichMusic
 {
     [[KSServerManager sharedManager] getAudioWithOffset: [self.audioArray count]
                                                   token: _token
                                                   limit: kCountToLoad
-     
+                                             whichMusic: whichMusic
                                               onSuccess: ^(NSArray *audioList) {
                                                   if (audioList == nil)
                                                   {
@@ -141,7 +144,7 @@ static const NSInteger kCountToLoad = 20;
                                                   else
                                                   {
                                                       [self.audioArray addObjectsFromArray:audioList];
-                                                      self.currentLoadedAudios += kCountToLoad;
+                                                      self.currentLoadedAudios += [audioList count];
                                                       [_tableView reloadData];
                                                   }
                             
@@ -184,7 +187,14 @@ static const NSInteger kCountToLoad = 20;
     
     if (indexPath.row == self.currentLoadedAudios - 1)
     {
-        [self getAudioFromServer];
+        if([_segmentControl selectedSegmentIndex] == 0) // my music
+        {
+            [self getAudioFromServer:kUsersMusic];
+        }
+        else if ([_segmentControl selectedSegmentIndex] == 1) // popular music
+        {
+            [self getAudioFromServer:kPopularMusic];
+        }
     }
     else
     {
@@ -257,7 +267,14 @@ static const NSInteger kCountToLoad = 20;
     
     if(_currentAudioIndex == [self.audioArray count] - kOffsetFromTheBottom)
     {
-        [self getAudioFromServer];
+        if([_segmentControl selectedSegmentIndex] == 0)
+        {
+            [self getAudioFromServer:kUsersMusic];
+        }
+        else if ([_segmentControl selectedSegmentIndex] == 1)
+        {
+            [self getAudioFromServer:kPopularMusic];
+        }
     }
     if (self.currentAudioIndex != [self.audioArray count] - 1)
     {
@@ -340,6 +357,33 @@ static const NSInteger kCountToLoad = 20;
 - (void)playerDidFinishPlayingItem
 {
     [self nextAudio:nil];
+}
+
+
+#pragma mark - SegmentControl
+
+- (void)segmentControlChanged:(id)sender
+{
+    NSLog(@"%d", [_segmentControl selectedSegmentIndex]);
+    [_tableView setDataSource:nil];
+    
+    if([_segmentControl selectedSegmentIndex] == 0)
+    {
+        [self updateTableWithData:kUsersMusic];
+    }
+    else if ([_segmentControl selectedSegmentIndex] == 1)
+    {
+        [self updateTableWithData:kPopularMusic];
+    }
+}
+
+- (void)updateTableWithData:(NSString *)data
+{
+    [_tableView setDataSource:self];
+    self.currentAudioIndex = 0;
+    self.currentLoadedAudios = 0;
+    [self.audioArray removeAllObjects];
+    [self getAudioFromServer:data];
 }
 
 @end
