@@ -58,13 +58,14 @@ static const NSInteger kCountToLoad = 20;
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed) name:KSPlayerConnectionFailedNotification object:nil];
     [self.navigationItem setHidesBackButton:YES];
-    [_slider setHidden:YES];
+    [_slider setAlpha:0.0f];
     [KSPlayer sharedInstance].delegate = self;
     [super viewDidLoad];
     self.audioArray = [NSMutableArray array];
     [self getAudioFromServer];
-    
     [self setupToolBarWithPlaying:NO];
+    [_slider setFrame:CGRectMake(_slider.frame.origin.x, _tableView.frame.size.height - _slider.frame.size.height/2,
+                                _slider.frame.size.width, _slider.frame.size.height)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -211,7 +212,7 @@ static const NSInteger kCountToLoad = 20;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_slider setValue:0.0 animated:YES];
-    [_slider setHidden:NO];
+    [self sliderNeedToShow:YES];
     [self setupToolBarWithPlaying:YES];
     _currentAudio = [self.audioArray objectAtIndex:indexPath.row];
     _currentAudioIndex = indexPath.row;
@@ -232,8 +233,7 @@ static const NSInteger kCountToLoad = 20;
 - (IBAction)playAudio:(id)sender
 {
     NSLog(@"playAudio");
-    
-    [_slider setHidden:NO];
+
     [self setupToolBarWithPlaying:YES];
     
     if (self.currentAudioIndex)
@@ -252,8 +252,6 @@ static const NSInteger kCountToLoad = 20;
 - (IBAction)nextAudio:(id)sender
 {
     NSLog(@"nextAudio");
-    
-    [_slider setHidden:NO];
     
     if(_currentAudioIndex == [self.audioArray count] - kOffsetFromTheBottom)
     {
@@ -277,9 +275,7 @@ static const NSInteger kCountToLoad = 20;
 - (IBAction)previousAudio:(id)sender
 {
     NSLog(@"previousAudio");
-    
-    [_slider setHidden:NO];
-    
+
     if ((int)_currentAudioIndex >= 1)
     {
         [_slider setValue:0.0 animated:YES];
@@ -289,8 +285,39 @@ static const NSInteger kCountToLoad = 20;
     }
 }
 
+- (IBAction)pauseAudio:(id)sender
+{
+    [self setupToolBarWithPlaying:NO];
+    [[KSPlayer sharedInstance] pauseAudio];
+}
+
+- (IBAction)stopAudio:(id)sender
+{
+    _currentAudio = nil;
+    _currentAudioIndex = 0;
+    [self sliderNeedToShow:NO];
+    [self setupToolBarWithPlaying:NO];
+    [[KSPlayer sharedInstance] stopAudio];
+}
+
+- (IBAction)valueChangeSliderTimer:(id)sender
+{
+    NSLog(@"start changing");
+    [[KSPlayer sharedInstance] seekToTime:_slider.value];
+}
+
+- (void)sliderNeedToShow:(BOOL)isNeed
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0f];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    _slider.alpha = (!isNeed) ? 0.0f : 1.0f;
+    [UIView commitAnimations];
+}
+
 - (void)playAndUpdateSlider
 {
+    [self sliderNeedToShow:YES];
     [self setBroadcast];
     [_slider setMaximumValue:_currentAudio.duration.intValue];
     [[KSPlayer sharedInstance] playAudio: _currentAudio];
@@ -302,18 +329,6 @@ static const NSInteger kCountToLoad = 20;
     [defaults setObject:nil forKey:kAccessToken];
     [defaults setObject:nil forKey:kUserID];
     [defaults synchronize];
-}
-
-- (IBAction)pauseAudio:(id)sender
-{
-    [self setupToolBarWithPlaying:NO];
-    [[KSPlayer sharedInstance] pauseAudio];
-}
-
-- (IBAction)valueChangeSliderTimer:(id)sender
-{
-    NSLog(@"start changing");
-    [[KSPlayer sharedInstance] seekToTime:_slider.value];
 }
 
 - (void)updateTimeLabel:(unsigned long long)current_second

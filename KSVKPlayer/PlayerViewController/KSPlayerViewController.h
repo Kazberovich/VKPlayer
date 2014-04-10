@@ -29,5 +29,6 @@
 - (IBAction)previousAudio:(id)sender;
 - (IBAction)pauseAudio:(id)sender;
 - (IBAction)valueChangeSliderTimer:(id)sender;
+- (IBAction)stopAudio:(id)sender;
 
 @end
